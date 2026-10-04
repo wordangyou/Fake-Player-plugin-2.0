@@ -57,27 +57,27 @@ public final class HelpGui implements Listener {
     private static final TextColor CAT_PERF = TextColor.fromHexString("#9691AB");
 
     private enum Category {
-        ALL("ᴀʟʟ", CAT_ALL, Material.COMPASS, Material.COMPASS, "ꜱʜᴏᴡꜱ ᴇᴠᴇʀʏ ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅ."),
-        CORE("ᴄᴏʀᴇ", CAT_CORE, Material.NETHER_STAR, Material.GRAY_DYE, "ꜱᴘᴀᴡɴ, ᴅᴇꜱᴘᴀᴡɴ, ꜱᴀᴠᴇ, ʀᴇʟᴏᴀᴅ & ᴍᴏʀᴇ."),
-        BOTS("ʙᴏᴛꜱ", CAT_BOT, Material.PLAYER_HEAD, Material.SKELETON_SKULL, "ᴘᴇʀ-ʙᴏᴛ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ, ɪɴᴠᴇɴᴛᴏʀʏ & ᴏᴡɴᴇʀꜱ."),
+        ALL("全部", CAT_ALL, Material.COMPASS, Material.COMPASS, "显示所有可用命令。"),
+        CORE("核心", CAT_CORE, Material.NETHER_STAR, Material.GRAY_DYE, "生成、移除、保存、重载等。"),
+        BOTS("假人", CAT_BOT, Material.PLAYER_HEAD, Material.SKELETON_SKULL, "单个假人的管理、背包与拥有者。"),
         ACTIONS(
-                "ᴀᴄᴛɪᴏɴꜱ",
+                "动作",
                 CAT_ACTION,
                 Material.DIAMOND_PICKAXE,
                 Material.IRON_PICKAXE,
-                "ɴᴀᴠ, ᴍɪɴɪɴɢ, ꜰɪɴᴅ, ᴄᴏᴍʙᴀᴛ, ꜱᴛᴏʀᴀɢᴇ & ᴍᴏʀᴇ."),
+                "导航、挖掘、寻找、战斗、存储等。"),
         AUTH(
-                "ᴀᴜᴛʜ",
+                "认证",
                 CAT_AUTH,
                 Material.TRIPWIRE_HOOK,
                 Material.STRING,
-                "ʙᴏᴛ ᴀᴜᴛᴏ-ʀᴇɢɪꜱᴛᴇʀ/ʟᴏɢɪɴ ᴀɢᴀɪɴꜱᴛ ᴀɴ ɪɴꜱᴛᴀʟʟᴇᴅ ʟᴏɢɪɴ ᴘʟᴜɢɪɴ."),
+                "假人针对已安装登录插件的自动注册/登录。"),
         PERF(
-                "ᴘᴇʀꜰ",
+                "性能",
                 CAT_PERF,
                 Material.SPYGLASS,
                 Material.CLOCK,
-                "ᴛᴘꜱ/ᴍꜱᴘᴛ ᴍᴏɴɪᴛᴏʀɪɴɢ, ʙᴇɴᴄʜᴍᴀʀᴋꜱ & ᴛʜᴇ ꜱᴘᴀʀᴋ ᴘʀᴏꜰɪʟᴇʀ.");
+                "TPS/MSPT 监控、基准测试与 Spark 性能分析。");
 
         final String label;
         final TextColor color;
@@ -212,7 +212,7 @@ public final class HelpGui implements Listener {
 
         Holder holder = new Holder(uuid);
 
-        String catLabel = session.category() == Category.ALL ? "ᴄᴏᴍᴍᴀɴᴅꜱ" : session.category().label + " ᴄᴏᴍᴍᴀɴᴅꜱ";
+        String catLabel = session.category() == Category.ALL ? "命令" : session.category().label + " 命令";
         Component title = Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("[").color(DARK_GRAY))
@@ -283,7 +283,7 @@ public final class HelpGui implements Listener {
 
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(active ? "◈  ᴄᴜʀʀᴇɴᴛʟʏ ᴠɪᴇᴡɪɴɢ" : "ᴄʟɪᴄᴋ ᴛᴏ ꜱᴡɪᴛᴄʜ")
+                .append(Component.text(active ? "◈  正在查看" : "点击切换")
                         .color(active ? ON_GREEN : DARK_GRAY))));
 
         item.setItemMeta(meta);
@@ -325,7 +325,7 @@ public final class HelpGui implements Listener {
             lore.add(Component.empty());
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ᴜꜱᴀɢᴇ").color(DARK_GRAY).decoration(TextDecoration.BOLD, true)));
+                    .append(Component.text("用法").color(DARK_GRAY).decoration(TextDecoration.BOLD, true)));
             for (String mode : splitModes(usage)) {
                 lore.add(buildUsageLine(name, mode, alias));
             }
@@ -336,7 +336,7 @@ public final class HelpGui implements Listener {
             lore.add(Component.empty());
             Component row = Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ᴀʟɪᴀꜱ  ").color(DARK_GRAY).decoration(TextDecoration.BOLD, true));
+                    .append(Component.text("别名  ").color(DARK_GRAY).decoration(TextDecoration.BOLD, true));
             for (int i = 0; i < aliases.size(); i++) {
                 row = row.append(Component.text(aliases.get(i)).color(ACCENT));
                 if (i < aliases.size() - 1)
@@ -350,12 +350,12 @@ public final class HelpGui implements Listener {
             lore.add(Component.empty());
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ᴘᴇʀᴍ  ").color(DARK_GRAY).decoration(TextDecoration.BOLD, true))
+                    .append(Component.text("权限  ").color(DARK_GRAY).decoration(TextDecoration.BOLD, true))
                     .append(Component.text(perm).color(YELLOW)));
         }
 
         lore.add(Component.empty());
-        lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴠɪᴇᴡ ᴅᴇᴛᴀɪʟꜱ"));
+        lore.add(hint("◈ ", "点击查看详情"));
 
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -468,7 +468,7 @@ public final class HelpGui implements Listener {
                 .append(Component.text(isNext ? "▶" : "◄").color(col).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text((isNext ? "ɴᴇxᴛ ᴘᴀɢᴇ" : "ᴘʀᴇᴠ ᴘᴀɢᴇ") + " (" + targetPage + ")")
+                .append(Component.text((isNext ? "下一页" : "上一页") + " (" + targetPage + ")")
                         .color(DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
@@ -485,7 +485,7 @@ public final class HelpGui implements Listener {
         skull.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("[").color(DARK_GRAY))
-                .append(Component.text("ꜰᴀᴋᴇ ᴘʟᴀʏᴇʀ ᴘʟᴜɢɪɴ").color(ACCENT).decoration(TextDecoration.BOLD, true))
+                .append(Component.text("假人插件").color(ACCENT).decoration(TextDecoration.BOLD, true))
                 .append(Component.text("]").color(DARK_GRAY)));
 
         List<Component> lore = new ArrayList<>();
@@ -493,10 +493,10 @@ public final class HelpGui implements Listener {
 
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ᴀᴅᴠᴀɴᴄᴇᴅ ꜰᴀᴋᴇ ᴘʟᴀʏᴇʀ ꜱᴘᴏᴏꜰᴇʀ").color(GRAY)));
+                .append(Component.text("高级假人欺骗器").color(GRAY)));
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ꜰᴏʀ ᴘᴀᴘᴇʀ/ᴘᴜʀᴘᴜʀ/ꜰᴏʟɪᴀ 1.21+").color(DARK_GRAY)));
+                .append(Component.text("适用于 Paper/Purpur/Folia 1.21+").color(DARK_GRAY)));
 
         lore.add(Component.empty());
         lore.add(divider());
@@ -504,7 +504,7 @@ public final class HelpGui implements Listener {
 
         String version = rawPlugin.getPluginMeta().getVersion();
         String author = rawPlugin.getPluginMeta().getAuthors().isEmpty()
-                ? "Unknown"
+                ? "未知"
                 : String.join(", ", rawPlugin.getPluginMeta().getAuthors());
 
         if (rawPlugin instanceof FakePlayerPlugin fpp) {
@@ -513,24 +513,24 @@ public final class HelpGui implements Listener {
 
                 lore.add(Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("⚗ ʙᴇᴛᴀ ʙᴜɪʟᴅ  ")
+                        .append(Component.text("⚗ 测试版构建  ")
                                 .color(TextColor.fromHexString("#A78BFA"))
                                 .decoration(TextDecoration.BOLD, true))
-                        .append(Component.text("ʟᴀᴛᴇꜱᴛ ꜱᴛᴀʙʟᴇ: ").color(DARK_GRAY))
+                        .append(Component.text("最新稳定版: ").color(DARK_GRAY))
                         .append(Component.text(latest).color(GRAY)));
             } else if (latest != null && fpp.getUpdateNotification() != null) {
 
                 lore.add(Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("⚠ ɴᴇᴡ ᴠᴇʀꜱɪᴏɴ  ")
+                        .append(Component.text("⚠ 新版本  ")
                                 .color(TextColor.fromHexString("#BAFF4F"))
                                 .decoration(TextDecoration.BOLD, true))
                         .append(Component.text(latest).color(ON_GREEN).decoration(TextDecoration.BOLD, true)));
             }
         }
 
-        lore.add(infoRow("ᴠᴇʀꜱɪᴏɴ", version));
-        lore.add(infoRow("ᴀᴜᴛʜᴏʀ", author));
+        lore.add(infoRow("版本", version));
+        lore.add(infoRow("作者", author));
 
         if (rawPlugin instanceof FakePlayerPlugin fpp) {
             String mcVer = fpp.getDetectedMcVersion();
@@ -543,7 +543,7 @@ public final class HelpGui implements Listener {
 
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ᴅᴏᴡɴʟᴏᴀᴅ  ").color(GRAY).decoration(TextDecoration.BOLD, true))
+                .append(Component.text("下载  ").color(GRAY).decoration(TextDecoration.BOLD, true))
                 .append(Component.text("Modrinth").color(ACCENT))
                 .append(Component.text("  ·  ").color(DARK_GRAY))
                 .append(Component.text("PaperMC").color(ACCENT))
@@ -552,11 +552,11 @@ public final class HelpGui implements Listener {
 
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ꜱᴜᴘᴘᴏʀᴛ   ").color(GRAY).decoration(TextDecoration.BOLD, true))
+                .append(Component.text("支持   ").color(GRAY).decoration(TextDecoration.BOLD, true))
                 .append(Component.text("Discord").color(ACCENT)));
 
         lore.add(Component.empty());
-        lore.add(hint("◈ ", "ᴜꜱᴇ /ꜰᴘᴘ ꜰᴏʀ ʟɪɴᴋꜱ & ꜰᴜʟʟ ɪɴꜰᴏ"));
+        lore.add(hint("◈ ", "使用 /fpp 查看链接和完整信息"));
 
         skull.lore(lore);
         item.setItemMeta(skull);
@@ -575,10 +575,10 @@ public final class HelpGui implements Listener {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("✕  ᴄʟᴏꜱᴇ").color(GuiKit.OFF_RED).decoration(TextDecoration.BOLD, true)));
+                .append(Component.text("✕  关闭").color(GuiKit.OFF_RED).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ᴄʟᴏꜱᴇ ᴛʜɪꜱ ᴍᴇɴᴜ.").color(DARK_GRAY))));
+                .append(Component.text("关闭此菜单。").color(DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
     }

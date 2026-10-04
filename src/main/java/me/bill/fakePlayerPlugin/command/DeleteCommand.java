@@ -32,7 +32,7 @@ public class DeleteCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Despawns a fake player bot by name.";
+        return "按名字移除假人。";
     }
 
     @Override

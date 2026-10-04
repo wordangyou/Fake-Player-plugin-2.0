@@ -35,7 +35,7 @@ public final class BackupManager {
 
         writeManifest(backupDir, plugin, reason);
         pruneOldBackups(backupDir.getParentFile());
-        FppLogger.success("Config-files backup created -> " + relativeBackupPath(plugin, backupDir) + "/");
+        FppLogger.success("配置文件备份已创建 -> " + relativeBackupPath(plugin, backupDir) + "/");
         return backupDir;
     }
 
@@ -60,8 +60,8 @@ public final class BackupManager {
         pruneOldBackups(backupDir.getParentFile());
 
         String path = relativeBackupPath(plugin, backupDir) + "/";
-        if (announce) FppLogger.success("Backup created -> " + path);
-        else FppLogger.debug("Backup created -> " + path);
+        if (announce) FppLogger.success("备份已创建 -> " + path);
+        else FppLogger.debug("备份已创建 -> " + path);
         return backupDir;
     }
 
@@ -75,7 +75,7 @@ public final class BackupManager {
 
         writeManifest(backupDir, plugin, reason);
         pruneOldBackups(backupDir.getParentFile());
-        FppLogger.success("Database backup created -> " + relativeBackupPath(plugin, backupDir) + "/");
+        FppLogger.success("数据库备份已创建 -> " + relativeBackupPath(plugin, backupDir) + "/");
         return backupDir;
     }
 
@@ -132,21 +132,21 @@ public final class BackupManager {
             dst.getParentFile().mkdirs();
             Files.copy(src.toPath(), dst.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            FppLogger.debug("BackupManager: could not copy " + src.getName() + ": " + e.getMessage());
+            FppLogger.debug("BackupManager: 无法复制 " + src.getName() + "：" + e.getMessage());
         }
     }
 
     private static void writeManifest(File backupDir, FakePlayerPlugin plugin, String reason) {
         File manifest = new File(backupDir, "MANIFEST.txt");
         try (PrintWriter pw = new PrintWriter(new FileWriter(manifest))) {
-            pw.println("FakePlayerPlugin Backup Manifest");
+            pw.println("FakePlayerPlugin 备份清单");
             pw.println("================================");
-            pw.println("Plugin version : " + plugin.getPluginMeta().getVersion());
-            pw.println("Backup reason  : " + reason);
-            pw.println("Timestamp      : " + LocalDateTime.now());
-            pw.println("Server version : " + plugin.getServer().getVersion());
+            pw.println("插件版本  : " + plugin.getPluginMeta().getVersion());
+            pw.println("备份原因  : " + reason);
+            pw.println("时间戳    : " + LocalDateTime.now());
+            pw.println("服务端版本 : " + plugin.getServer().getVersion());
         } catch (IOException e) {
-            FppLogger.debug("BackupManager: could not write manifest: " + e.getMessage());
+            FppLogger.debug("BackupManager: 无法写入备份清单：" + e.getMessage());
         }
     }
 
@@ -168,7 +168,7 @@ public final class BackupManager {
         int toDelete = dirs.length - MAX_BACKUPS;
         for (int i = 0; i < toDelete; i++) {
             deleteDirectory(dirs[i]);
-            FppLogger.debug("BackupManager: pruned old backup: " + dirs[i].getName());
+            FppLogger.debug("BackupManager: 已清理旧备份：" + dirs[i].getName());
         }
     }
 

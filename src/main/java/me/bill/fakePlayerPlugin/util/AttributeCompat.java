@@ -3,34 +3,34 @@ package me.bill.fakePlayerPlugin.util;
 import org.bukkit.attribute.Attribute;
 
 /**
- * Version-safe attribute lookup helper.
+ * 版本兼容的属性查找辅助类。
  *
- * <p>Paper 1.21.3+ introduced shorthand enum constants without the {@code GENERIC_} prefix
- * (e.g. {@code MAX_HEALTH}). Older servers (1.21.1 and below) only have the legacy names
- * (e.g. {@code GENERIC_MAX_HEALTH}). Referencing the new constant directly in bytecode causes
- * a {@link NoSuchFieldError} at runtime on servers that don't have it yet.
+ * <p>Paper 1.21.3+ 新增了不带 {@code GENERIC_} 前缀的简写枚举常量
+ * （如 {@code MAX_HEALTH}）。旧版服务端（1.21.1 及以下）只有旧名称
+ * （如 {@code GENERIC_MAX_HEALTH}）。若在字节码中直接引用新常量，
+ * 在不具备该常量的服务端上会在运行时触发 {@link NoSuchFieldError}。
  *
- * <p>This class resolves the correct constant once at class-load time via reflection so the
- * rest of the codebase can call {@link #maxHealth()} without any version branching.
+ * <p>本类会在类加载阶段通过反射确定正确的常量，这样其余代码
+ * 便可直接调用 {@link #maxHealth()}，无需进行任何版本判断。
  */
 public final class AttributeCompat {
 
     /**
-     * Resolved at class-load; never null unless the server is very broken.
+     * 在类加载时解析；除非服务端严重异常，否则不会为 null。
      */
     public static final Attribute MAX_HEALTH = resolve("MAX_HEALTH", "GENERIC_MAX_HEALTH");
 
     private AttributeCompat() {}
 
     /**
-     * Returns the max-health {@link Attribute} constant that exists on the current server,
-     * or {@code null} if neither name could be found (should never happen on any supported version).
+     * 返回当前服务端存在的最大生命值 {@link Attribute} 常量；
+     * 若两个名称均无法找到则返回 {@code null}（在任何受支持的版本上都不应发生）。
      */
     public static Attribute maxHealth() {
         return MAX_HEALTH;
     }
 
-    // ── internal ──────────────────────────────────────────────────────────────
+    // ── 内部实现 ──────────────────────────────────────────────────────────────
 
     @SuppressWarnings("unchecked")
     private static <T extends Attribute> T resolve(String... names) {
@@ -38,12 +38,12 @@ public final class AttributeCompat {
             try {
                 return (T) Attribute.class.getField(name).get(null);
             } catch (NoSuchFieldException ignored) {
-                // try next candidate
+                // 尝试下一个候选名称
             } catch (Exception e) {
-                FppLogger.warn("AttributeCompat: unexpected error resolving '" + name + "': " + e.getMessage());
+                FppLogger.warn("AttributeCompat：解析 '" + name + "' 时出现意外错误：" + e.getMessage());
             }
         }
-        FppLogger.warn("AttributeCompat: could not resolve any of: " + String.join(", ", names));
+        FppLogger.warn("AttributeCompat：无法解析以下任一名称：" + String.join(", ", names));
         return null;
     }
 }

@@ -30,12 +30,12 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextColor;
 
 /**
- * Comprehensive system health check for FakePlayerPlugin.
+ * FakePlayerPlugin 的全面系统健康检查。
  *
- * <p>Runs deep diagnostics across every plugin subsystem and logs detailed
- * progress to both the invoking player and the server console.  Simulation
- * checks verify that spawning <em>would</em> succeed without creating an
- * actual bot.
+ * <p>对每个插件子系统运行深入诊断，并将详细进度同时
+ * 记录给调用玩家和服务端控制台。模拟检查验证
+ * 生成假人 <em>本应</em> 成功，而无需实际创建
+ * 一个真实假人。
  */
 public final class CheckCommand implements FppCommand {
 
@@ -65,7 +65,7 @@ public final class CheckCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Run a comprehensive system health check on the plugin.";
+        return "对插件运行全面的系统健康检查。";
     }
 
     @Override
@@ -91,45 +91,45 @@ public final class CheckCommand implements FppCommand {
         int issues = 0;
         int warnings = 0;
 
-        log(sender, "Starting FPP system health check...");
+        log(sender, "正在开始 FPP 系统健康检查...");
 
         /* ================================================================ */
-        /*  1. PLUGIN INITIALISATION                                        */
+        /*  1. 插件初始化                                                    */
         /* ================================================================ */
-        log(sender, "[1/12] Checking plugin state...");
+        log(sender, "[1/12] 正在检查插件状态...");
         if (plugin.isEnabled()) {
-            ok(sender, "Plugin enabled");
+            ok(sender, "插件已启用");
         } else {
-            err(sender, "Plugin is DISABLED");
+            err(sender, "插件处于禁用状态");
             issues++;
         }
 
         String version = plugin.getPluginMeta().getVersion();
-        info(sender, "  Version: " + version);
+        info(sender, "  版本：" + version);
 
         /* ================================================================ */
-        /*  2. CONFIGURATION                                                */
+        /*  2. 配置                                                          */
         /* ================================================================ */
         if (checkConfig) {
-            log(sender, "[2/12] Checking configuration...");
+            log(sender, "[2/12] 正在检查配置...");
             File cfgFile = new File(plugin.getDataFolder(), "config.yml");
             if (!cfgFile.exists()) {
-                err(sender, "config.yml missing");
+                err(sender, "config.yml 缺失");
                 issues++;
             } else {
-                ok(sender, "config.yml exists");
+                ok(sender, "config.yml 存在");
             }
 
             int cfgVer = plugin.getConfig().getInt("config-version", 0);
-            int latestVer = 74; // hardcode current config version
+            int latestVer = 74; // 硬编码当前配置版本
             if (cfgVer < latestVer) {
-                warn(sender, "Config version outdated: " + cfgVer + " < " + latestVer);
+                warn(sender, "配置版本过旧：" + cfgVer + " < " + latestVer);
                 warnings++;
             } else {
-                ok(sender, "Config version: " + cfgVer);
+                ok(sender, "配置版本：" + cfgVer);
             }
 
-            // Validate critical keys (handle nested paths)
+            // 校验关键键（处理嵌套路径）
             String[][] criticalKeys = {{"limits", "max-bots"}, {"database", "server-id"}, {"database", "mode"}};
             for (String[] path : criticalKeys) {
                 boolean present;
@@ -141,42 +141,42 @@ public final class CheckCommand implements FppCommand {
                     present = section != null && section.contains(path[1]);
                 }
                 if (!present) {
-                    warn(sender, "  Missing config key: " + String.join(".", path));
+                    warn(sender, "  缺少配置键：" + String.join(".", path));
                     warnings++;
                 }
             }
         }
 
         /* ================================================================ */
-        /*  3. NMS / SPAWN SUBSYSTEM                                        */
+        /*  3. NMS / 生成子系统                                              */
         /* ================================================================ */
         if (checkNms) {
-            log(sender, "[3/12] Checking NMS spawn subsystem...");
+            log(sender, "[3/12] 正在检查 NMS 生成子系统...");
             boolean nmsAvailable = NmsPlayerSpawner.isAvailable();
             if (nmsAvailable) {
-                ok(sender, "NmsPlayerSpawner available");
+                ok(sender, "NmsPlayerSpawner 可用");
             } else {
-                err(sender, "NmsPlayerSpawner NOT available - unsupported server version");
+                err(sender, "NmsPlayerSpawner 不可用 - 不支持的服务端版本");
                 issues++;
             }
 
-            // Deep reflection audit
+            // 深入反射审计
             if (deep && nmsAvailable) {
-                log(sender, "  Deep reflection audit...");
+                log(sender, "  正在深入反射审计...");
                 int reflectionIssues = auditReflection(sender);
                 issues += reflectionIssues;
             }
 
             int active = manager.getActivePlayers().size();
-            info(sender, "  Active bots: " + active);
+            info(sender, "  活跃假人：" + active);
 
-            // Simulation: verify spawn prerequisites without actually spawning
+            // 模拟：验证生成前置条件，而不实际生成
             if (simulation) {
-                log(sender, "  Running spawn simulation...");
+                log(sender, "  正在运行生成模拟...");
                 World w =
                         Bukkit.getWorlds().isEmpty() ? null : Bukkit.getWorlds().getFirst();
                 if (w == null) {
-                    err(sender, "  No worlds - simulation aborted");
+                    err(sender, "  没有世界 - 模拟已中止");
                     issues++;
                 } else {
                     Location simLoc = w.getSpawnLocation();
@@ -185,25 +185,25 @@ public final class CheckCommand implements FppCommand {
                         Object nmsServer =
                                 craftServer.getClass().getMethod("getServer").invoke(craftServer);
                         if (nmsServer != null) {
-                            ok(sender, "  CraftServer.getServer() accessible");
+                            ok(sender, "  CraftServer.getServer() 可访问");
                         }
 
                         Object nmsWorld = w.getClass().getMethod("getHandle").invoke(w);
                         if (nmsWorld != null) {
-                            ok(sender, "  CraftWorld.getHandle() accessible");
+                            ok(sender, "  CraftWorld.getHandle() 可访问");
                         }
 
-                        // Verify PlayerList exists
+                        // 验证 PlayerList 存在
                         Object playerList =
                                 nmsServer.getClass().getMethod("getPlayerList").invoke(nmsServer);
                         if (playerList != null) {
-                            ok(sender, "  PlayerList accessible");
+                            ok(sender, "  PlayerList 可访问");
                         } else {
-                            err(sender, "  PlayerList is null");
+                            err(sender, "  PlayerList 为 null");
                             issues++;
                         }
                     } catch (Exception e) {
-                        err(sender, "  Simulation failed: " + e.getClass().getSimpleName() + ": " + e.getMessage());
+                        err(sender, "  模拟失败：" + e.getClass().getSimpleName() + ": " + e.getMessage());
                         issues++;
                     }
                 }
@@ -211,63 +211,63 @@ public final class CheckCommand implements FppCommand {
         }
 
         /* ================================================================ */
-        /*  4. DATABASE                                                     */
+        /*  4. 数据库                                                        */
         /* ================================================================ */
         if (checkDatabase) {
-            log(sender, "[4/12] Checking database...");
+            log(sender, "[4/12] 正在检查数据库...");
             DatabaseManager db = plugin.getDatabaseManager();
             if (db == null) {
-                warn(sender, "DatabaseManager is null - using YAML fallback");
+                warn(sender, "DatabaseManager 为 null - 使用 YAML 回退");
                 warnings++;
             } else {
                 Connection conn = db.getConnection();
                 if (conn != null) {
-                    ok(sender, "Database connection open");
+                    ok(sender, "数据库连接已打开");
 
-                    // Verify tables
+                    // 验证数据表
                     if (deep) {
-                        log(sender, "  Verifying schema tables...");
+                        log(sender, "  正在验证模式表...");
                         String[] tables = {"fpp_bot_sessions", "fpp_active_bots", "fpp_bot_tasks"};
                         for (String table : tables) {
                             try (Statement st = conn.createStatement();
-                                    ResultSet rs = st.executeQuery(
-                                            "SELECT name FROM sqlite_master WHERE type='table' AND name='" + table
-                                                    + "'")) {
+                                 ResultSet rs = st.executeQuery(
+                                         "SELECT name FROM sqlite_master WHERE type='table' AND name='" + table
+                                                 + "'")) {
                                 if (rs.next()) {
-                                    ok(sender, "    Table " + table + " exists");
+                                    ok(sender, "    表 " + table + " 存在");
                                 } else {
-                                    err(sender, "    Table " + table + " MISSING");
+                                    err(sender, "    表 " + table + " 缺失");
                                     issues++;
                                 }
                             } catch (SQLException e) {
-                                warn(sender, "    Could not verify table " + table + ": " + e.getMessage());
+                                warn(sender, "    无法验证表 " + table + "：" + e.getMessage());
                                 warnings++;
                             }
                         }
                     }
                 } else {
-                    err(sender, "Database connection is null");
+                    err(sender, "数据库连接为 null");
                     issues++;
                 }
             }
 
-            // Data directories
+            // 数据目录
             File dataDir = new File(plugin.getDataFolder(), "data");
             File langDir = new File(plugin.getDataFolder(), "language");
-            status(sender, "Data directory", dataDir.exists());
-            status(sender, "Language directory", langDir.exists());
+            status(sender, "数据目录", dataDir.exists());
+            status(sender, "语言目录", langDir.exists());
         }
 
         /* ================================================================ */
-        /*  5. FOLIA / SCHEDULER                                            */
+        /*  5. Folia / 调度器                                                */
         /* ================================================================ */
         if (checkFolia) {
-            log(sender, "[5/12] Checking Folia scheduler...");
+            log(sender, "[5/12] 正在检查 Folia 调度器...");
             boolean folia = NmsPlayerSpawner.isFoliaServer();
             if (folia) {
-                ok(sender, "Folia detected - using region schedulers");
+                ok(sender, "检测到 Folia - 使用区域调度器");
 
-                // Verify all bots are on correct threads
+                // 验证所有假人位于正确的线程
                 int bad = 0;
                 for (FakePlayer fp : manager.getActivePlayers()) {
                     Player p = fp.getPlayer();
@@ -276,70 +276,69 @@ public final class CheckCommand implements FppCommand {
                             p.getLocation();
                         } catch (Exception e) {
                             bad++;
-                            log(sender, "    Bot " + fp.getName() + " on wrong region thread!");
+                            log(sender, "    假人 " + fp.getName() + " 位于错误的区域线程！");
                         }
                     }
                 }
                 if (bad > 0) {
-                    err(sender, "  " + bad + " bot(s) on wrong region thread");
+                    err(sender, "  " + bad + " 个假人位于错误的区域线程");
                     issues++;
                 } else if (manager.getActivePlayers().size() > 0) {
-                    ok(sender, "  All bots on correct region threads");
+                    ok(sender, "  所有假人均在正确的区域线程上");
                 }
             } else {
-                ok(sender, "Paper detected - using BukkitScheduler");
+                ok(sender, "检测到 Paper - 使用 BukkitScheduler");
             }
 
-            // Verify scheduler utility
+            // 验证调度器工具
             try {
-                FppScheduler.runSync(plugin, () -> log(sender, "  FppScheduler test callback OK"));
-                ok(sender, "FppScheduler functional");
+                FppScheduler.runSync(plugin, () -> log(sender, "  FppScheduler 测试回调正常"));
+                ok(sender, "FppScheduler 功能正常");
             } catch (Exception e) {
-                err(sender, "FppScheduler error: " + e.getMessage());
+                err(sender, "FppScheduler 错误：" + e.getMessage());
                 issues++;
             }
         }
-
         /* ================================================================ */
-        /*  6. WORLD / ENVIRONMENT                                          */
+        /*  6. 世界 / 环境                                                   */
         /* ================================================================ */
         if (checkWorld) {
-            log(sender, "[6/12] Checking world environment...");
+            log(sender, "[6/12] 正在检查世界环境...");
             List<World> worlds = Bukkit.getWorlds();
             if (worlds.isEmpty()) {
-                err(sender, "No worlds loaded");
+                err(sender, "未加载任何世界");
                 issues++;
             } else {
-                ok(sender, worlds.size() + " world(s) loaded");
+                ok(sender, "已加载 " + worlds.size() + " 个世界");
                 for (World w : worlds) {
                     Location spawn = w.getSpawnLocation();
                     boolean ok = spawn != null;
-                    status(sender, "  " + w.getName() + " spawn", ok);
+                    status(sender, "  " + w.getName() + " 出生点", ok);
                     if (!ok) warnings++;
                 }
             }
         }
 
         /* ================================================================ */
-        /*  7. COMMAND REGISTRY                                             */
+        /*  7. 命令注册                                                      */
         /* ================================================================ */
         if (checkCommands) {
-            log(sender, "[7/12] Checking command registration...");
+            log(sender, "[7/12] 正在检查命令注册...");
             org.bukkit.command.PluginCommand cmd = Bukkit.getPluginCommand("fpp");
             if (cmd == null) {
-                err(sender, "/fpp command not registered");
+                err(sender, "/fpp 命令未注册");
                 issues++;
             } else {
-                ok(sender, "/fpp command registered");
+                ok(sender, "/fpp 命令已注册");
                 if (cmd.getPlugin() != plugin) {
-                    err(sender, "/fpp owned by: " + cmd.getPlugin().getName());
+                    err(sender, "/fpp 归属于：" + cmd.getPlugin().getName());
                     issues++;
                 }
             }
 
-            // List all registered subcommands
+            // 列出所有已注册的子命令
             if (deep) {
-                log(sender, "  Registered subcommands:");
+                log(sender, "  已注册的子命令：");
                 for (FppCommand c : plugin.getCommandManager().getCommands()) {
                     info(sender, "    - " + c.getName());
                 }
@@ -347,16 +346,16 @@ public final class CheckCommand implements FppCommand {
         }
 
         /* ================================================================ */
-        /*  8. EVENT LISTENERS                                              */
+        /*  8. 事件监听器                                                    */
         /* ================================================================ */
         if (checkListeners) {
-            log(sender, "[8/12] Checking event listeners...");
+            log(sender, "[8/12] 正在检查事件监听器...");
             String[] criticalEvents = {
-                "org.bukkit.event.player.PlayerJoinEvent",
-                "org.bukkit.event.player.PlayerQuitEvent",
-                "org.bukkit.event.entity.PlayerDeathEvent",
-                "org.bukkit.event.entity.EntityDamageEvent",
-                "org.bukkit.event.player.PlayerInteractAtEntityEvent"
+                    "org.bukkit.event.player.PlayerJoinEvent",
+                    "org.bukkit.event.player.PlayerQuitEvent",
+                    "org.bukkit.event.entity.PlayerDeathEvent",
+                    "org.bukkit.event.entity.EntityDamageEvent",
+                    "org.bukkit.event.player.PlayerInteractAtEntityEvent"
             };
             for (String ev : criticalEvents) {
                 boolean present = hasListener(ev);
@@ -366,11 +365,11 @@ public final class CheckCommand implements FppCommand {
         }
 
         /* ================================================================ */
-        /*  9. SOFT-DEPENDS                                                 */
+        /*  9. 软依赖                                                        */
         /* ================================================================ */
         if (checkExtensions) {
-            log(sender, "[9/12] Checking soft-depends...");
-            // (LuckPerms is intentionally not checked here - FPP no longer hooks it)
+            log(sender, "[9/12] 正在检查软依赖...");
+            //（此处有意不检查 LuckPerms - FPP 已不再挂钩它）
             Plugin papi = Bukkit.getPluginManager().getPlugin("PlaceholderAPI");
             Plugin we = Bukkit.getPluginManager().getPlugin("WorldEdit");
             status(sender, "PlaceholderAPI", papi != null && papi.isEnabled());
@@ -378,12 +377,12 @@ public final class CheckCommand implements FppCommand {
         }
 
         /* ================================================================ */
-        /*  10. MEMORY / BOT STATE AUDIT                                    */
+        /*  10. 内存 / 假人状态审计                                          */
         /* ================================================================ */
         if (checkMemory) {
-            log(sender, "[10/12] Running memory & state audit...");
+            log(sender, "[10/12] 正在运行内存与状态审计...");
             int active = manager.getActivePlayers().size();
-            info(sender, "  Active bots: " + active);
+            info(sender, "  活跃假人：" + active);
 
             if (active > 0) {
                 int invalid = 0;
@@ -392,7 +391,7 @@ public final class CheckCommand implements FppCommand {
                 for (FakePlayer fp : manager.getActivePlayers()) {
                     String name = fp.getName();
                     if (fp.getUuid() == null) {
-                        err(sender, "    Bot " + name + " has null UUID!");
+                        err(sender, "    假人 " + name + " 的 UUID 为 null！");
                         invalid++;
                     }
                     Player p = fp.getPlayer();
@@ -403,15 +402,15 @@ public final class CheckCommand implements FppCommand {
                     }
                 }
                 if (invalid > 0) {
-                    err(sender, "  " + invalid + " bot(s) with invalid state");
+                    err(sender, "  " + invalid + " 个假人状态无效");
                     issues += invalid;
                 }
                 if (offline > 0) {
-                    warn(sender, "  " + offline + " bot(s) with offline body");
+                    warn(sender, "  " + offline + " 个假人实体离线");
                     warnings += offline;
                 }
                 if (missingBody > 0) {
-                    warn(sender, "  " + missingBody + " bot(s) without body (tab-only)");
+                    warn(sender, "  " + missingBody + " 个假人没有实体（仅 Tab 列表）");
                     warnings += missingBody;
                 }
             }
@@ -419,69 +418,69 @@ public final class CheckCommand implements FppCommand {
             Runtime rt = Runtime.getRuntime();
             long usedMB = (rt.totalMemory() - rt.freeMemory()) / 1024 / 1024;
             long maxMB = rt.maxMemory() / 1024 / 1024;
-            info(sender, "  JVM memory: " + usedMB + " MB / " + maxMB + " MB used");
+            info(sender, "  JVM 内存：已用 " + usedMB + " MB / " + maxMB + " MB");
         }
 
         /* ================================================================ */
-        /*  11. PATHFINDING                                                 */
+        /*  11. 寻路                                                         */
         /* ================================================================ */
         if (deep || all) {
-            log(sender, "[11/12] Checking pathfinding...");
+            log(sender, "[11/12] 正在检查寻路...");
             PathfindingService pf = plugin.getPathfindingService();
             if (pf == null) {
-                warn(sender, "PathfindingService is null");
+                warn(sender, "PathfindingService 为 null");
                 warnings++;
             } else {
-                ok(sender, "PathfindingService active");
+                ok(sender, "PathfindingService 运行中");
             }
         }
 
         /* ================================================================ */
-        /*  12. LANG / LOCALISATION                                         */
+        /*  12. 语言 / 本地化                                                */
         /* ================================================================ */
         if (deep || all) {
-            log(sender, "[12/12] Checking language files...");
+            log(sender, "[12/12] 正在检查语言文件...");
             File langDir = new File(plugin.getDataFolder(), "language");
             if (langDir.exists() && langDir.isDirectory()) {
                 File[] files = langDir.listFiles((d, n) -> n.endsWith(".yml"));
                 if (files != null && files.length > 0) {
-                    ok(sender, "  " + files.length + " language file(s) found");
+                    ok(sender, "  找到 " + files.length + " 个语言文件");
                 } else {
-                    warn(sender, "  No language files in language/ directory");
+                    warn(sender, "  language/ 目录中没有语言文件");
                     warnings++;
                 }
             } else {
-                warn(sender, "  language/ directory missing");
+                warn(sender, "  language/ 目录缺失");
                 warnings++;
             }
 
-            // Verify a critical lang key exists
+            // 验证一个关键语言键存在
             Component testMsg = Lang.get("no-permission");
             if (testMsg == null) {
-                warn(sender, "  Lang key 'spawn-usage' missing");
+                warn(sender, "  语言键 'spawn-usage' 缺失");
                 warnings++;
             } else {
-                ok(sender, "  Lang system functional");
+                ok(sender, "  语言系统功能正常");
             }
         }
 
         /* ================================================================ */
-        /*  SUMMARY                                                         */
+        /*  总结                                                             */
         /* ================================================================ */
-        log(sender, "Health check complete.");
+        log(sender, "健康检查完成。");
         if (issues == 0 && warnings == 0) {
-            ok(sender, "All systems operational - 0 issues found.");
-            FppLogger.info("[CHECK] All systems operational.");
+            ok(sender, "所有系统运行正常 - 未发现问题。");
+            FppLogger.info("[CHECK] 所有系统运行正常。");
         } else {
-            warn(sender, "Found " + issues + " error(s) and " + warnings + " warning(s).");
-            FppLogger.warn("[CHECK] " + issues + " error(s), " + warnings + " warning(s) found.");
+            warn(sender, "发现 " + issues + " 个错误和 " + warnings + " 个警告。");
+            FppLogger.warn("[CHECK] 发现 " + issues + " 个错误、 " + warnings + " 个警告。");
         }
 
         return true;
     }
 
     /* ------------------------------------------------------------------ */
-    /*  Helpers                                                           */
+    /*  辅助方法                                                          */
     /* ------------------------------------------------------------------ */
 
     private static boolean hasFlag(String[] args, String flag) {
@@ -491,7 +490,7 @@ public final class CheckCommand implements FppCommand {
         return false;
     }
 
-    /** Log to both player chat and server console. */
+    /** 同时记录到玩家聊天和服务端控制台。 */
     private void log(CommandSender sender, String message) {
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(MUTED))
@@ -535,31 +534,31 @@ public final class CheckCommand implements FppCommand {
         if (ok) {
             ok(sender, key);
         } else {
-            warn(sender, key + " - MISSING / FAILED");
+            warn(sender, key + " - 缺失 / 失败");
         }
     }
 
     /**
-     * Deep reflection audit: attempt to resolve every critical NMS class/field/method
-     * via the same reflection paths NmsPlayerSpawner uses.
+     * 深入反射审计：尝试通过与 NmsPlayerSpawner 相同的反射路径，
+     * 解析每一个关键 NMS 类/字段/方法。
      */
     private int auditReflection(CommandSender sender) {
         int issues = 0;
         String[] criticalClasses = {
-            "net.minecraft.server.MinecraftServer",
-            "net.minecraft.server.level.ServerPlayer",
-            "net.minecraft.server.level.ServerLevel",
-            "net.minecraft.server.network.ServerGamePacketListenerImpl",
-            "net.minecraft.network.Connection",
-            "net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket",
-            "com.mojang.authlib.GameProfile"
+                "net.minecraft.server.MinecraftServer",
+                "net.minecraft.server.level.ServerPlayer",
+                "net.minecraft.server.level.ServerLevel",
+                "net.minecraft.server.network.ServerGamePacketListenerImpl",
+                "net.minecraft.network.Connection",
+                "net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket",
+                "com.mojang.authlib.GameProfile"
         };
         for (String cls : criticalClasses) {
             try {
                 Class.forName(cls);
-                ok(sender, "  Class " + cls + " resolvable");
+                ok(sender, "  类 " + cls + " 可解析");
             } catch (ClassNotFoundException e) {
-                err(sender, "  Class " + cls + " NOT FOUND");
+                err(sender, "  类 " + cls + " 未找到");
                 issues++;
             }
         }
@@ -581,18 +580,18 @@ public final class CheckCommand implements FppCommand {
         String prefix = args[0].toLowerCase();
         List<String> out = new ArrayList<>();
         for (String f : new String[] {
-            "--deep",
-            "--simulation",
-            "--commands",
-            "--listeners",
-            "--nms",
-            "--database",
-            "--folia",
-            "--world",
-            "--config",
-            "--extensions",
-            "--memory",
-            "--all"
+                "--deep",
+                "--simulation",
+                "--commands",
+                "--listeners",
+                "--nms",
+                "--database",
+                "--folia",
+                "--world",
+                "--config",
+                "--extensions",
+                "--memory",
+                "--all"
         }) {
             if (f.startsWith(prefix)) out.add(f);
         }

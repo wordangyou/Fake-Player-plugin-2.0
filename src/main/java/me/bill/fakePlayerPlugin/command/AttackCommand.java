@@ -77,7 +77,7 @@ public final class AttackCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Make a bot swing at the entity it is looking at.";
+        return "让假人对它正在注视的实体挥击。";
     }
 
     @Override
@@ -224,7 +224,7 @@ public final class AttackCommand implements FppCommand {
         if (once) stopAttacking(uuid);
     }
 
-    /** Swing cooldown in ticks for a weapon material - shared with the PVE controller. */
+    /** 某种武器材料的挥击冷却（tick 数）- 与 PVE 控制器共享。 */
     public static int getWeaponCooldown(@Nullable Material weapon) {
         if (weapon == null) return DEFAULT_COOLDOWN;
         return WEAPON_COOLDOWN.getOrDefault(weapon, DEFAULT_COOLDOWN);

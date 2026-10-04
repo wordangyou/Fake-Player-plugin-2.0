@@ -58,7 +58,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
             for (String alias : command.getAliases()) {
                 byName.putIfAbsent(alias.toLowerCase(), command);
             }
-            Config.debug("Registered command: fpp " + command.getName());
+            Config.debug("已注册命令：fpp " + command.getName());
         }
     }
 
@@ -103,18 +103,18 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         FppCommand sub = byName.get(subName);
 
         if (sub == null) {
-            Config.debug(sender.getName() + " used unknown sub-command: " + subName);
+            Config.debug(sender.getName() + " 使用了未知子命令：" + subName);
             sender.sendMessage(Lang.get("unknown-command", label));
             return true;
         }
 
         if (!sub.canUse(sender)) {
-            Config.debug(sender.getName() + " was denied: fpp " + subName);
+            Config.debug(sender.getName() + " 被拒绝：fpp " + subName);
             sender.sendMessage(Lang.get("no-permission"));
             return true;
         }
 
-        Config.debug(sender.getName() + " executed: fpp " + String.join(" ", args));
+        Config.debug(sender.getName() + " 执行了：fpp " + String.join(" ", args));
 
         if (sub instanceof HelpCommand hc) hc.setLastLabel(label);
         String[] subArgs = Arrays.copyOfRange(args, 1, args.length);
@@ -252,13 +252,13 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         sender.sendMessage(divider);
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(DARK_GRAY))
-                .append(Component.text("ᴛʏᴘᴇ ").color(GRAY))
+                .append(Component.text("输入 ").color(GRAY))
                 .append(Component.text("/fpp help")
                         .color(ACCENT)
                         .clickEvent(ClickEvent.runCommand("/fpp help"))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to open the help" + " menu")
+                        .hoverEvent(HoverEvent.showText(Component.text("点击打开帮助" + "菜单")
                                 .color(GRAY))))
-                .append(Component.text(" ꜰᴏʀ ᴀ ʟɪꜱᴛ ᴏꜰ ᴄᴏᴍᴍᴀɴᴅꜱ.").color(GRAY)));
+                .append(Component.text(" 查看命令列表。").color(GRAY)));
         sender.sendMessage(divider);
     }
 
@@ -274,30 +274,30 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         sender.sendMessage(header);
         sender.sendMessage(Component.empty());
 
-        sender.sendMessage(row("ᴠᴇʀꜱɪᴏɴ", version));
-        sender.sendMessage(row("ᴀᴜᴛʜᴏʀ", author));
+        sender.sendMessage(row("版本", version));
+        sender.sendMessage(row("作者", author));
 
         FakePlayerManager fpm = plugin.getFakePlayerManager();
         if (fpm != null) {
-            sender.sendMessage(row("ᴀᴄᴛɪᴠᴇ ʙᴏᴛꜱ", String.valueOf(fpm.getCount())));
+            sender.sendMessage(row("活跃假人", String.valueOf(fpm.getCount())));
         }
 
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(DARK_GRAY))
-                .append(Component.text("ᴅᴏᴡɴʟᴏᴀᴅ ").color(GRAY))
+                .append(Component.text("下载 ").color(GRAY))
                 .append(Component.text("→ ").color(DARK_GRAY))
                 .append(Component.text("Modrinth")
                         .color(ACCENT)
                         .decorate(TextDecoration.UNDERLINED)
                         .clickEvent(ClickEvent.openUrl("https://modrinth.com/plugin/fake-player-plugin-(fpp)"))
                         .hoverEvent(HoverEvent.showText(
-                                Component.text("Click to open Modrinth").color(GRAY))))
+                                Component.text("点击打开 Modrinth").color(GRAY))))
                 .append(Component.text(", ").color(GRAY))
                 .append(Component.text("PaperMC")
                         .color(ACCENT)
                         .decorate(TextDecoration.UNDERLINED)
                         .clickEvent(ClickEvent.openUrl("https://hangar.papermc.io/Pepe-tf/FakePlayerPlugin"))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to open PaperMC" + " Hangar")
+                        .hoverEvent(HoverEvent.showText(Component.text("点击打开 PaperMC" + " Hangar")
                                 .color(GRAY))))
                 .append(Component.text(", ").color(GRAY))
                 .append(Component.text("BuiltByBit")
@@ -305,37 +305,37 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                         .decorate(TextDecoration.UNDERLINED)
                         .clickEvent(ClickEvent.openUrl("https://builtbybit.com/resources/fake-player-plugin.98704/"))
                         .hoverEvent(HoverEvent.showText(
-                                Component.text("Click to open BuiltByBit").color(GRAY)))));
+                                Component.text("点击打开 BuiltByBit").color(GRAY)))));
 
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(DARK_GRAY))
-                .append(Component.text("ꜱᴜᴘᴘᴏʀᴛ  ").color(GRAY))
+                .append(Component.text("支持  ").color(GRAY))
                 .append(Component.text("→ ").color(DARK_GRAY))
                 .append(Component.text("Discord")
                         .color(ACCENT)
                         .decorate(TextDecoration.UNDERLINED)
                         .clickEvent(ClickEvent.openUrl("https://discord.gg/Q9cd9frzRt"))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to join the support" + " Discord")
+                        .hoverEvent(HoverEvent.showText(Component.text("点击加入支持" + " Discord")
                                 .color(GRAY)))));
 
         sender.sendMessage(Component.empty());
 
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(DARK_GRAY))
-                .append(Component.text("ᴛʏᴘᴇ ").color(GRAY))
+                .append(Component.text("输入 ").color(GRAY))
                 .append(Component.text("/fpp help")
                         .color(ACCENT)
                         .clickEvent(ClickEvent.runCommand("/fpp help"))
-                        .hoverEvent(HoverEvent.showText(Component.text("Click to open the help" + " menu")
+                        .hoverEvent(HoverEvent.showText(Component.text("点击打开帮助" + "菜单")
                                 .color(GRAY))))
-                .append(Component.text(" ꜰᴏʀ ᴀ ʟɪꜱᴛ ᴏꜰ ᴄᴏᴍᴍᴀɴᴅꜱ.").color(GRAY)));
+                .append(Component.text(" 查看命令列表。").color(GRAY)));
 
         sender.sendMessage(Component.empty());
         sender.sendMessage(Component.empty()
                 .append(Component.text("  ").color(DARK_GRAY))
-                .append(Component.text("ꜰʀᴇᴇ & ᴏᴘᴇɴ-ꜱᴏᴜʀᴄᴇ").color(GRAY))
+                .append(Component.text("免费 & 开源").color(GRAY))
                 .append(Component.text(" · ").color(DARK_GRAY))
-                .append(Component.text("ɪꜰ ʏᴏᴜ ᴘᴀɪᴅ ꜰᴏʀ ᴛʜɪꜱ, ʏᴏᴜ ᴡᴇʀᴇ ꜱᴄᴀᴍᴍᴇᴅ.")
+                .append(Component.text("如果你为它付过钱，说明你被骗了。")
                         .color(GRAY)));
 
         sender.sendMessage(divider);

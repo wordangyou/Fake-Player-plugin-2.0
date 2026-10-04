@@ -101,7 +101,7 @@ public final class LeftClickCommand extends AbstractClickCommand {
 
     @Override
     public String getDescription() {
-        return "Bot left-clicks like a real player (attacks what it aims at, else breaks blocks). Default: --once";
+        return "假人像真实玩家一样左键点击（攻击准星所指目标，否则破坏方块）。默认：--once";
     }
 
     @Override

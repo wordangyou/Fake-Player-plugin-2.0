@@ -36,7 +36,7 @@ public class SettingCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Open the interactive settings GUI. Provide a bot name to open per-bot settings.";
+        return "打开交互式设置界面。提供假人名字，可打开对应假人的设置。";
     }
 
     @Override

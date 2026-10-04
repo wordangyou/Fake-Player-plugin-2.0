@@ -104,90 +104,69 @@ public final class BotSettingGui implements Listener {
     static {
         List<MobDisplay> list = new ArrayList<>();
 
-        list.add(new MobDisplay(EntityType.ZOMBIE, Material.ZOMBIE_HEAD, "ᴢᴏᴍʙɪᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.SKELETON, Material.SKELETON_SKULL, "ꜱᴋᴇʟᴇᴛᴏɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.CREEPER, Material.CREEPER_HEAD, "ᴄʀᴇᴇᴘᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.SPIDER, Material.SPIDER_EYE, "ꜱᴘɪᴅᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.CAVE_SPIDER, Material.FERMENTED_SPIDER_EYE, "ᴄᴀᴠᴇ ꜱᴘɪᴅᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.ENDERMAN, Material.ENDER_PEARL, "ᴇɴᴅᴇʀᴍᴀɴ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.WITCH, Material.SPLASH_POTION, "ᴡɪᴛᴄʜ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.PILLAGER, Material.CROSSBOW, "ᴘɪʟʟᴀɢᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.VINDICATOR, Material.IRON_AXE, "ᴠɪɴᴅɪᴄᴀᴛᴏʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.EVOKER, Material.TOTEM_OF_UNDYING, "ᴇᴠᴏᴋᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.RAVAGER, Material.SADDLE, "ʀᴀᴠᴀɢᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.VEX, Material.IRON_SWORD, "ᴠᴇx", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.PHANTOM, Material.PHANTOM_MEMBRANE, "ᴘʜᴀɴᴛᴏᴍ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.DROWNED, Material.TRIDENT, "ᴅʀᴏᴡɴᴇᴅ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.HUSK, Material.SAND, "ʜᴜꜱᴋ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.STRAY, Material.ARROW, "ꜱᴛʀᴀʏ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.BLAZE, Material.BLAZE_ROD, "ʙʟᴀᴢᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.GHAST, Material.GHAST_TEAR, "ɢʜᴀꜱᴛ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.MAGMA_CUBE, Material.MAGMA_CREAM, "ᴍᴀɢᴍᴀ ᴄᴜʙᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.SLIME, Material.SLIME_BALL, "ꜱʟɪᴍᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.HOGLIN, Material.COOKED_PORKCHOP, "ʜᴏɢʟɪɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.PIGLIN_BRUTE, Material.GOLDEN_AXE, "ᴘɪɢʟɪɴ ʙʀᴜᴛᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.WARDEN, Material.SCULK_SHRIEKER, "ᴡᴀʀᴅᴇɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(
-                EntityType.WITHER_SKELETON, Material.WITHER_SKELETON_SKULL, "ᴡɪᴛʜᴇʀ ꜱᴋᴇʟᴇᴛᴏɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.GUARDIAN, Material.PRISMARINE_SHARD, "ɢᴜᴀʀᴅɪᴀɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.ELDER_GUARDIAN, Material.PRISMARINE_CRYSTALS, "ᴇʟᴅᴇʀ ɢᴜᴀʀᴅɪᴀɴ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.SHULKER, Material.SHULKER_SHELL, "ꜱʜᴜʟᴋᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.SILVERFISH, Material.STONE_BRICKS, "ꜱɪʟᴠᴇʀꜰɪꜱʜ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.ENDERMITE, Material.ENDER_EYE, "ᴇɴᴅᴇʀᴍɪᴛᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.BREEZE, Material.WIND_CHARGE, "ʙʀᴇᴇᴢᴇ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.BOGGED, Material.POISONOUS_POTATO, "ʙᴏɢɢᴇᴅ", "ʜᴏꜱᴛɪʟᴇ"));
+        list.add(new MobDisplay(EntityType.ZOMBIE, Material.ZOMBIE_HEAD, "僵尸", "敌对"));
+        list.add(new MobDisplay(EntityType.SKELETON, Material.SKELETON_SKULL, "骷髅", "敌对"));
+        list.add(new MobDisplay(EntityType.CREEPER, Material.CREEPER_HEAD, "苦力怕", "敌对"));
+        list.add(new MobDisplay(EntityType.SPIDER, Material.SPIDER_EYE, "蜘蛛", "敌对"));
+        list.add(new MobDisplay(EntityType.CAVE_SPIDER, Material.FERMENTED_SPIDER_EYE, "洞穴蜘蛛", "敌对"));
+        list.add(new MobDisplay(EntityType.ENDERMAN, Material.ENDER_PEARL, "末影人", "中立"));
+        list.add(new MobDisplay(EntityType.WITCH, Material.SPLASH_POTION, "女巫", "敌对"));
+        list.add(new MobDisplay(EntityType.PILLAGER, Material.CROSSBOW, "掠夺者", "敌对"));
+        list.add(new MobDisplay(EntityType.VINDICATOR, Material.IRON_AXE, "卫道士", "敌对"));
+        list.add(new MobDisplay(EntityType.EVOKER, Material.TOTEM_OF_UNDYING, "唤魔者", "敌对"));
+        list.add(new MobDisplay(EntityType.RAVAGER, Material.SADDLE, "劫掠兽", "敌对"));
+        list.add(new MobDisplay(EntityType.VEX, Material.IRON_SWORD, "恼鬼", "敌对"));
+        list.add(new MobDisplay(EntityType.PHANTOM, Material.PHANTOM_MEMBRANE, "幻翼", "敌对"));
+        list.add(new MobDisplay(EntityType.DROWNED, Material.TRIDENT, "溺尸", "敌对"));
+        list.add(new MobDisplay(EntityType.HUSK, Material.SAND, "尸壳", "敌对"));
+        list.add(new MobDisplay(EntityType.STRAY, Material.ARROW, "流浪者", "敌对"));
+        list.add(new MobDisplay(EntityType.BLAZE, Material.BLAZE_ROD, "烈焰人", "敌对"));
+        list.add(new MobDisplay(EntityType.GHAST, Material.GHAST_TEAR, "恶魂", "敌对"));
+        list.add(new MobDisplay(EntityType.MAGMA_CUBE, Material.MAGMA_CREAM, "岩浆怪", "敌对"));
+        list.add(new MobDisplay(EntityType.SLIME, Material.SLIME_BALL, "史莱姆", "敌对"));
+        list.add(new MobDisplay(EntityType.HOGLIN, Material.COOKED_PORKCHOP, "疣猪兽", "敌对"));
+        list.add(new MobDisplay(EntityType.PIGLIN_BRUTE, Material.GOLDEN_AXE, "猪灵蛮兵", "敌对"));
+        list.add(new MobDisplay(EntityType.WARDEN, Material.SCULK_SHRIEKER, "监守者", "敌对"));
 
-        list.add(new MobDisplay(EntityType.ZOMBIFIED_PIGLIN, Material.GOLD_NUGGET, "ᴢᴏᴍʙɪꜰɪᴇᴅ ᴘɪɢʟɪɴ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.PIGLIN, Material.GOLD_INGOT, "ᴘɪɢʟɪɴ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.WOLF, Material.BONE, "ᴡᴏʟꜰ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.IRON_GOLEM, Material.IRON_BLOCK, "ɪʀᴏɴ ɢᴏʟᴇᴍ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.BEE, Material.HONEYCOMB, "ʙᴇᴇ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.POLAR_BEAR, Material.COD, "ᴘᴏʟᴀʀ ʙᴇᴀʀ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.LLAMA, Material.LEAD, "ʟʟᴀᴍᴀ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.DOLPHIN, Material.HEART_OF_THE_SEA, "ᴅᴏʟᴘʜɪɴ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.GOAT, Material.WHEAT, "ɢᴏᴀᴛ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.PANDA, Material.BAMBOO, "ᴘᴀɴᴅᴀ", "ɴᴇᴜᴛʀᴀʟ"));
-        list.add(new MobDisplay(EntityType.TRADER_LLAMA, Material.LEAD, "ᴛʀᴀᴅᴇʀ ʟʟᴀᴍᴀ", "ɴᴇᴜᴛʀᴀʟ"));
+        list.add(new MobDisplay(EntityType.ENDER_DRAGON, Material.DRAGON_HEAD, "末影龙", "BOSS"));
+        list.add(new MobDisplay(EntityType.WITHER, Material.NETHER_STAR, "凋灵", "BOSS"));
 
-        list.add(new MobDisplay(EntityType.ENDER_DRAGON, Material.DRAGON_HEAD, "ᴇɴᴅᴇʀ ᴅʀᴀɢᴏɴ", "ʙᴏꜱꜱ"));
-        list.add(new MobDisplay(EntityType.WITHER, Material.NETHER_STAR, "ᴡɪᴛʜᴇʀ", "ʙᴏꜱꜱ"));
-
-        list.add(new MobDisplay(EntityType.COW, Material.BEEF, "ᴄᴏᴡ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.PIG, Material.PORKCHOP, "ᴘɪɢ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SHEEP, Material.WHITE_WOOL, "ꜱʜᴇᴇᴘ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.CHICKEN, Material.FEATHER, "ᴄʜɪᴄᴋᴇɴ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.RABBIT, Material.RABBIT_FOOT, "ʀᴀʙʙɪᴛ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SQUID, Material.INK_SAC, "ꜱQᴜɪᴅ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.GLOW_SQUID, Material.GLOW_INK_SAC, "ɢʟᴏᴡ ꜱQᴜɪᴅ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.TURTLE, Material.TURTLE_EGG, "ᴛᴜʀᴛʟᴇ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.COD, Material.COD, "ᴄᴏᴅ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SALMON, Material.SALMON, "ꜱᴀʟᴍᴏɴ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.TROPICAL_FISH, Material.TROPICAL_FISH, "ᴛʀᴏᴘɪᴄᴀʟ ꜰɪꜱʜ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.PUFFERFISH, Material.PUFFERFISH, "ᴘᴜꜰꜰᴇʀꜰɪꜱʜ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.VILLAGER, Material.EMERALD, "ᴠɪʟʟᴀɢᴇʀ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.WANDERING_TRADER, Material.EMERALD_BLOCK, "ᴡᴀɴᴅᴇʀɪɴɢ ᴛʀᴀᴅᴇʀ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.HORSE, Material.GOLDEN_APPLE, "ʜᴏʀꜱᴇ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.DONKEY, Material.CHEST, "ᴅᴏɴᴋᴇʏ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.MULE, Material.CHEST, "ᴍᴜʟᴇ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.CAT, Material.STRING, "ᴄᴀᴛ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.PARROT, Material.COOKIE, "ᴘᴀʀʀᴏᴛ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.FOX, Material.SWEET_BERRIES, "ꜰᴏx", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.OCELOT, Material.COD, "ᴏᴄᴇʟᴏᴛ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.AXOLOTL, Material.AXOLOTL_BUCKET, "ᴀxᴏʟᴏᴛʟ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.FROG, Material.SLIME_BALL, "ꜰʀᴏɢ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.TADPOLE, Material.TADPOLE_BUCKET, "ᴛᴀᴅᴘᴏʟᴇ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.ALLAY, Material.AMETHYST_SHARD, "ᴀʟʟᴀʏ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SNIFFER, Material.TORCHFLOWER_SEEDS, "ꜱɴɪꜰꜰᴇʀ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.CAMEL, Material.CACTUS, "ᴄᴀᴍᴇʟ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.ARMADILLO, Material.BRUSH, "ᴀʀᴍᴀᴅɪʟʟᴏ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SNOW_GOLEM, Material.SNOW_BLOCK, "ꜱɴᴏᴡ ɢᴏʟᴇᴍ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.STRIDER, Material.WARPED_FUNGUS, "ꜱᴛʀɪᴅᴇʀ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.BAT, Material.BLACK_DYE, "ʙᴀᴛ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.MOOSHROOM, Material.RED_MUSHROOM, "ᴍᴏᴏꜱʜʀᴏᴏᴍ", "ᴘᴀꜱꜱɪᴠᴇ"));
-        list.add(new MobDisplay(EntityType.SKELETON_HORSE, Material.BONE_BLOCK, "ꜱᴋᴇʟᴇᴛᴏɴ ʜᴏʀꜱᴇ", "ᴜɴᴅᴇᴀᴅ"));
-        list.add(new MobDisplay(EntityType.ZOMBIE_HORSE, Material.ROTTEN_FLESH, "ᴢᴏᴍʙɪᴇ ʜᴏʀꜱᴇ", "ᴜɴᴅᴇᴀᴅ"));
-        list.add(new MobDisplay(EntityType.ZOMBIE_VILLAGER, Material.GOLDEN_APPLE, "ᴢᴏᴍʙɪᴇ ᴠɪʟʟᴀɢᴇʀ", "ʜᴏꜱᴛɪʟᴇ"));
-        list.add(new MobDisplay(EntityType.ZOGLIN, Material.ROTTEN_FLESH, "ᴢᴏɢʟɪɴ", "ʜᴏꜱᴛɪʟᴇ"));
+        list.add(new MobDisplay(EntityType.COW, Material.BEEF, "牛", "被动"));
+        list.add(new MobDisplay(EntityType.PIG, Material.PORKCHOP, "猪", "被动"));
+        list.add(new MobDisplay(EntityType.SHEEP, Material.WHITE_WOOL, "绵羊", "被动"));
+        list.add(new MobDisplay(EntityType.CHICKEN, Material.FEATHER, "鸡", "被动"));
+        list.add(new MobDisplay(EntityType.RABBIT, Material.RABBIT_FOOT, "兔子", "被动"));
+        list.add(new MobDisplay(EntityType.SQUID, Material.INK_SAC, "鱿鱼", "被动"));
+        list.add(new MobDisplay(EntityType.GLOW_SQUID, Material.GLOW_INK_SAC, "发光鱿鱼", "被动"));
+        list.add(new MobDisplay(EntityType.TURTLE, Material.TURTLE_EGG, "海龟", "被动"));
+        list.add(new MobDisplay(EntityType.COD, Material.COD, "鳕鱼", "被动"));
+        list.add(new MobDisplay(EntityType.SALMON, Material.SALMON, "鲑鱼", "被动"));
+        list.add(new MobDisplay(EntityType.TROPICAL_FISH, Material.TROPICAL_FISH, "热带鱼", "被动"));
+        list.add(new MobDisplay(EntityType.PUFFERFISH, Material.PUFFERFISH, "河豚", "被动"));
+        list.add(new MobDisplay(EntityType.VILLAGER, Material.EMERALD, "村民", "被动"));
+        list.add(new MobDisplay(EntityType.WANDERING_TRADER, Material.EMERALD_BLOCK, "流浪商人", "被动"));
+        list.add(new MobDisplay(EntityType.HORSE, Material.GOLDEN_APPLE, "马", "被动"));
+        list.add(new MobDisplay(EntityType.DONKEY, Material.CHEST, "驴", "被动"));
+        list.add(new MobDisplay(EntityType.MULE, Material.CHEST, "骡", "被动"));
+        list.add(new MobDisplay(EntityType.CAT, Material.STRING, "猫", "被动"));
+        list.add(new MobDisplay(EntityType.PARROT, Material.COOKIE, "鹦鹉", "被动"));
+        list.add(new MobDisplay(EntityType.FOX, Material.SWEET_BERRIES, "狐狸", "被动"));
+        list.add(new MobDisplay(EntityType.OCELOT, Material.COD, "豹猫", "被动"));
+        list.add(new MobDisplay(EntityType.AXOLOTL, Material.AXOLOTL_BUCKET, "美西螈", "被动"));
+        list.add(new MobDisplay(EntityType.FROG, Material.SLIME_BALL, "青蛙", "被动"));
+        list.add(new MobDisplay(EntityType.TADPOLE, Material.TADPOLE_BUCKET, "蝌蚪", "被动"));
+        list.add(new MobDisplay(EntityType.ALLAY, Material.AMETHYST_SHARD, "悦灵", "被动"));
+        list.add(new MobDisplay(EntityType.SNIFFER, Material.TORCHFLOWER_SEEDS, "嗅探兽", "被动"));
+        list.add(new MobDisplay(EntityType.CAMEL, Material.CACTUS, "骆驼", "被动"));
+        list.add(new MobDisplay(EntityType.ARMADILLO, Material.BRUSH, "犰狳", "被动"));
+        list.add(new MobDisplay(EntityType.SNOW_GOLEM, Material.SNOW_BLOCK, "雪傀儡", "被动"));
+        list.add(new MobDisplay(EntityType.STRIDER, Material.WARPED_FUNGUS, "炽足兽", "被动"));
+        list.add(new MobDisplay(EntityType.BAT, Material.BLACK_DYE, "蝙蝠", "被动"));
+        list.add(new MobDisplay(EntityType.MOOSHROOM, Material.RED_MUSHROOM, "哞菇", "被动"));
+        list.add(new MobDisplay(EntityType.SKELETON_HORSE, Material.BONE_BLOCK, "骷髅马", "亡灵"));
+        list.add(new MobDisplay(EntityType.ZOMBIE_HORSE, Material.ROTTEN_FLESH, "僵尸马", "亡灵"));
+        list.add(new MobDisplay(EntityType.ZOMBIE_VILLAGER, Material.GOLDEN_APPLE, "僵尸村民", "敌对"));
+        list.add(new MobDisplay(EntityType.ZOGLIN, Material.ROTTEN_FLESH, "僵尸疣猪兽", "敌对"));
 
         MOB_LIST = Collections.unmodifiableList(list);
     }
@@ -517,7 +496,7 @@ public final class BotSettingGui implements Listener {
             player.sendMessage(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("✔ ").color(ON_GREEN))
-                    .append(Component.text("ʙᴏᴛ ꜱᴇᴛᴛɪɴɢꜱ ꜱᴀᴠᴇᴅ • ꜱᴇᴛᴛɪɴɢꜱ ᴀᴘᴘʟɪᴇᴅ")
+                    .append(Component.text("假人设置已保存 • 设置已生效")
                             .color(WHITE)));
         }
     }
@@ -560,7 +539,7 @@ public final class BotSettingGui implements Listener {
                 p.sendActionBar(Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
                         .append(Component.text("✦ ").color(ACCENT))
-                        .append(Component.text("ᴄᴀɴᴄᴇʟʟᴇᴅ - ʀᴇᴛᴜʀɴɪɴɢ ᴛᴏ" + " ꜱᴇᴛᴛɪɴɢꜱ.")
+                       .append(Component.text("已取消 - 返回设置。")
                                 .color(GRAY)));
                 build(p);
                 return;
@@ -613,7 +592,7 @@ public final class BotSettingGui implements Listener {
                         .append(Component.text(entry.label() + "  ")
                                 .color(WHITE)
                                 .decoration(TextDecoration.BOLD, false))
-                        .append(Component.text("- ᴄᴏᴍɪɴɢ ꜱᴏᴏɴ")
+                        .append(Component.text("- 即将推出")
                                 .color(COMING_SOON_COLOR)
                                 .decoration(TextDecoration.BOLD, true)));
             }
@@ -635,7 +614,7 @@ public final class BotSettingGui implements Listener {
                     manager.persistBotSettings(bot);
                 }
                 playUiClick(player, newVal ? 1.2f : 0.85f);
-                sendActionBarConfirm(player, entry.label(), newVal ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ");
+                sendActionBarConfirm(player, entry.label(), newVal ? "✔ 已开启" : "✘ 已关闭");
                 build(player);
             }
             case CYCLE_PRIORITY -> {
@@ -643,7 +622,7 @@ public final class BotSettingGui implements Listener {
                 manager.persistBotSettings(bot);
                 restartPveIfActive(bot);
                 playUiClick(player, 1.0f);
-                sendActionBarConfirm(player, entry.label(), bot.getPvePriority());
+                sendActionBarConfirm(player, entry.label(), "lowest-health".equals(bot.getPvePriority()) ? "最低血量" : "最近");
                 build(player);
             }
             case CYCLE_PVE_MODE -> {
@@ -814,17 +793,17 @@ public final class BotSettingGui implements Listener {
 
     private String pveModeLabel(FakePlayer bot) {
         return switch (bot.getPveSmartAttackMode()) {
-            case OFF -> "✘ ᴏꜰꜰ";
-            case ON_NO_MOVE -> "✔ ᴏɴ · ꜱᴛɪʟʟ";
-            case ON_MOVE -> "✔ ᴏɴ · ᴍᴏᴠᴇ";
+            case OFF -> "✘ 关闭";
+            case ON_NO_MOVE -> "✔ 开启 · 静止";
+            case ON_MOVE -> "✔ 开启 · 移动";
         };
     }
 
     private void applyImmediate(Player player, FakePlayer bot, String id) {
         switch (id) {
-            case "skin_info" -> sendActionBarConfirm(player, "ᴄᴜʀʀᴇɴᴛ ꜱᴋɪɴ", skinSummary(bot));
+            case "skin_info" -> sendActionBarConfirm(player, "当前皮肤", skinSummary(bot));
             case "skin_reroll" -> rerollSkin(player, bot);
-            case "pve_status" -> sendActionBarConfirm(player, "ᴘᴠᴇ ꜱᴛᴀᴛᴜꜱ", pveStatusLabel(bot));
+            case "pve_status" -> sendActionBarConfirm(player, "PVE 状态", pveStatusLabel(bot));
             default -> {}
         }
     }
@@ -832,7 +811,7 @@ public final class BotSettingGui implements Listener {
     private void rerollSkin(Player player, FakePlayer bot) {
         SkinManager skinManager = plugin.getSkinManager();
         if (skinManager == null || !Config.skinRarePoolsEnabled()) {
-            sendActionBarConfirm(player, "ʀᴇ-ʀᴏʟʟ ꜱᴋɪɴ", "✘ ꜱᴋɪɴ ᴘᴏᴏʟꜱ ᴅɪꜱᴀʙʟᴇᴅ");
+            sendActionBarConfirm(player, "重掷皮肤", "✘ 皮肤卡池未启用");
             return;
         }
         // Clearing the resolved skin makes resolveEffectiveSkin roll the pools again - identical
@@ -840,7 +819,7 @@ public final class BotSettingGui implements Listener {
         bot.setResolvedSkin(null);
         skinManager.resolveEffectiveSkin(bot, skin -> {
             boolean applied = skin != null && skin.isValid() && skinManager.applySkinFromProfile(bot, skin);
-            sendActionBarConfirm(player, "ʀᴇ-ʀᴏʟʟ ꜱᴋɪɴ", applied ? skinSummary(bot) : "✘ ʀᴏʟʟ ꜰᴀɪʟᴇᴅ");
+            sendActionBarConfirm(player, "重掷皮肤", applied ? skinSummary(bot) : "✘ 重掷失败");
             if (player.isOnline()) build(player);
         });
     }
@@ -856,7 +835,7 @@ public final class BotSettingGui implements Listener {
                 player.sendMessage(Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
                         .append(Component.text("⚠ ").color(DANGER_RED))
-                        .append(Component.text("ᴄʟɪᴄᴋ ᴀɢᴀɪɴ ᴡɪᴛʜɪɴ 5ꜱ ᴛᴏ ᴄᴏɴꜰɪʀᴍ ʀᴇꜱᴇᴛ.")
+                       .append(Component.text("5 秒内再次点击以确认重置。")
                                 .color(YELLOW)));
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, SoundCategory.MASTER, 0.8f, 0.5f);
                 startConfirmCountdown(player, bot, uuid);
@@ -869,7 +848,7 @@ public final class BotSettingGui implements Listener {
             player.sendMessage(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("⟲ ").color(YELLOW))
-                    .append(Component.text("ᴀʟʟ ꜱᴇᴛᴛɪɴɢꜱ ʀᴇꜱᴇᴛ ꜰᴏʀ  ").color(WHITE))
+                   .append(Component.text("已重置所有设置：").color(WHITE))
                     .append(Component.text(bot.getName()).color(ACCENT)));
             return;
         }
@@ -886,7 +865,7 @@ public final class BotSettingGui implements Listener {
             player.sendMessage(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("✕ ").color(DANGER_RED))
-                    .append(Component.text("ᴅᴇʟᴇᴛᴇᴅ ʙᴏᴛ  ").color(WHITE))
+                    .append(Component.text("已删除假人：").color(WHITE))
                     .append(Component.text(botName).color(ACCENT)));
         }
     }
@@ -932,7 +911,7 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ᴛʜᴀᴛ ɴᴀᴍᴇ ɪꜱ ᴇᴍᴘᴛʏ ᴏʀ ɪɴᴠᴀʟɪᴅ.")
+                           .append(Component.text("名字为空或无效。")
                                     .color(GRAY)));
                     return;
                 }
@@ -940,12 +919,12 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ᴛᴏᴏ ʟᴏɴɢ - ᴍᴀx " + RENAME_MAX_LENGTH + " ᴄʜᴀʀᴀᴄᴛᴇʀꜱ.")
+                            .append(Component.text("太长 - 最多 " + RENAME_MAX_LENGTH + " 个字符。")
                                     .color(GRAY)));
                     return;
                 }
                 manager.renameBot(bot, newName);
-                sendActionBarConfirm(player, "ʀᴇɴᴀᴍᴇᴅ", plain);
+                sendActionBarConfirm(player, "已重命名", plain);
             }
             case "auto_eat_threshold" -> {
                 int val;
@@ -955,7 +934,7 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ɪɴᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ - ᴇɴᴛᴇʀ 0-19.")
+                            .append(Component.text("无效数字 - 请输入 0-19。")
                                     .color(GRAY)));
                     return;
                 }
@@ -965,7 +944,7 @@ public final class BotSettingGui implements Listener {
                 bot.setAutoEatHungerThreshold(val);
                 fireSettingChange(bot, "auto_eat_threshold", old, bot.getAutoEatHungerThreshold());
                 manager.persistBotSettings(bot);
-                sendActionBarConfirm(player, "ᴀᴜᴛᴏ-ᴇᴀᴛ ᴀᴛ", bot.getAutoEatHungerThreshold() + " / 20 ʜᴜɴɢᴇʀ");
+                sendActionBarConfirm(player, "自动进食阈值", bot.getAutoEatHungerThreshold() + " / 20 饥饿值");
             }
             case "chunk_load_radius" -> {
                 int globalMax = Config.chunkLoadingEnabled() ? Config.chunkLoadingRadius() : 0;
@@ -977,7 +956,7 @@ public final class BotSettingGui implements Listener {
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
                             .append(Component.text(
-                                            "ɪɴᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ - ᴇɴᴛᴇʀ -1 (ɢʟᴏʙᴀʟ), 0" + " (ᴏꜰꜰ), ᴏʀ 1-" + globalMax + ".")
+                                            "无效数字 - 请输入 -1（全局）、0（关闭）或 1-" + globalMax + "。")
                                     .color(GRAY)));
                     return;
                 }
@@ -988,8 +967,8 @@ public final class BotSettingGui implements Listener {
                 bot.setChunkLoadRadius(val);
                 fireSettingChange(bot, "chunk_load_radius", old, bot.getChunkLoadRadius());
                 manager.persistBotSettings(bot);
-                String display = val == -1 ? "ɢʟᴏʙᴀʟ (" + globalMax + ")" : val == 0 ? "ᴅɪꜱᴀʙʟᴇᴅ" : val + " ᴄʜᴜɴᴋꜱ";
-                sendActionBarConfirm(player, "ᴄʜᴜɴᴋ ʀᴀᴅɪᴜꜱ", display);
+                String display = val == -1 ? "全局 (" + globalMax + ")" : val == 0 ? "已关闭" : val + " 区块";
+                sendActionBarConfirm(player, "区块半径", display);
             }
             case "pve_range" -> {
                 double val;
@@ -999,7 +978,7 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ɪɴᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ - ᴇɴᴛᴇʀ 1-64.")
+                            .append(Component.text("无效数字 - 请输入 1-64。")
                                     .color(GRAY)));
                     return;
                 }
@@ -1008,7 +987,7 @@ public final class BotSettingGui implements Listener {
                 bot.setPveRange(val);
                 manager.persistBotSettings(bot);
                 restartPveIfActive(bot);
-                sendActionBarConfirm(player, "ᴘᴠᴇ ʀᴀɴɢᴇ", (int) val + " ʙʟᴏᴄᴋꜱ");
+                sendActionBarConfirm(player, "PVE 范围", (int) val + " 格");
             }
             case "rental_extend" -> {
                 if (!player.hasPermission(Perm.RENT)) {
@@ -1040,11 +1019,11 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ɪɴᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ - ᴇɴᴛᴇʀ "
+                            .append(Component.text("无效数字 - 请输入 "
                                             + LeftClickCommand.MIN_INTERVAL_TICKS
                                             + "-"
                                             + LeftClickCommand.MAX_INTERVAL_TICKS
-                                            + ", ᴏʀ 0 ꜰᴏʀ ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ.")
+                                            + "，或 0 使用全局默认。")
                                     .color(GRAY)));
                     return;
                 }
@@ -1057,8 +1036,8 @@ public final class BotSettingGui implements Listener {
                 bot.setLeftClickIntervalTicks(val);
                 manager.persistBotSettings(bot);
                 persistClickIntervals(bot);
-                String display = val == -1 ? "ɢʟᴏʙᴀʟ (" + Config.leftClickIntervalTicks() + ")" : val + " ᴛɪᴄᴋꜱ";
-                sendActionBarConfirm(player, "ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ɪɴᴛᴇʀᴠᴀʟ", display);
+                String display = val == -1 ? "全局 (" + Config.leftClickIntervalTicks() + ")" : val + " 刻";
+                sendActionBarConfirm(player, "左键间隔", display);
             }
             case "right_click_interval" -> {
                 int val;
@@ -1068,11 +1047,11 @@ public final class BotSettingGui implements Listener {
                     player.sendMessage(Component.empty()
                             .decoration(TextDecoration.ITALIC, false)
                             .append(Component.text("✘ ").color(OFF_RED))
-                            .append(Component.text("ɪɴᴠᴀʟɪᴅ ɴᴜᴍʙᴇʀ - ᴇɴᴛᴇʀ "
+                            .append(Component.text("无效数字 - 请输入 "
                                             + RightClickCommand.MIN_INTERVAL_TICKS
                                             + "-"
                                             + RightClickCommand.MAX_INTERVAL_TICKS
-                                            + ", ᴏʀ 0 ꜰᴏʀ ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ.")
+                                            + "，或 0 使用全局默认。")
                                     .color(GRAY)));
                     return;
                 }
@@ -1085,8 +1064,8 @@ public final class BotSettingGui implements Listener {
                 bot.setRightClickIntervalTicks(val);
                 manager.persistBotSettings(bot);
                 persistClickIntervals(bot);
-                String display = val == -1 ? "ɢʟᴏʙᴀʟ (" + Config.rightClickIntervalTicks() + ")" : val + " ᴛɪᴄᴋꜱ";
-                sendActionBarConfirm(player, "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ɪɴᴛᴇʀᴠᴀʟ", display);
+                String display = val == -1 ? "全局 (" + Config.rightClickIntervalTicks() + ")" : val + " 刻";
+                sendActionBarConfirm(player, "右键间隔", display);
             }
         }
     }
@@ -1125,7 +1104,7 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text("] ").color(DARK_GRAY))
                 .append(Component.text(bot.getName()).color(ACCENT))
                 .append(Component.text("  ·  ").color(DARK_GRAY))
-                .append(Component.text("ꜱᴇʟᴇᴄᴛ ᴍᴏʙꜱ").color(DARK_GRAY))
+                .append(Component.text("选择怪物").color(DARK_GRAY))
                 .append(Component.text("  (" + (page + 1) + "/" + totalPages + ")")
                         .color(DARK_GRAY));
 
@@ -1139,12 +1118,12 @@ public final class BotSettingGui implements Listener {
             inv.setItem(i - startIdx, buildMobItem(mob, selected));
         }
 
-        inv.setItem(MOB_SLOT_BACK, buildMobBarItem(Material.ARROW, "◄  ʙᴀᴄᴋ ᴛᴏ ꜱᴇᴛᴛɪɴɢꜱ", ACCENT));
+        inv.setItem(MOB_SLOT_BACK, buildMobBarItem(Material.ARROW, "◄  返回设置", ACCENT));
 
         inv.setItem(
                 MOB_SLOT_PREV_PAGE,
                 page > 0
-                        ? buildMobBarItem(Material.MAGENTA_STAINED_GLASS_PANE, "◄  ᴘʀᴇᴠɪᴏᴜꜱ ᴘᴀɢᴇ", COMING_SOON_COLOR)
+                        ? buildMobBarItem(Material.MAGENTA_STAINED_GLASS_PANE, "◄  上一页", COMING_SOON_COLOR)
                         : glassFiller(Material.GRAY_STAINED_GLASS_PANE));
 
         inv.setItem(47, glassFiller(Material.GRAY_STAINED_GLASS_PANE));
@@ -1159,14 +1138,14 @@ public final class BotSettingGui implements Listener {
         }
         clearMeta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("✦  ᴀʟʟ ʜᴏꜱᴛɪʟᴇ ᴍᴏʙꜱ")
+                .append(Component.text("✦  所有敌对生物")
                         .color(isAllHostile ? SELECTED_GREEN : VALUE_YELLOW)
                         .decoration(TextDecoration.BOLD, true)));
         List<Component> clearLore = new ArrayList<>();
         clearLore.add(Component.empty());
         clearLore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(isAllHostile ? "◈  ᴄᴜʀʀᴇɴᴛʟʏ ᴀᴄᴛɪᴠᴇ" : "ᴄʟɪᴄᴋ ᴛᴏ ᴄʟᴇᴀʀ ᴀʟʟ ᴛᴀʀɢᴇᴛꜱ")
+                .append(Component.text(isAllHostile ? "◈  当前生效" : "点击清除所有目标")
                         .color(isAllHostile ? SELECTED_GREEN : DARK_GRAY)));
         clearMeta.lore(clearLore);
         clearItem.setItemMeta(clearMeta);
@@ -1178,7 +1157,7 @@ public final class BotSettingGui implements Listener {
         inv.setItem(
                 MOB_SLOT_NEXT_PAGE,
                 page < totalPages - 1
-                        ? buildMobBarItem(Material.LIME_STAINED_GLASS_PANE, "▶  ɴᴇxᴛ ᴘᴀɢᴇ", ON_GREEN)
+                        ? buildMobBarItem(Material.LIME_STAINED_GLASS_PANE, "▶  下一页", ON_GREEN)
                         : glassFiller(Material.GRAY_STAINED_GLASS_PANE));
 
         inv.setItem(MOB_SLOT_CLOSE, buildCloseButton());
@@ -1241,7 +1220,7 @@ public final class BotSettingGui implements Listener {
             manager.persistBotSettings(bot);
             restartPveIfActive(bot);
             playUiClick(player, 1.2f);
-            sendActionBarConfirm(player, "ᴍᴏʙ ᴛᴀʀɢᴇᴛ", "ᴀʟʟ ʜᴏꜱᴛɪʟᴇ");
+            sendActionBarConfirm(player, "怪物目标", "所有敌对");
             pendingRebuild.add(uuid);
             buildMobSelector(player, bot, page);
             pendingRebuild.remove(uuid);
@@ -1259,9 +1238,9 @@ public final class BotSettingGui implements Listener {
             playUiClick(player, 1.2f);
             int count = bot.getPveMobTypes().size();
             String label = nowSelected
-                    ? "+" + mob.displayName + " (" + count + " ꜱᴇʟᴇᴄᴛᴇᴅ)"
-                    : "-" + mob.displayName + " (" + (count == 0 ? "ᴀʟʟ ʜᴏꜱᴛɪʟᴇ" : count + " ꜱᴇʟᴇᴄᴛᴇᴅ") + ")";
-            sendActionBarConfirm(player, "ᴍᴏʙ ᴛᴀʀɢᴇᴛ", label);
+                    ? "+" + mob.displayName + " (" + count + " 已选中)"
+                    : "-" + mob.displayName + " (" + (count == 0 ? "所有敌对" : count + " 已选中") + ")";
+            sendActionBarConfirm(player, "怪物目标", label);
 
             pendingRebuild.add(uuid);
             buildMobSelector(player, bot, page);
@@ -1295,7 +1274,7 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text("] ").color(DARK_GRAY))
                 .append(Component.text(bot.getName()).color(ACCENT))
                 .append(Component.text("  ·  ").color(DARK_GRAY))
-                .append(Component.text("ᴀʟʟᴏᴡᴇᴅ ꜰᴏᴏᴅꜱ").color(DARK_GRAY))
+                .append(Component.text("允许的食物").color(DARK_GRAY))
                 .append(Component.text("  (" + (page + 1) + "/" + totalPages + ")")
                         .color(DARK_GRAY));
 
@@ -1308,11 +1287,11 @@ public final class BotSettingGui implements Listener {
             inv.setItem(i - startIdx, buildFoodItem(food, selected.contains(food.material())));
         }
 
-        inv.setItem(MOB_SLOT_BACK, buildMobBarItem(Material.ARROW, "◄  ʙᴀᴄᴋ ᴛᴏ ꜱᴇᴛᴛɪɴɢꜱ", ACCENT));
+        inv.setItem(MOB_SLOT_BACK, buildMobBarItem(Material.ARROW, "◄  返回设置", ACCENT));
         inv.setItem(
                 MOB_SLOT_PREV_PAGE,
                 page > 0
-                        ? buildMobBarItem(Material.MAGENTA_STAINED_GLASS_PANE, "◄  ᴘʀᴇᴠɪᴏᴜꜱ ᴘᴀɢᴇ", COMING_SOON_COLOR)
+                        ? buildMobBarItem(Material.MAGENTA_STAINED_GLASS_PANE, "◄  上一页", COMING_SOON_COLOR)
                         : glassFiller(Material.GRAY_STAINED_GLASS_PANE));
         inv.setItem(47, glassFiller(Material.GRAY_STAINED_GLASS_PANE));
         inv.setItem(48, glassFiller(Material.GRAY_STAINED_GLASS_PANE));
@@ -1326,14 +1305,14 @@ public final class BotSettingGui implements Listener {
         }
         clearMeta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("✦  ᴀɴʏ ꜰᴏᴏᴅ")
+                .append(Component.text("✦  任意食物")
                         .color(anyFood ? SELECTED_GREEN : VALUE_YELLOW)
                         .decoration(TextDecoration.BOLD, true)));
         List<Component> clearLore = new ArrayList<>();
         clearLore.add(Component.empty());
         clearLore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(anyFood ? "◈  ᴄᴜʀʀᴇɴᴛʟʏ ᴇᴀᴛɪɴɢ ᴀɴʏ ꜰᴏᴏᴅ" : "ᴄʟɪᴄᴋ ᴛᴏ ᴀʟʟᴏᴡ ᴀɴʏ ꜰᴏᴏᴅ")
+                .append(Component.text(anyFood ? "◈  当前吃任意食物" : "点击允许任意食物")
                         .color(anyFood ? SELECTED_GREEN : DARK_GRAY)));
         clearMeta.lore(clearLore);
         clearItem.setItemMeta(clearMeta);
@@ -1344,7 +1323,7 @@ public final class BotSettingGui implements Listener {
         inv.setItem(
                 MOB_SLOT_NEXT_PAGE,
                 page < totalPages - 1
-                        ? buildMobBarItem(Material.LIME_STAINED_GLASS_PANE, "▶  ɴᴇxᴛ ᴘᴀɢᴇ", ON_GREEN)
+                        ? buildMobBarItem(Material.LIME_STAINED_GLASS_PANE, "▶  下一页", ON_GREEN)
                         : glassFiller(Material.GRAY_STAINED_GLASS_PANE));
         inv.setItem(MOB_SLOT_CLOSE, buildCloseButton());
 
@@ -1370,11 +1349,11 @@ public final class BotSettingGui implements Listener {
         lore.add(Component.empty());
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ʜᴜɴɢᴇʀ  ").color(DARK_GRAY))
+                .append(Component.text("饥饿值  ").color(DARK_GRAY))
                 .append(Component.text("+" + food.nutrition()).color(VALUE_YELLOW)));
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(selected ? "◈  ꜱᴇʟᴇᴄᴛᴇᴅ" : "◈  ᴄʟɪᴄᴋ ᴛᴏ ᴀʟʟᴏᴡ")
+                .append(Component.text(selected ? "◈  已选中" : "◈  点击允许")
                         .color(selected ? SELECTED_GREEN : DARK_GRAY)));
         meta.lore(lore);
         item.setItemMeta(meta);
@@ -1429,7 +1408,7 @@ public final class BotSettingGui implements Listener {
             bot.setAutoEatFoods(new LinkedHashSet<>());
             manager.persistBotSettings(bot);
             playUiClick(player, 1.2f);
-            sendActionBarConfirm(player, "ᴀᴜᴛᴏ-ᴇᴀᴛ ꜰᴏᴏᴅꜱ", "ᴀɴʏ ꜰᴏᴏᴅ");
+            sendActionBarConfirm(player, "自动进食食物", "任意食物");
             pendingRebuild.add(uuid);
             buildFoodSelector(player, bot, page);
             pendingRebuild.remove(uuid);
@@ -1444,9 +1423,9 @@ public final class BotSettingGui implements Listener {
             playUiClick(player, 1.2f);
             int count = bot.getAutoEatFoods().size();
             String label = nowSelected
-                    ? "+" + food.display() + " (" + count + " ꜱᴇʟᴇᴄᴛᴇᴅ)"
-                    : "-" + food.display() + " (" + (count == 0 ? "ᴀɴʏ ꜰᴏᴏᴅ" : count + " ꜱᴇʟᴇᴄᴛᴇᴅ") + ")";
-            sendActionBarConfirm(player, "ᴀᴜᴛᴏ-ᴇᴀᴛ ꜰᴏᴏᴅ", label);
+                    ? "+" + food.display() + " (" + count + " 已选中)"
+                    : "-" + food.display() + " (" + (count == 0 ? "任意食物" : count + " 已选中") + ")";
+            sendActionBarConfirm(player, "自动进食食物", label);
             pendingRebuild.add(uuid);
             buildFoodSelector(player, bot, page);
             pendingRebuild.remove(uuid);
@@ -1469,7 +1448,7 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text("] ").color(DARK_GRAY))
                 .append(Component.text(bot.getName()).color(ACCENT))
                 .append(Component.text("  ·  ").color(DARK_GRAY))
-                .append(Component.text("ꜱʜᴀʀᴇ ᴄᴏɴᴛʀᴏʟ").color(DARK_GRAY));
+                .append(Component.text("共享控制").color(DARK_GRAY));
 
         Inventory inv = Bukkit.createInventory(holder, SIZE, title);
         int slot = 0;
@@ -1483,13 +1462,13 @@ public final class BotSettingGui implements Listener {
         if (slot == 0) {
             ItemStack item = new ItemStack(Material.BARRIER);
             ItemMeta meta = item.getItemMeta();
-            meta.displayName(Component.text("ɴᴏ ᴏɴʟɪɴᴇ ᴘʟᴀʏᴇʀꜱ").color(OFF_RED));
+            meta.displayName(Component.text("没有在线玩家").color(OFF_RED));
             meta.lore(List.of(
-                    Component.text("ᴘʟᴀʏᴇʀꜱ ᴍᴜꜱᴛ ʙᴇ ᴏɴʟɪɴᴇ ᴛᴏ ꜱʜᴀʀᴇ ᴄᴏɴᴛʀᴏʟ.").color(GRAY)));
+                    Component.text("玩家必须在线才能共享控制。").color(GRAY)));
             item.setItemMeta(meta);
             inv.setItem(22, item);
         }
-        inv.setItem(45, buildMobBarItem(Material.ARROW, "◄  ʙᴀᴄᴋ ᴛᴏ ꜱᴇᴛᴛɪɴɢꜱ", ACCENT));
+        inv.setItem(45, buildMobBarItem(Material.ARROW, "◄  返回设置", ACCENT));
         for (int i = 46; i < 53; i++) inv.setItem(i, glassFiller(Material.GRAY_STAINED_GLASS_PANE));
         inv.setItem(53, buildCloseButton());
         player.openInventory(inv);
@@ -1508,9 +1487,9 @@ public final class BotSettingGui implements Listener {
                     .color(shared ? SELECTED_GREEN : ACCENT)
                     .decoration(TextDecoration.ITALIC, false));
             meta.lore(List.of(
-                    Component.text(shared ? "✔ ᴄᴀɴ ᴄᴏɴᴛʀᴏʟ ᴛʜɪꜱ ʙᴏᴛ" : "✘ ɴᴏ ᴄᴏɴᴛʀᴏʟ ᴀᴄᴄᴇꜱꜱ")
+                    Component.text(shared ? "✔ 可控制此假人" : "✘ 无控制权限")
                             .color(shared ? SELECTED_GREEN : GRAY),
-                    Component.text("ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ").color(YELLOW)));
+                    Component.text("点击切换").color(YELLOW)));
             item.setItemMeta(meta);
         }
         return item;
@@ -1553,7 +1532,7 @@ public final class BotSettingGui implements Listener {
         if (shared) bot.removeSharedController(target.getUniqueId());
         else bot.addSharedController(target.getUniqueId());
         playUiClick(player, shared ? 0.85f : 1.2f);
-        sendActionBarConfirm(player, "ꜱʜᴀʀᴇ ᴄᴏɴᴛʀᴏʟ", target.getName() + (shared ? " ʀᴇᴠᴏᴋᴇᴅ" : " ɢʀᴀɴᴛᴇᴅ"));
+        sendActionBarConfirm(player, "共享控制", target.getName() + (shared ? " 已撤销" : " 已授予"));
         pendingRebuild.add(uuid);
         buildShareSelector(player, bot);
         pendingRebuild.remove(uuid);
@@ -1577,7 +1556,7 @@ public final class BotSettingGui implements Listener {
         lore.add(Component.empty());
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ᴛʏᴘᴇ  ").color(DARK_GRAY))
+                .append(Component.text("类型  ").color(DARK_GRAY))
                 .append(Component.text(mob.category).color(GRAY)));
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
@@ -1587,10 +1566,10 @@ public final class BotSettingGui implements Listener {
         if (selected) {
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("◈  ᴛᴀʀɢᴇᴛᴇᴅ").color(SELECTED_GREEN)));
-            lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ʀᴇᴍᴏᴠᴇ"));
+                    .append(Component.text("◈  已锁定").color(SELECTED_GREEN)));
+            lore.add(hint("◈ ", "点击移除"));
         } else {
-            lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴀᴅᴅ ᴛᴀʀɢᴇᴛ"));
+            lore.add(hint("◈ ", "点击添加目标"));
         }
 
         meta.lore(lore);
@@ -1703,8 +1682,8 @@ public final class BotSettingGui implements Listener {
         player.sendActionBar(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("⟲ ").color(YELLOW))
-                .append(Component.text("ʙᴏᴛ ꜱᴇᴛᴛɪɴɢꜱ  ").color(WHITE))
-                .append(Component.text("ʀᴇꜱᴇᴛ ᴛᴏ ᴅᴇꜰᴀᴜʟᴛꜱ").color(YELLOW).decoration(TextDecoration.BOLD, true)));
+                .append(Component.text("假人设置  ").color(WHITE))
+                .append(Component.text("已重置为默认值").color(YELLOW).decoration(TextDecoration.BOLD, true)));
     }
 
     private void openChatInput(Player player, FakePlayer bot, BotEntry entry) {
@@ -1720,51 +1699,51 @@ public final class BotSettingGui implements Listener {
         String currentVal;
         switch (entry.id()) {
             case "rename" -> {
-                promptLabel = "ɴᴇᴡ ᴅɪꜱᴘʟᴀʏ ɴᴀᴍᴇ (ᴍᴀx " + RENAME_MAX_LENGTH + ")";
+                promptLabel = "新显示名称（最大 " + RENAME_MAX_LENGTH + "）";
                 currentVal = bot.getDisplayName();
             }
             case "auto_eat_threshold" -> {
-                promptLabel = "ʜᴜɴɢᴇʀ ᴛʜʀᴇꜱʜᴏʟᴅ (0-19)";
+                promptLabel = "饥饿值阈值（0-19）";
                 currentVal = bot.getAutoEatHungerThreshold() + " / 20";
             }
             case "chunk_load_radius" -> {
                 int gMax = Config.chunkLoadingEnabled() ? Config.chunkLoadingRadius() : 0;
-                promptLabel = "ʀᴀᴅɪᴜꜱ (-1=ɢʟᴏʙᴀʟ, 0=ᴏꜰꜰ, 1-" + gMax + ")";
+                promptLabel = "半径（-1=全局，0=关闭，1-" + gMax + "）";
                 int cur = bot.getChunkLoadRadius();
-                currentVal = cur == -1 ? "ɢʟᴏʙᴀʟ (" + gMax + ")" : cur == 0 ? "ᴅɪꜱᴀʙʟᴇᴅ" : cur + " ᴄʜᴜɴᴋꜱ";
+                currentVal = cur == -1 ? "全局 (" + gMax + ")" : cur == 0 ? "已关闭" : cur + " 区块";
             }
             case "pve_range" -> {
-                promptLabel = "ᴅᴇᴛᴇᴄᴛ ʀᴀɴɢᴇ (1-64)";
-                currentVal = (int) bot.getPveRange() + " ʙʟᴏᴄᴋꜱ";
+                promptLabel = "检测范围（1-64）";
+                currentVal = (int) bot.getPveRange() + " 格";
             }
             case "rental_extend" -> {
                 int min = Config.rentalMinHours();
                 int max = Config.rentalMaxHours();
-                promptLabel = "ʜᴏᴜʀꜱ ᴛᴏ ʙᴜʏ (" + min + "-" + max + ", " + Config.rentalPricePerHour() + "/ʜ)";
+                promptLabel = "购买小时数（" + min + "-" + max + "，" + Config.rentalPricePerHour() + "/小时）";
                 currentVal = bot.isRented()
                         ? RentalPurchases.formatRemaining(
                                 RentalPurchases.currentExpiry(bot) - System.currentTimeMillis())
-                        : "ᴘᴇʀᴍᴀɴᴇɴᴛ";
+                        : "永久";
             }
             case "left_click_interval" -> {
-                promptLabel = "ᴛɪᴄᴋꜱ ("
+                promptLabel = "刻数（"
                         + LeftClickCommand.MIN_INTERVAL_TICKS
                         + "-"
                         + LeftClickCommand.MAX_INTERVAL_TICKS
-                        + ", 0 = ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ)";
+                        + "，0 = 全局默认）";
                 currentVal = bot.getLeftClickIntervalTicks() > 0
-                        ? bot.getLeftClickIntervalTicks() + " ᴛɪᴄᴋꜱ"
-                        : "ɢʟᴏʙᴀʟ (" + Config.leftClickIntervalTicks() + ")";
+                        ? bot.getLeftClickIntervalTicks() + " 刻"
+                        : "全局 (" + Config.leftClickIntervalTicks() + ")";
             }
             case "right_click_interval" -> {
-                promptLabel = "ᴛɪᴄᴋꜱ ("
+                promptLabel = "刻数（"
                         + RightClickCommand.MIN_INTERVAL_TICKS
                         + "-"
                         + RightClickCommand.MAX_INTERVAL_TICKS
-                        + ", 0 = ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ)";
+                        + "，0 = 全局默认）";
                 currentVal = bot.getRightClickIntervalTicks() > 0
-                        ? bot.getRightClickIntervalTicks() + " ᴛɪᴄᴋꜱ"
-                        : "ɢʟᴏʙᴀʟ (" + Config.rightClickIntervalTicks() + ")";
+                        ? bot.getRightClickIntervalTicks() + " 刻"
+                        : "全局 (" + Config.rightClickIntervalTicks() + ")";
             }
             default -> {
                 promptLabel = entry.label();
@@ -1779,8 +1758,8 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text("[").color(DARK_GRAY))
                 .append(Component.text("ꜰᴘᴘ").color(ACCENT))
                 .append(Component.text("]  ").color(DARK_GRAY))
-                .append(Component.text("ʙᴏᴛ ꜱᴇᴛᴛɪɴɢꜱ").color(WHITE).decoration(TextDecoration.BOLD, true))
-                .append(Component.text("  ·  ᴇᴅɪᴛ ᴠᴀʟᴜᴇ").color(DARK_GRAY)));
+                .append(Component.text("假人设置").color(WHITE).decoration(TextDecoration.BOLD, true))
+                .append(Component.text("  ·  编辑数值").color(DARK_GRAY)));
         player.sendMessage(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("│  ").color(DARK_GRAY))
@@ -1803,14 +1782,14 @@ public final class BotSettingGui implements Listener {
         player.sendMessage(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("│  ").color(DARK_GRAY))
-                .append(Component.text("ᴄᴜʀʀᴇɴᴛ  ").color(DARK_GRAY))
+                .append(Component.text("当前  ").color(DARK_GRAY))
                 .append(Component.text(currentVal).color(VALUE_YELLOW).decoration(TextDecoration.BOLD, true)));
         player.sendMessage(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("└─ ").color(DARK_GRAY))
-                .append(Component.text("ᴛʏᴘᴇ ᴀ ɴᴇᴡ ᴠᴀʟᴜᴇ, ᴏʀ ").color(GRAY))
-                .append(Component.text("ᴄᴀɴᴄᴇʟ").color(OFF_RED).decoration(TextDecoration.BOLD, true))
-                .append(Component.text(" ᴛᴏ ɢᴏ ʙᴀᴄᴋ.").color(GRAY)));
+                .append(Component.text("输入新数值，或输入 ").color(GRAY))
+                .append(Component.text("cancel").color(OFF_RED).decoration(TextDecoration.BOLD, true))
+                .append(Component.text(" 返回。").color(GRAY)));
         player.sendMessage(Component.empty());
 
         int taskId = FppScheduler.runSyncLaterWithId(
@@ -1824,7 +1803,7 @@ public final class BotSettingGui implements Listener {
                             p.sendMessage(Component.empty()
                                     .decoration(TextDecoration.ITALIC, false)
                                     .append(Component.text("✦ ").color(ACCENT))
-                                    .append(Component.text("ɪɴᴘᴜᴛ ᴛɪᴍᴇᴅ" + " ᴏᴜᴛ -" + " ʀᴇᴛᴜʀɴɪɴɢ" + " ᴛᴏ ꜱᴇᴛᴛɪɴɢꜱ.")
+                                    .append(Component.text("输入超时 - 返回设置。")
                                             .color(GRAY)));
                             build(p);
                         }
@@ -1850,8 +1829,8 @@ public final class BotSettingGui implements Listener {
             lore.add(Component.empty());
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ᴠᴀʟᴜᴇ  ").color(DARK_GRAY))
-                    .append(Component.text("⚠ ᴄᴏᴍɪɴɢ ꜱᴏᴏɴ")
+                    .append(Component.text("数值  ").color(DARK_GRAY))
+                    .append(Component.text("⚠ 即将推出")
                             .color(COMING_SOON_COLOR)
                             .decoration(TextDecoration.BOLD, true)));
             lore.add(Component.empty());
@@ -1865,7 +1844,7 @@ public final class BotSettingGui implements Listener {
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("⊘ ").color(COMING_SOON_COLOR))
-                    .append(Component.text("ꜰᴇᴀᴛᴜʀᴇ ᴜɴᴀᴠᴀɪʟᴀʙʟᴇ").color(DARK_GRAY)));
+                    .append(Component.text("功能不可用").color(DARK_GRAY)));
             meta.lore(lore);
             item.setItemMeta(meta);
             return item;
@@ -1892,7 +1871,7 @@ public final class BotSettingGui implements Listener {
         TextColor valColor = isDanger ? DANGER_RED : (isToggle ? (isOn ? ON_GREEN : OFF_RED) : VALUE_YELLOW);
         lore.add(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ᴠᴀʟᴜᴇ  ").color(DARK_GRAY))
+                .append(Component.text("数值  ").color(DARK_GRAY))
                 .append(Component.text(valueString(entry, bot, viewer))
                         .color(valColor)
                         .decoration(TextDecoration.BOLD, true)));
@@ -1905,12 +1884,12 @@ public final class BotSettingGui implements Listener {
         }
         lore.add(Component.empty());
         switch (entry.type()) {
-            case TOGGLE -> lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ"));
-            case CYCLE_PRIORITY -> lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴄʏᴄʟᴇ"));
-            case ACTION -> lore.add(hint("✎ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴇᴅɪᴛ ɪɴ ᴄʜᴀᴛ"));
-            case MOB_SELECTOR -> lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ ᴍᴏʙ ꜱᴇʟᴇᴄᴛᴏʀ"));
-            case FOOD_SELECTOR -> lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴏᴘᴇɴ ꜰᴏᴏᴅ ʟɪꜱᴛ"));
-            case IMMEDIATE -> lore.add(hint("◈ ", "ᴄʟɪᴄᴋ ᴛᴏ ᴄʟᴇᴀʀ"));
+            case TOGGLE -> lore.add(hint("◈ ", "点击切换"));
+            case CYCLE_PRIORITY -> lore.add(hint("◈ ", "点击循环切换"));
+            case ACTION -> lore.add(hint("✎ ", "点击在聊天中编辑"));
+            case MOB_SELECTOR -> lore.add(hint("◈ ", "点击打开怪物选择"));
+            case FOOD_SELECTOR -> lore.add(hint("◈ ", "点击打开食物列表"));
+            case IMMEDIATE -> lore.add(hint("◈ ", "点击清除"));
             case DANGER -> lore.add(dangerConfirmHint(entry, viewer));
         }
         meta.lore(lore);
@@ -1935,7 +1914,7 @@ public final class BotSettingGui implements Listener {
                 return Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
                         .append(Component.text("◈ ").color(DANGER_RED))
-                        .append(Component.text("ᴄᴏɴꜰɪʀᴍ ᴡɪᴛʜɪɴ " + remainingS + "ꜱ")
+                        .append(Component.text("在 " + remainingS + " 秒内确认")
                                 .color(YELLOW)
                                 .decoration(TextDecoration.BOLD, true));
             }
@@ -1943,33 +1922,33 @@ public final class BotSettingGui implements Listener {
         return Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
                 .append(Component.text("◈ ").color(DANGER_RED))
-                .append(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ᴄᴏɴꜰɪʀᴍ").color(DARK_GRAY));
+                .append(Component.text("点击确认").color(DARK_GRAY));
     }
 
     private String valueString(BotEntry entry, FakePlayer bot, Player viewer) {
         if (entry.valueOverride() != null) return entry.valueOverride();
         return switch (entry.id()) {
             case "show_path" -> PathfindingDebugManager.isViewing(viewer.getUniqueId(), bot.getUuid())
-                    ? "✔ ᴇɴᴀʙʟᴇᴅ"
-                    : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "frozen" -> bot.isFrozen() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "respawn_on_death" -> bot.isRespawnOnDeath() ? "✔ ʀᴇꜱᴘᴀᴡɴ" : "✘ ᴅᴇꜱᴘᴀᴡɴ";
-            case "head_ai_enabled" -> bot.isHeadAiEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "swim_ai_enabled" -> bot.isSwimAiEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "pickup_items" -> bot.isPickUpItemsEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "pickup_xp" -> bot.isPickUpXpEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "auto_milk" -> bot.isAutoMilkEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "prevent_bad_omen" -> bot.isPreventBadOmen() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "nav_parkour" -> bot.isNavParkour() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "nav_break_blocks" -> bot.isNavBreakBlocks() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "nav_place_blocks" -> bot.isNavPlaceBlocks() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
+                    ? "✔ 已开启"
+                    : "✘ 已关闭";
+            case "frozen" -> bot.isFrozen() ? "✔ 已开启" : "✘ 已关闭";
+case "respawn_on_death" -> bot.isRespawnOnDeath() ? "✔ 重生" : "✘ 消失";
+            case "head_ai_enabled" -> bot.isHeadAiEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "swim_ai_enabled" -> bot.isSwimAiEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "pickup_items" -> bot.isPickUpItemsEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "pickup_xp" -> bot.isPickUpXpEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "auto_milk" -> bot.isAutoMilkEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "prevent_bad_omen" -> bot.isPreventBadOmen() ? "✔ 已开启" : "✘ 已关闭";
+            case "nav_parkour" -> bot.isNavParkour() ? "✔ 已开启" : "✘ 已关闭";
+            case "nav_break_blocks" -> bot.isNavBreakBlocks() ? "✔ 已开启" : "✘ 已关闭";
+            case "nav_place_blocks" -> bot.isNavPlaceBlocks() ? "✔ 已开启" : "✘ 已关闭";
             case "pve_enabled" -> pveModeLabel(bot);
-            case "share_control" -> bot.getSharedControllers().size() + " ꜱʜᴀʀᴇᴅ";
-            case "pve_range" -> (int) bot.getPveRange() + " ʙʟᴏᴄᴋꜱ";
-            case "pve_priority" -> bot.getPvePriority() != null ? bot.getPvePriority() : "nearest";
+case "share_control" -> bot.getSharedControllers().size() + " 人共享";
+            case "pve_range" -> (int) bot.getPveRange() + " 格";
+            case "pve_priority" -> "lowest-health".equals(bot.getPvePriority()) ? "最低血量" : "最近";
             case "pve_mob_type" -> {
                 Set<String> types = bot.getPveMobTypes();
-                if (types.isEmpty()) yield "ᴀʟʟ ʜᴏꜱᴛɪʟᴇ";
+                if (types.isEmpty()) yield "所有敌对";
                 if (types.size() == 1) {
                     String t = types.iterator().next();
                     for (MobDisplay md : MOB_LIST) {
@@ -1977,32 +1956,32 @@ public final class BotSettingGui implements Listener {
                     }
                     yield t.toLowerCase();
                 }
-                yield types.size() + " ᴍᴏʙ ᴛʏᴘᴇꜱ";
+               yield types.size() + " 种怪物";
             }
             case "chunk_load_radius" -> {
                 int r = bot.getChunkLoadRadius();
                 int gMax = Config.chunkLoadingEnabled() ? Config.chunkLoadingRadius() : 0;
-                yield r == -1 ? "ɢʟᴏʙᴀʟ (" + gMax + ")" : r == 0 ? "ᴅɪꜱᴀʙʟᴇᴅ" : r + " ᴄʜᴜɴᴋꜱ";
+                yield r == -1 ? "全局 (" + gMax + ")" : r == 0 ? "已关闭" : r + " 区块";
             }
             case "rental_extend" -> bot.isRented()
                     ? RentalPurchases.formatRemaining(RentalPurchases.currentExpiry(bot) - System.currentTimeMillis())
-                    : "ᴘᴇʀᴍᴀɴᴇɴᴛ";
+                    : "永久";
             case "left_click_interval" -> bot.getLeftClickIntervalTicks() > 0
-                    ? bot.getLeftClickIntervalTicks() + " ᴛɪᴄᴋꜱ"
-                    : "ɢʟᴏʙᴀʟ (" + Config.leftClickIntervalTicks() + ")";
+                    ? bot.getLeftClickIntervalTicks() + " 刻"
+                    : "全局 (" + Config.leftClickIntervalTicks() + ")";
             case "right_click_interval" -> bot.getRightClickIntervalTicks() > 0
-                    ? bot.getRightClickIntervalTicks() + " ᴛɪᴄᴋꜱ"
-                    : "ɢʟᴏʙᴀʟ (" + Config.rightClickIntervalTicks() + ")";
-            case "auto_eat" -> bot.isAutoEatEnabled() ? "✔ ᴇɴᴀʙʟᴇᴅ" : "✘ ᴅɪꜱᴀʙʟᴇᴅ";
-            case "auto_eat_threshold" -> bot.getAutoEatHungerThreshold() + " / 20 ʜᴜɴɢᴇʀ";
+                    ? bot.getRightClickIntervalTicks() + " 刻"
+                    : "全局 (" + Config.rightClickIntervalTicks() + ")";
+            case "auto_eat" -> bot.isAutoEatEnabled() ? "✔ 已开启" : "✘ 已关闭";
+            case "auto_eat_threshold" -> bot.getAutoEatHungerThreshold() + " / 20 饥饿值";
             case "auto_eat_foods" -> {
                 int n = bot.getAutoEatFoods().size();
-                yield n == 0 ? "ᴀɴʏ ꜰᴏᴏᴅ" : n + " ꜱᴇʟᴇᴄᴛᴇᴅ";
+                yield n == 0 ? "任意食物" : n + " 已选中";
             }
-            case "reset_all" -> "⚠ ɢᴇɴᴇʀᴀʟ · ᴄʜᴀᴛ · ᴘᴠᴇ · ᴘᴀᴛʜ · ᴄᴍᴅꜱ";
+            case "reset_all" -> "⚠ 常规 · 聊天 · PVE · 寻路 · 指令";
             case "delete" -> bot.getName();
             case "skin_info" -> skinSummary(bot);
-            case "skin_reroll" -> "ᴄʟɪᴄᴋ ᴛᴏ ʀᴏʟʟ";
+            case "skin_reroll" -> "点击重掷";
             case "pve_status" -> pveStatusLabel(bot);
             default -> "?";
         };
@@ -2010,35 +1989,35 @@ public final class BotSettingGui implements Listener {
 
     /** Live combat state for the PVE status entry: off / scanning / fighting. */
     private String pveStatusLabel(FakePlayer bot) {
-        if (!bot.isPveEnabled()) return "✘ ᴏꜰꜰ";
+        if (!bot.isPveEnabled()) return "✘ 关闭";
         var pve = plugin.getPveController();
-        if (pve != null && pve.isEngaged(bot.getUuid())) return "⚔ ꜰɪɢʜᴛɪɴɢ";
-        return "◌ ꜱᴄᴀɴɴɪɴɢ ꜰᴏʀ ᴛᴀʀɢᴇᴛꜱ";
+        if (pve != null && pve.isEngaged(bot.getUuid())) return "⚔ 战斗中";
+        return "◌ 扫描目标中";
     }
 
     /** One-line summary of the bot's current skin: source/rarity + detected player model. */
     private String skinSummary(FakePlayer bot) {
         SkinProfile skin = bot.getResolvedSkin();
-        if (skin == null || !skin.isValid()) return "ᴠᴀɴɪʟʟᴀ ᴅᴇꜰᴀᴜʟᴛ";
+        if (skin == null || !skin.isValid()) return "原版默认";
         SkinModelDetector.SkinModel model = SkinModelDetector.detectFromTextureValue(skin.getValue());
         String modelLabel =
                 switch (model) {
-                    case SLIM -> "ꜱʟɪᴍ";
-                    case CLASSIC -> "ᴄʟᴀꜱꜱɪᴄ";
+                    case SLIM -> "纤细";
+                    case CLASSIC -> "经典";
                     case UNKNOWN -> "?";
                 };
         return skinRarityLabel(skin.getSource()) + " · " + modelLabel;
     }
 
     private static String skinRarityLabel(String source) {
-        if (source == null) return "ᴄᴜꜱᴛᴏᴍ";
+        if (source == null) return "自定义";
         if (source.startsWith("pool:")) {
             String tail = source.substring(source.lastIndexOf(':') + 1);
-            if ("main".equals(tail)) return "ᴍᴀɪɴ";
-            if (tail.startsWith("1-in-")) return "✨ ʀᴀʀᴇ " + tail.replace("1-in-", "1/");
+            if ("main".equals(tail)) return "主池";
+            if (tail.startsWith("1-in-")) return "✨ 稀有 " + tail.replace("1-in-", "1/");
         }
-        if (source.startsWith("despawn:")) return "ʀᴇꜱᴛᴏʀᴇᴅ";
-        return "ᴄᴜꜱᴛᴏᴍ";
+        if (source.startsWith("despawn:")) return "已恢复";
+        return "自定义";
     }
 
     private boolean getBoolValue(String id, FakePlayer bot, Player viewer) {
@@ -2117,7 +2096,7 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text(cat.label()).color(ACCENT).decoration(TextDecoration.BOLD, active)));
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text(active ? "◈  ᴄᴜʀʀᴇɴᴛʟʏ ᴠɪᴇᴡɪɴɢ" : "ᴄʟɪᴄᴋ ᴛᴏ ꜱᴡɪᴛᴄʜ")
+                .append(Component.text(active ? "◈  正在查看" : "点击切换")
                         .color(active ? ON_GREEN : DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
@@ -2133,7 +2112,7 @@ public final class BotSettingGui implements Listener {
                 .append(Component.text(isNext ? "▶" : "◄").color(col).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("ꜱᴄʀᴏʟʟ ᴄᴀᴛᴇɢᴏʀɪᴇꜱ " + (isNext ? "ꜰᴏʀᴡᴀʀᴅ" : "ʙᴀᴄᴋᴡᴀʀᴅ") + ".")
+                .append(Component.text("滚动分类 " + (isNext ? "向前" : "向后") + "。")
                         .color(DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
@@ -2144,14 +2123,14 @@ public final class BotSettingGui implements Listener {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("⟲  ʀᴇꜱᴇᴛ ʙᴏᴛ").color(YELLOW)));
+                .append(Component.text("⟲  重置假人").color(YELLOW)));
         meta.lore(List.of(
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ʀᴇꜱᴇᴛ ᴀʟʟ ʙᴏᴛ ꜱᴇᴛᴛɪɴɢꜱ").color(GRAY)),
+                        .append(Component.text("重置所有假人设置").color(GRAY)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴛᴏ ᴅᴇꜰᴀᴜʟᴛ ᴠᴀʟᴜᴇꜱ.").color(GRAY))));
+                        .append(Component.text("为默认值。").color(GRAY))));
         item.setItemMeta(meta);
         return item;
     }
@@ -2161,14 +2140,14 @@ public final class BotSettingGui implements Listener {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("✕  ᴄʟᴏꜱᴇ").color(OFF_RED).decoration(TextDecoration.BOLD, true)));
+                .append(Component.text("✕  关闭").color(OFF_RED).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴄʟɪᴄᴋ - ᴄʟᴏꜱᴇ ᴛʜᴇ ᴍᴇɴᴜ").color(DARK_GRAY)),
+                        .append(Component.text("点击 - 关闭菜单").color(DARK_GRAY)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ꜱʜɪꜰᴛ-ᴄʟɪᴄᴋ - ʙᴀᴄᴋ ᴛᴏ ᴛʜᴇ ʙᴏᴛ ʟɪꜱᴛ")
+                        .append(Component.text("Shift+点击 - 返回假人列表")
                                 .color(DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
@@ -2263,117 +2242,116 @@ public final class BotSettingGui implements Listener {
     private BotCategory general() {
         int globalMax = Config.chunkLoadingEnabled() ? Config.chunkLoadingRadius() : 0;
         return new BotCategory(
-                "⚙ ɢᴇɴᴇʀᴀʟ",
+                "⚙ 常规",
                 Material.COMPARATOR,
                 Material.GRAY_DYE,
                 Material.LIGHT_GRAY_STAINED_GLASS_PANE,
                 List.of(
                         BotEntry.action(
                                 "rename",
-                                "ʀᴇɴᴀᴍᴇ ʙᴏᴛ",
-                                "ꜱᴇᴛ ᴛʜɪꜱ ʙᴏᴛ'ꜱ ᴅɪꜱᴘʟᴀʏ ɴᴀᴍᴇ.\n"
-                                        + "ꜱʜᴏᴡɴ ᴀʙᴏᴠᴇ ɪᴛꜱ ʜᴇᴀᴅ, ɪɴ ᴛʜᴇ ᴛᴀʙ\n"
-                                        + "ʟɪꜱᴛ ᴀɴᴅ ɪɴ ᴄᴏᴍᴍᴀɴᴅ ᴏᴜᴛᴘᴜᴛ.\n"
-                                        + "ɪᴅᴇɴᴛɪᴛʏ (ᴜᴜɪᴅ) ꜱᴛᴀʏꜱ ᴛʜᴇ ꜱᴀᴍᴇ.",
+                                "重命名假人",
+                                "设置此假人的显示名字。\n"
+                                        + "显示在头顶、Tab 列表\n"
+                                        + "和命令输出中。\n"
+                                        + "身份 (UUID) 保持不变。",
                                 Material.NAME_TAG,
                                 false),
                         BotEntry.toggle(
                                 "frozen",
-                                "ꜰʀᴏᴢᴇɴ",
-                                "ʙᴏᴛ ᴄᴀɴɴᴏᴛ ᴍᴏᴠᴇ ᴡʜᴇɴ ꜰʀᴏᴢᴇɴ.\nᴛᴏɢɢʟᴇ ᴛᴏ ᴘᴀᴜꜱᴇ ᴀʟʟ ᴍᴏᴠᴇᴍᴇɴᴛ.",
+                                "冻结",
+                                "假人冻结时无法移动。\n开启即可暂停所有移动。",
                                 Material.PACKED_ICE,
                                 false),
                         BotEntry.toggle(
                                 "respawn_on_death",
-                                "ʀᴇꜱᴘᴀᴡɴ ᴏɴ ᴅᴇᴀᴛʜ",
-                                "ᴛʜɪꜱ ʙᴏᴛ ʀᴇꜱᴘᴀᴡɴꜱ ᴀꜰᴛᴇʀ ᴅᴇᴀᴛʜ ᴡʜᴇɴ ᴇɴᴀʙʟᴇᴅ.\n" + "ᴅɪꜱᴀʙʟᴇᴅ = ᴅᴇᴀᴛʜ ᴅᴇꜱᴘᴀᴡɴꜱ ᴛʜᴇ ʙᴏᴛ.",
+                                "死亡后重生",
+                                "开启后假人死后会自动重生。\n关闭 = 死亡后消失。",
                                 Material.TOTEM_OF_UNDYING,
                                 false),
                         BotEntry.toggle(
                                 "head_ai_enabled",
-                                "ʜᴇᴀᴅ ᴀɪ (ʟᴏᴏᴋ ᴀᴛ ᴘʟᴀʏᴇʀ)",
-                                "ʙᴏᴛ ꜱᴍᴏᴏᴛʜʟʏ ʀᴏᴛᴀᴛᴇꜱ ᴛᴏᴡᴀʀᴅ ᴘʟᴀʏᴇʀꜱ ᴡʜᴇɴ ᴇɴᴀʙʟᴇᴅ.\n"
-                                        + "ᴅɪꜱᴀʙʟᴇ ᴛᴏ ᴋᴇᴇᴘ ʜᴇᴀᴅ ꜱᴛᴀᴛɪᴏɴᴀʀʏ.",
+                                "头部 AI（看向玩家）",
+                                "开启后假人会平滑地转头看向玩家。\n"
+                                        + "关闭可让头部保持不动。",
                                 Material.PLAYER_HEAD,
                                 false),
                         BotEntry.action(
                                 "chunk_load_radius",
-                                "ᴄʜᴜɴᴋ ʀᴀᴅɪᴜꜱ",
-                                "ʜᴏᴡ ᴍᴀɴʏ ᴄʜᴜɴᴋꜱ ᴛʜɪꜱ ʙᴏᴛ ʟᴏᴀᴅꜱ.\n"
-                                        + "-1 = ꜰᴏʟʟᴏᴡ ɢʟᴏʙᴀʟ ᴄᴏɴꜰɪɢ\n"
-                                        + "0  = ᴅɪꜱᴀʙʟᴇᴅ ꜰᴏʀ ᴛʜɪꜱ ʙᴏᴛ\n"
+                                "区块半径",
+                                "此假人加载的区块数量。\n"
+                                        + "-1 = 跟随全局配置\n"
+                                        + "0  = 对此假人关闭\n"
                                         + "1-"
                                         + globalMax
-                                        + " = ꜰɪxᴇᴅ ʀᴀᴅɪᴜꜱ (ᴄᴀᴘᴘᴇᴅ ᴀᴛ ɢʟᴏʙᴀʟ ᴍᴀx)",
+                                        + " = 固定半径（受全局上限限制）",
                                 Material.MAP,
                                 false),
                         BotEntry.toggle(
                                 "pickup_items",
-                                "ᴘɪᴄᴋ ᴜᴘ ɪᴛᴇᴍꜱ",
-                                "ᴛʜɪꜱ ʙᴏᴛ ᴘɪᴄᴋꜱ ᴜᴘ ɪᴛᴇᴍ ᴇɴᴛɪᴛɪᴇꜱ\nɪɴᴛᴏ ɪᴛꜱ ɪɴᴠᴇɴᴛᴏʀʏ ᴡʜᴇɴ ᴇɴᴀʙʟᴇᴅ.",
+                                "拾取物品",
+                                "开启后此假人会把物品实体\n捡进自己的背包。",
                                 Material.HOPPER,
                                 false),
                         BotEntry.toggle(
                                 "pickup_xp",
-                                "ᴘɪᴄᴋ ᴜᴘ xᴘ",
-                                "ᴛʜɪꜱ ʙᴏᴛ ᴄᴏʟʟᴇᴄᴛꜱ ᴇxᴘᴇʀɪᴇɴᴄᴇ ᴏʀʙꜱ\n" + "ᴡʜᴇɴ ᴇɴᴀʙʟᴇᴅ. /ꜰᴘᴘ xᴘ ᴄᴏᴏʟᴅᴏᴡɴ ꜱᴛɪʟʟ ᴀᴘᴘʟɪᴇꜱ.",
+                                "拾取经验",
+                                "开启后此假人会收集经验球。\n" + "/fpp xp 的冷却仍然生效。",
                                 Material.EXPERIENCE_BOTTLE,
                                 false),
                         BotEntry.toggle(
                                 "auto_milk",
-                                "ᴀᴜᴛᴏ ᴍɪʟᴋ",
-                                "ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴄᴜʀᴇ ʜᴀʀᴍꜰᴜʟ ᴇꜰꜰᴇᴄᴛꜱ\n"
-                                        + "(ᴘᴏɪꜱᴏɴ, ᴡɪᴛʜᴇʀ, ꜱʟᴏᴡɴᴇꜱꜱ, ᴇᴛᴄ.)\n"
-                                        + "ɢʟᴏʙᴀʟ: "
-                                        + (Config.autoMilkEnabled() ? "ᴇɴᴀʙʟᴇᴅ" : "ᴅɪꜱᴀʙʟᴇᴅ"),
+                                "自动喝奶",
+                                "自动清除负面效果\n"
+                                        + "（中毒、凋零、缓慢等）\n"
+                                        + "全局: "
+                                        + (Config.autoMilkEnabled() ? "已开启" : "已关闭"),
                                 Material.MILK_BUCKET,
                                 false),
                         BotEntry.toggle(
                                 "prevent_bad_omen",
-                                "ʙʟᴏᴄᴋ ʙᴀᴅ ᴏᴍᴇɴ",
-                                "ᴘʀᴇᴠᴇɴᴛ ʙᴀᴅ ᴏᴍᴇɴ, ʀᴀɪᴅ ᴏᴍᴇɴ\n"
-                                        + "ᴀɴᴅ ᴛʀɪᴀʟ ᴏᴍᴇɴ ᴇꜰꜰᴇᴄᴛꜱ.\n"
-                                        + "ᴘʀᴇᴠᴇɴᴛꜱ ʙᴏᴛꜱ ꜰʀᴏᴍ ᴛʀɪɢɢᴇʀɪɴɢ ʀᴀɪᴅꜱ.\n"
-                                        + "ɢʟᴏʙᴀʟ: "
-                                        + (Config.preventBadOmen() ? "ᴇɴᴀʙʟᴇᴅ" : "ᴅɪꜱᴀʙʟᴇᴅ"),
+                                "屏蔽不祥之兆",
+                                "屏蔽不祥之兆、袭击之兆\n"
+                                        + "和试炼之兆效果。\n"
+                                        + "防止假人触发袭击。\n"
+                                        + "全局: "
+                                        + (Config.preventBadOmen() ? "已开启" : "已关闭"),
                                 Material.OMINOUS_BOTTLE,
                                 false),
                         BotEntry.immediate(
                                 "share_control",
-                                "ꜱʜᴀʀᴇ ᴄᴏɴᴛʀᴏʟ",
-                                "ᴏᴘᴇɴ ᴀ ʀᴇᴀʟ-ᴘʟᴀʏᴇʀ ꜱᴇʟᴇᴄᴛᴏʀ\n"
-                                        + "ᴛᴏ ɢʀᴀɴᴛ ᴏʀ ʀᴇᴠᴏᴋᴇ ᴄᴏɴᴛʀᴏʟ.\n"
-                                        + "ᴏɴʟʏ ᴏᴡɴᴇʀꜱ ᴀɴᴅ ᴀᴅᴍɪɴꜱ ᴄᴀɴ ꜱʜᴀʀᴇ.",
+                                "共享控制",
+                                "打开真实玩家选择器\n"
+                                        + "以授予或撤销控制权。\n"
+                                        + "仅拥有者和管理员可共享。",
                                 Material.PLAYER_HEAD,
                                 false),
                         BotEntry.action(
                                 "rental_extend",
-                                "ʀᴇɴᴛᴀʟ ᴛɪᴍᴇ",
-                                "ᴛʜɪꜱ ʙᴏᴛ'ꜱ ʀᴇᴍᴀɪɴɪɴɢ ᴘᴀɪᴅ ᴛɪᴍᴇ.\n"
-                                        + "ᴄʟɪᴄᴋ ᴛᴏ ʙᴜʏ ᴍᴏʀᴇ ʜᴏᴜʀꜱ ᴡɪᴛʜ ʏᴏᴜʀ\n"
-                                        + "ᴇᴄᴏɴᴏᴍʏ ʙᴀʟᴀɴᴄᴇ (" + Config.rentalPricePerHour() + "/ʜ).\n"
-                                        + "ɴᴏᴛ ʀᴇɴᴛᴇᴅ = ᴘᴇʀᴍᴀɴᴇɴᴛ, ɴᴇᴠᴇʀ ᴇxᴘɪʀᴇꜱ.",
+                                "租赁时间",
+                                "此假人的剩余付费时间。\n"
+                                        + "点击使用你的经济余额\n"
+                                        + "购买更多小时 (" + Config.rentalPricePerHour() + "/时)。\n"
+                                        + "未租赁 = 永久，永不过期。",
                                 Material.CLOCK,
                                 false),
                         BotEntry.action(
                                 "left_click_interval",
-                                "ʟᴇꜰᴛ-ᴄʟɪᴄᴋ ɪɴᴛᴇʀᴠᴀʟ",
-                                "ᴛɪᴄᴋꜱ ʙᴇᴛᴡᴇᴇɴ ʙʟᴏᴄᴋ ʙʀᴇᴀᴋꜱ ᴡʜɪʟᴇ\n"
-                                        + "ʀᴇᴘᴇᴀᴛ/ʜᴏʟᴅ ᴍɪɴɪɴɢ. ᴇɴᴛɪᴛʏ ᴀᴛᴛᴀᴄᴋꜱ ᴀʀᴇ\n"
-                                        + "ᴜɴᴀꜰꜰᴇᴄᴛᴇᴅ (ᴡᴇᴀᴘᴏɴ ꜱᴘᴇᴇᴅ ᴘᴀᴄᴇꜱ ᴛʜᴏꜱᴇ).\n"
-                                        + "ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ: "
+                                "左键间隔",
+                                "重复/长按挖掘时破坏方块之间的间隔刻数。\n"
+                                        + "攻击实体不受影响（由武器攻速决定）。\n"
+                                        + "全局默认: "
                                         + Config.leftClickIntervalTicks()
-                                        + " ᴛɪᴄᴋꜱ.",
+                                        + " 刻。",
                                 Material.IRON_PICKAXE,
                                 false),
                         BotEntry.action(
                                 "right_click_interval",
-                                "ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ɪɴᴛᴇʀᴠᴀʟ",
-                                "ᴛɪᴄᴋꜱ ʙᴇᴛᴡᴇᴇɴ ʜᴇʟᴅ ʀɪɢʜᴛ-ᴄʟɪᴄᴋ ᴘᴜʟꜱᴇꜱ.\n"
-                                        + "ᴠᴀɴɪʟʟᴀ'ꜱ ᴏᴡɴ ᴄʟɪᴇɴᴛ ᴜꜱᴇꜱ ~4.\n"
-                                        + "ɢʟᴏʙᴀʟ ᴅᴇꜰᴀᴜʟᴛ: "
+                                "右键间隔",
+                                "长按右键的脉冲间隔刻数。\n"
+                                        + "原版客户端约用 4。\n"
+                                        + "全局默认: "
                                         + Config.rightClickIntervalTicks()
-                                        + " ᴛɪᴄᴋꜱ.",
+                                        + " 刻。",
                                 Material.IRON_HOE,
                                 false)));
     }
@@ -2387,160 +2365,159 @@ public final class BotSettingGui implements Listener {
                 List.of(
                         BotEntry.immediate(
                                 "pve_status",
-                                "ᴘᴠᴇ ꜱᴛᴀᴛᴜꜱ",
-                                "ʟɪᴠᴇ ᴄᴏᴍʙᴀᴛ ꜱᴛᴀᴛᴇ ᴏꜰ ᴛʜɪꜱ ʙᴏᴛ:\n"
-                                        + "ᴏꜰꜰ / ꜱᴄᴀɴɴɪɴɢ / ꜰɪɢʜᴛɪɴɢ.\n"
-                                        + "ᴄʟɪᴄᴋ ᴛᴏ ʀᴇꜰʀᴇꜱʜ.",
+                                "PVE 状态",
+                                "此假人的实时战斗状态:\n"
+                                        + "关闭 / 扫描 / 战斗。\n"
+                                        + "点击刷新。",
                                 Material.SPYGLASS,
                                 false),
                         BotEntry.cyclePveMode(
                                 "pve_enabled",
-                                "ꜱᴍᴀʀᴛ ᴀᴛᴛᴀᴄᴋ",
-                                "ᴄʏᴄʟᴇꜱ ʙᴇᴛᴡᴇᴇɴ ᴏꜰꜰ, ᴏɴ ᴡɪᴛʜᴏᴜᴛ\n"
-                                        + "ᴍᴏᴠᴇᴍᴇɴᴛ, ᴀɴᴅ ᴏɴ ᴡɪᴛʜ ᴍᴏᴠᴇᴍᴇɴᴛ.\n"
-                                        + "ꜱᴍᴀʀᴛ ᴀᴛᴛᴀᴄᴋ ᴜꜱᴇꜱ ᴡᴇᴀᴘᴏɴ ᴄᴏᴏʟᴅᴏᴡɴꜱ\n"
-                                        + "ᴀɴᴅ ꜱᴍᴏᴏᴛʜ ʀᴏᴛᴀᴛɪᴏɴ.",
+                                "智能攻击",
+                                "在关闭、开启（不移动）、\n"
+                                        + "开启（移动）之间循环。\n"
+                                        + "智能攻击使用武器冷却\n"
+                                        + "和平滑转身。",
                                 Material.IRON_SWORD,
                                 false),
                         BotEntry.mobSelector(
                                 "pve_mob_type",
-                                "ꜱᴇʟᴇᴄᴛ ᴛᴀʀɢᴇᴛ ᴍᴏʙꜱ",
-                                "ᴏᴘᴇɴ ᴀ ᴠɪꜱᴜᴀʟ ꜱᴇʟᴇᴄᴛᴏʀ ᴛᴏ ᴘɪᴄᴋ\n"
-                                        + "ᴡʜɪᴄʜ ᴍᴏʙ ᴛʏᴘᴇꜱ ᴛʜᴇ ʙᴏᴛ ᴛᴀʀɢᴇᴛꜱ.\n"
-                                        + "ᴄʟɪᴄᴋ ᴛᴏ ᴛᴏɢɢʟᴇ ᴍᴜʟᴛɪᴘʟᴇ ᴍᴏʙꜱ.\n"
-                                        + "'ᴀʟʟ ʜᴏꜱᴛɪʟᴇ' = ᴄʟᴇᴀʀ ᴀʟʟ.",
+                                "选择目标怪物",
+                                "打开可视选择器来挑选\n"
+                                        + "假人攻击的怪物类型。\n"
+                                        + "点击可切换多个怪物。\n"
+                                        + "'所有敌对' = 清空全部。",
                                 Material.ZOMBIE_HEAD,
                                 false),
                         BotEntry.action(
                                 "pve_range",
-                                "ᴅᴇᴛᴇᴄᴛ ʀᴀɴɢᴇ",
-                                "ʜᴏᴡ ꜰᴀʀ (ɪɴ ʙʟᴏᴄᴋꜱ) ᴛʜᴇ ʙᴏᴛ ꜱᴄᴀɴꜱ\n"
-                                        + "ꜰᴏʀ ᴍᴏʙꜱ ᴛᴏ ᴀᴛᴛᴀᴄᴋ.\n"
-                                        + "ʀᴀɴɢᴇ: 1 – 64 ʙʟᴏᴄᴋꜱ.",
+                                "检测范围",
+                                "假人扫描攻击怪物的距离（格）。\n"
+                                        + "范围: 1 – 64 格。",
                                 Material.SPYGLASS,
                                 false),
                         BotEntry.cyclePriority(
                                 "pve_priority",
-                                "ᴛᴀʀɢᴇᴛ ᴘʀɪᴏʀɪᴛʏ",
-                                "ʜᴏᴡ ᴛʜᴇ ʙᴏᴛ ᴄʜᴏᴏꜱᴇꜱ ɪᴛꜱ ᴛᴀʀɢᴇᴛ.\n" + "ᴄʏᴄʟᴇꜱ: nearest ↔ lowest-health",
+                                "目标优先级",
+                                "假人如何选择目标。\n" + "循环: 最近 ↔ 最低血量",
                                 Material.COMPARATOR,
                                 false)));
     }
 
     private BotCategory pathfinding() {
         return new BotCategory(
-                "🧭 ᴘᴀᴛʜꜰɪɴᴅɪɴɢ",
+                "🧭 寻路",
                 Material.COMPASS,
                 Material.CLOCK,
                 Material.CYAN_STAINED_GLASS_PANE,
                 List.of(
                         BotEntry.toggle(
                                 "show_path",
-                                "ꜱʜᴏᴡ ᴘᴀᴛʜ (ᴅᴇʙᴜɢ)",
-                                "ʀᴇɴᴅᴇʀꜱ ᴀ ᴘᴀʀᴛɪᴄʟᴇ ᴛʀᴀɪʟ ᴀʟᴏɴɢ ᴛʜɪꜱ\n"
-                                        + "ʙᴏᴛ'ꜱ ᴀᴄᴛɪᴠᴇ ᴘᴀᴛʜꜰɪɴᴅɪɴɢ ʀᴏᴜᴛᴇ,\n"
-                                        + "ᴠɪꜱɪʙʟᴇ ᴏɴʟʏ ᴛᴏ ʏᴏᴜ (ʙᴀʀɪᴛᴏɴᴇ-ꜱᴛʏʟᴇ).\n"
-                                        + "ᴏʀᴀɴɢᴇ = ɴᴇxᴛ ᴡᴀʏᴘᴏɪɴᴛ, ʀᴇᴅ = ᴅᴇꜱᴛɪɴᴀᴛɪᴏɴ.",
+                                "显示路径（调试）",
+                                "沿此假人的当前寻路路线\n"
+                                        + "渲染粒子轨迹，仅你可见\n"
+                                        + "（Baritone 风格）。\n"
+                                        + "橙色 = 下一个路径点，红色 = 目的地。",
                                 Material.MAP,
                                 false),
                         BotEntry.toggle(
                                 "nav_parkour",
-                                "ᴘᴀʀᴋᴏᴜʀ",
-                                "ᴀʟʟᴏᴡꜱ ᴛʜᴇ ᴘᴀᴛʜꜰɪɴᴅᴇʀ ᴛᴏ ᴘʟᴀɴ ꜱʜᴏʀᴛ\nɢᴀᴘ ᴊᴜᴍᴘꜱ ɪɴꜱᴛᴇᴀᴅ ᴏꜰ ᴀʟᴡᴀʏꜱ ʀᴏᴜᴛɪɴɢ ᴀʀᴏᴜɴᴅ.",
+                                "跑酷",
+                                "允许寻路器规划短距离跳跃，\n而不是总是绕路。",
                                 Material.SLIME_BALL,
                                 false),
                         BotEntry.toggle(
                                 "nav_break_blocks",
-                                "ʙʀᴇᴀᴋ ʙʟᴏᴄᴋꜱ",
-                                "ᴀʟʟᴏᴡꜱ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴍɪɴᴇ ᴛʜʀᴏᴜɢʜ\nᴏʙꜱᴛʀᴜᴄᴛɪɴɢ ʙʟᴏᴄᴋꜱ ᴡʜɪʟᴇ ɴᴀᴠɪɢᴀᴛɪɴɢ.",
+                                "破坏方块",
+                                "允许假人导航时\n挖穿阻挡的方块。",
                                 Material.DIAMOND_PICKAXE,
                                 false),
                         BotEntry.toggle(
                                 "nav_place_blocks",
-                                "ᴘʟᴀᴄᴇ ʙʟᴏᴄᴋꜱ (ʙʀɪᴅɢᴇ)",
-                                "ᴀʟʟᴏᴡꜱ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ʙʀɪᴅɢᴇ ᴏᴠᴇʀ ɢᴀᴘꜱ\nʙʏ ᴘʟᴀᴄɪɴɢ ʙʟᴏᴄᴋꜱ ᴡʜɪʟᴇ ɴᴀᴠɪɢᴀᴛɪɴɢ.",
+                                "放置方块（搭桥）",
+                                "允许假人导航时放置方块\n跨越沟壑。",
                                 Material.GRASS_BLOCK,
                                 false)));
     }
 
     private BotCategory skin() {
         return new BotCategory(
-                "🎨 ꜱᴋɪɴ",
+                "🎨 皮肤",
                 Material.PAINTING,
                 Material.ITEM_FRAME,
                 Material.MAGENTA_STAINED_GLASS_PANE,
                 List.of(
                         BotEntry.immediate(
                                 "skin_info",
-                                "ᴄᴜʀʀᴇɴᴛ ꜱᴋɪɴ",
-                                "ᴛʜᴇ ꜱᴋɪɴ ᴛʜɪꜱ ʙᴏᴛ ɪꜱ ᴡᴇᴀʀɪɴɢ:\n"
-                                        + "ꜱᴏᴜʀᴄᴇ (ᴍᴀɪɴ / ʀᴀʀᴇ ᴛɪᴇʀ / ᴄᴜꜱᴛᴏᴍ) ᴀɴᴅ\n"
-                                        + "ᴘʟᴀʏᴇʀ ᴍᴏᴅᴇʟ (ꜱʟɪᴍ/ᴄʟᴀꜱꜱɪᴄ, ᴀᴜᴛᴏ-ᴅᴇᴛᴇᴄᴛᴇᴅ).",
+                                "当前皮肤",
+                                "此假人正在使用的皮肤:\n"
+                                        + "来源（主池 / 稀有档 / 自定义）和\n"
+                                        + "玩家模型（纤细/经典，自动检测）。",
                                 Material.PAINTING,
                                 false),
                         BotEntry.immediate(
                                 "skin_reroll",
-                                "ʀᴇ-ʀᴏʟʟ ꜱᴋɪɴ",
-                                "ʀᴏʟʟꜱ ᴀ ꜰʀᴇꜱʜ ꜱᴋɪɴ ꜰʀᴏᴍ ᴛʜᴇ ᴘᴏᴏʟꜱ -\n"
-                                        + "ꜱᴀᴍᴇ ʀᴀʀᴇ-ᴛɪᴇʀ ᴄʜᴀɴᴄᴇꜱ ᴀꜱ ᴀ ꜰʀᴇꜱʜ ꜱᴘᴀᴡɴ.\n"
-                                        + "ᴛʜᴇ ɴᴇᴡ ꜱᴋɪɴ ᴘᴇʀꜱɪꜱᴛꜱ ʟɪᴋᴇ ᴀ ʀᴏʟʟᴇᴅ ᴏɴᴇ.",
+                                "重掷皮肤",
+                                "从卡池中新抽一个皮肤——\n"
+                                        + "稀有档概率与全新生成一致。\n"
+                                        + "新皮肤会像正常抽取一样保存。",
                                 Material.EXPERIENCE_BOTTLE,
                                 false)));
     }
 
     private BotCategory autoEat() {
         return new BotCategory(
-                "🍖 ᴀᴜᴛᴏ-ᴇᴀᴛ",
+                "🍖 自动进食",
                 Material.COOKED_BEEF,
                 Material.BEEF,
                 Material.ORANGE_STAINED_GLASS_PANE,
                 List.of(
                         BotEntry.toggle(
                                 "auto_eat",
-                                "ᴀᴜᴛᴏ-ᴇᴀᴛ",
-                                "ᴡʜᴇɴ ᴇɴᴀʙʟᴇᴅ, ᴛʜᴇ ʙᴏᴛ ᴇᴀᴛꜱ ꜰᴏᴏᴅ ꜰʀᴏᴍ\n"
-                                        + "ɪᴛꜱ ɪɴᴠᴇɴᴛᴏʀʏ ᴡʜᴇɴ ʜᴜɴɢʀʏ. ɪᴛ ᴘᴀᴜꜱᴇꜱ\n"
-                                        + "ᴡʜᴀᴛᴇᴠᴇʀ ɪᴛ'ꜱ ᴅᴏɪɴɢ, ᴇᴀᴛꜱ, ᴛʜᴇɴ ꜱᴡɪᴛᴄʜᴇꜱ\n"
-                                        + "ʙᴀᴄᴋ ᴛᴏ ᴡʜᴀᴛ ɪᴛ ᴡᴀꜱ ʜᴏʟᴅɪɴɢ.",
+                                "自动进食",
+                                "开启后，假人饿了会从背包\n"
+                                        + "拿食物吃。它会暂停手头\n"
+                                        + "的事，吃完后再切回\n"
+                                        + "原来的物品。",
                                 Material.COOKED_CHICKEN,
                                 false),
                         BotEntry.action(
                                 "auto_eat_threshold",
-                                "ʜᴜɴɢᴇʀ ᴛʜʀᴇꜱʜᴏʟᴅ",
-                                "ᴇᴀᴛ ᴡʜᴇɴ ʜᴜɴɢᴇʀ ꜰᴀʟʟꜱ ᴛᴏ ᴏʀ ʙᴇʟᴏᴡ\n"
-                                        + "ᴛʜɪꜱ ᴠᴀʟᴜᴇ (0-19, ᴡʜᴇʀᴇ 20 ɪꜱ ꜰᴜʟʟ).\n"
-                                        + "ʜɪɢʜᴇʀ = ᴇᴀᴛꜱ ꜱᴏᴏɴᴇʀ / ᴍᴏʀᴇ ᴏꜰᴛᴇɴ.",
+                                "饥饿阈值",
+                                "当饥饿值降到该数值或以下时进食\n"
+                                        + "（0-19，20 为满饱食度）。\n"
+                                        + "越高 = 越早/越频繁进食。",
                                 Material.CLOCK,
                                 false),
                         BotEntry.foodSelector(
                                 "auto_eat_foods",
-                                "ᴀʟʟᴏᴡᴇᴅ ꜰᴏᴏᴅꜱ",
-                                "ᴘɪᴄᴋ ᴡʜɪᴄʜ ꜰᴏᴏᴅꜱ ᴛʜᴇ ʙᴏᴛ ᴍᴀʏ ᴇᴀᴛ.\n"
-                                        + "ᴘʀɪᴏʀɪᴛʏ: ᴏꜰꜰ-ʜᴀɴᴅ → ʜᴏᴛʙᴀʀ → ɪɴᴠᴇɴᴛᴏʀʏ.\n"
-                                        + "ɴᴏɴᴇ ꜱᴇʟᴇᴄᴛᴇᴅ = ᴇᴀᴛ ᴀɴʏ ꜰᴏᴏᴅ.",
+                                "允许的食物",
+                                "挑选假人可吃的食物。\n"
+                                        + "优先级: 副手 → 快捷栏 → 背包。\n"
+                                        + "未选择 = 吃任何食物。",
                                 Material.APPLE,
                                 false)));
     }
 
     private BotCategory danger() {
         return new BotCategory(
-                "⚠ ᴅᴀɴɢᴇʀ",
+                "⚠ 危险操作",
                 Material.TNT,
                 Material.COAL,
                 Material.RED_STAINED_GLASS_PANE,
                 List.of(
                         BotEntry.danger(
                                 "reset_all",
-                                "ʀᴇꜱᴇᴛ ᴀʟʟ ꜱᴇᴛᴛɪɴɢꜱ",
-                                "⚠ ʀᴇꜱᴇᴛ ᴇᴠᴇʀʏ ꜱᴇᴛᴛɪɴɢ ᴏɴ ᴛʜɪꜱ ʙᴏᴛ\nᴛᴏ ᴅᴇꜰᴀᴜʟᴛ ᴠᴀʟᴜᴇꜱ.\n"
-                                        + "ɢᴇɴᴇʀᴀʟ, ᴄʜᴀᴛ, ᴘᴠᴇ, ᴘᴀᴛʜꜰɪɴᴅɪɴɢ,\n"
-                                        + "ᴄᴏᴍᴍᴀɴᴅꜱ - ᴀʟʟ ʀᴇꜱᴇᴛ.",
+                                "重置所有设置",
+                                "⚠ 将此假人的所有设置\n重置为默认值。\n"
+                                        + "常规、聊天、PVE、寻路、\n"
+                                        + "指令 - 全部重置。",
                                 Material.REDSTONE_BLOCK,
                                 true),
                         BotEntry.danger(
                                 "delete",
-                                "ᴅᴇʟᴇᴛᴇ ʙᴏᴛ",
-                                "⚠ ᴘᴇʀᴍᴀɴᴇɴᴛʟʏ ʀᴇᴍᴏᴠᴇ ᴛʜɪꜱ ʙᴏᴛ.\nᴛʜɪꜱ ᴀᴄɪᴠᴇ ᴄᴀɴɴᴏᴛ ʙᴇ ᴜɴᴅᴏɴᴇ.",
+                                   "删除假人",
+                                   "⚠ 永久移除此假人。\n此操作无法撤销。",
                                 Material.TNT,
                                 true)));
     }

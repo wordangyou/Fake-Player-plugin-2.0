@@ -193,43 +193,43 @@ public final class FppLogger {
             int backupCount,
             long startupMs) {
         boldRule();
-        info("  " + BOLD + BLUE + "FakePlayerPlugin" + RESET + WHITE + " v" + version + RESET);
+        info("  " + BOLD + BLUE + "假人插件" + RESET + WHITE + " v" + version + RESET);
         rule();
 
-        section("Runtime");
-        String dbDisplay = dbSchemaVersion > 0 ? dbState + "  (schema v" + dbSchemaVersion + ")" : dbState;
-        stateRow(resolveDbState(dbState), "Database", dbDisplay);
-        kv("Config version", configVersion);
-        kv("Startup time", startupMs + "ms");
+        section("运行环境");
+        String dbDisplay = dbSchemaVersion > 0 ? dbState + "  (架构 v" + dbSchemaVersion + ")" : dbState;
+        stateRow(resolveDbState(dbState), "数据库", dbDisplay);
+        kv("配置版本", configVersion);
+        kv("启动耗时", startupMs + "ms");
 
-        section("Features");
-        stateRow(persistEnabled ? RowState.OK : RowState.OFF, "Persistence", onOff(persistEnabled));
+        section("功能");
+        stateRow(persistEnabled ? RowState.OK : RowState.OFF, "持久化", onOff(persistEnabled));
         stateRow(
                 taskPersistEnabled ? RowState.OK : RowState.OFF,
-                "Task persistence",
-                taskPersistEnabled ? "db + yaml" : onOff(false));
-        stateRow(chunkLoading ? RowState.OK : RowState.OFF, "Chunk loading", onOff(chunkLoading));
+                "任务持久化",
+                taskPersistEnabled ? "数据库 + YAML" : onOff(false));
+        stateRow(chunkLoading ? RowState.OK : RowState.OFF, "区块加载", onOff(chunkLoading));
 
-        section("Integrations");
+        section("集成");
         stateRow(luckPermsFound ? RowState.OK : RowState.OFF, "LuckPerms", onOff(luckPermsFound));
-        stateRow(metricsActive ? RowState.OK : RowState.OFF, "Metrics", onOff(metricsActive));
+        stateRow(metricsActive ? RowState.OK : RowState.OFF, "数据统计", onOff(metricsActive));
 
-        section("Limits");
-        kv("Max bots", maxBots == 0 ? "unlimited" : maxBots);
+        section("限制");
+        kv("假人上限", maxBots == 0 ? "无限制" : maxBots);
 
         rule();
-        success("  Ready: /fpp help");
+        success("  就绪：/fpp help");
         boldRule();
     }
 
     public static void printShutdownBanner(int botsRemoved, long uptimeMs) {
         boldRule();
-        highlight("  ꜰᴀᴋᴇ ᴘʟᴀʏᴇʀ ᴘʟᴜɢɪɴ  -  shutting down");
+        highlight("  假人插件  -  正在关闭");
         rule();
-        kv("Session uptime", formatUptime(uptimeMs));
-        kv("Bots removed", botsRemoved);
+        kv("运行时长", formatUptime(uptimeMs));
+        kv("已移除假人", botsRemoved);
         boldRule();
-        info("  Goodbye!");
+        info("  再见！");
         boldRule();
     }
 
@@ -238,13 +238,13 @@ public final class FppLogger {
         long hours = totalSec / 3600;
         long minutes = (totalSec % 3600) / 60;
         long seconds = totalSec % 60;
-        if (hours > 0) return hours + "h " + minutes + "m " + seconds + "s";
-        if (minutes > 0) return minutes + "m " + seconds + "s";
-        return seconds + "s";
+        if (hours > 0) return hours + "小时 " + minutes + "分 " + seconds + "秒";
+        if (minutes > 0) return minutes + "分 " + seconds + "秒";
+        return seconds + "秒";
     }
 
     private static String onOff(boolean enabled) {
-        return enabled ? "enabled" : "disabled";
+        return enabled ? "已启用" : "已禁用";
     }
 
     private static RowState resolveDbState(String dbState) {

@@ -37,7 +37,7 @@ public class FreezeCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Freeze or unfreeze a bot in place.";
+        return "原地冻结或解冻假人。";
     }
 
     @Override

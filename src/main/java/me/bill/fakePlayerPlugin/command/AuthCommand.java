@@ -13,7 +13,7 @@ import me.bill.fakePlayerPlugin.fakeplayer.FakePlayerManager;
 import me.bill.fakePlayerPlugin.lang.Lang;
 import me.bill.fakePlayerPlugin.permission.Perm;
 
-/** Admin controls for {@link BotAuthManager}: toggle it, check its status, and manage a bot's remembered password. */
+/** {@link BotAuthManager} 的管理命令：开关它、查看状态、管理假人记住的密码。 */
 public class AuthCommand implements FppCommand {
 
     private final FakePlayerManager manager;
@@ -36,7 +36,7 @@ public class AuthCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Manage bot auto-register/login against an installed login plugin.";
+        return "管理与已安装登录插件配合的假人自动注册/登录。";
     }
 
     @Override
@@ -78,10 +78,8 @@ public class AuthCommand implements FppCommand {
                     sender.sendMessage(Lang.get("auth-usage"));
                     return true;
                 }
-                // Deliberately NOT gated on manager.getByName - the stored credential is a
-                // database row keyed by name, entirely independent of whether that bot happens to
-                // be active right now (an admin fixing up a despawned/offline bot's stale password
-                // is exactly the normal use case for this).
+                // 刻意不经过 manager.getByName 检查 - 存储的凭据是以名字为键的数据库记录，
+                // 与该假人当前是否活跃完全无关（管理员修复已消失/离线假人的过期密码正是常见用法）。
                 String name = args[1];
                 authManager.reset(name);
                 sender.sendMessage(Lang.get("auth-reset", "name", name));

@@ -19,13 +19,13 @@ import me.bill.fakePlayerPlugin.util.TextUtil;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 
 /**
- * Renames a bot's <em>display name</em> - the name shown above its head, in the tab list and in
- * command output. The login name and fb07 UUID (identity) are never changed, and the mandatory
- * "ʙᴏᴛ ʙʏ {owner}" disclosure row on the name-tag is preserved.
+ * 重命名假人的 <em>显示名称</em> - 即头顶、Tab 列表和
+ * 命令输出中显示的名字。登录名和 fb07 UUID（身份标识）永不改变，且
+ * 名牌上强制性的 "ʙᴏᴛ ʙʏ {owner}" 披露行会保留。
  */
 public final class RenameCommand implements FppCommand {
 
-    /** Longest allowed display name (visible, colour codes stripped) - keeps the name-tag readable. */
+    /** 允许的最长显示名称（可见字符，已剥离颜色代码）- 保持名牌可读。 */
     private static final int MAX_NAME_LENGTH = 32;
 
     private final FakePlayerManager manager;
@@ -46,7 +46,7 @@ public final class RenameCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Rename a bot's display name (identity is unchanged).";
+        return "重命名假人的显示名称（身份标识不变）。";
     }
 
     @Override

@@ -33,7 +33,7 @@ public class TpCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Teleports you to a bot.";
+        return "将你传送到某个假人身边。";
     }
 
     @Override

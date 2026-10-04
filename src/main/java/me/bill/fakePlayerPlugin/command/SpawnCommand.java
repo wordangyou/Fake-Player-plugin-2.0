@@ -46,8 +46,8 @@ public class SpawnCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Spawns a fake player bot at your location, or --location <x> <y> <z> <world> (admin"
-                + " only; required from console/command blocks).";
+        return "在你的位置生成一个假人，或使用 --location <x> <y> <z> <world>（仅管理员"
+                + "可用；从控制台/命令方块执行时必填）。";
     }
 
     @Override

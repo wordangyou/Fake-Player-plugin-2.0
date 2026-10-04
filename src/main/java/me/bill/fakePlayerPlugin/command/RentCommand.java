@@ -24,15 +24,15 @@ import me.bill.fakePlayerPlugin.permission.Perm;
 import me.bill.fakePlayerPlugin.util.BotAccess;
 
 /**
- * Bot rental: pay real economy currency for a bot slot and/or hours of runtime, so a bot
- * auto-despawns once its paid time runs out ({@link me.bill.fakePlayerPlugin.fakeplayer.RentalService}
- * enforces that separately).
+ * 假人租赁：用真实经济货币购买假人槽位和/或运行小时数，付费时间用完后
+ * 假人会自动消失（这一点由 {@link me.bill.fakePlayerPlugin.fakeplayer.RentalService}
+ * 单独强制执行）。
  *
- * <p>{@code buy}/{@code extend} are the self-service, economy-charging path. {@code give} is the
- * <em>dynamic</em> entry point the request asked for: it never touches an economy plugin at all, so
- * a server's own custom shop plugin (ShopGUIPlus, EconomyShopGUI, zShop, …) can charge the player
- * however it likes and simply run {@code fpp rent give <player> --new <hours>} as the purchase's
- * reward command - from console, with no FPP economy integration required on their end at all.
+ * <p>{@code buy}/{@code extend} 是自助、从经济系统扣费的路径。{@code give} 是
+ * <em>动态</em> 入口：它完全不接触经济插件，因此服务器自家的商店插件
+ * （ShopGUIPlus、EconomyShopGUI、zShop……）可自行向玩家收费，只需把
+ * {@code fpp rent give <player> --new <hours>} 作为购买奖励命令执行 -
+ * 从控制台运行，服务端完全无需接入 FPP 经济系统。
  */
 public final class RentCommand implements FppCommand {
 
@@ -56,7 +56,7 @@ public final class RentCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Rent a bot with real economy currency, billed per hour.";
+        return "用真实经济货币租赁假人，按小时计费。";
     }
 
     @Override
@@ -146,15 +146,15 @@ public final class RentCommand implements FppCommand {
         Location location = player.getLocation().clone();
         int result = manager.spawn(location, 1, player, null, false);
         if (result <= 0) {
-            economy.deposit(player, cost); // refund - nothing was actually spawned
+            economy.deposit(player, cost); // 退款 - 实际上什么都没生成
             sender.sendMessage(Lang.get("rent-spawn-failed"));
             return true;
         }
 
         FakePlayer fp = findNewBot(player, before);
         if (fp == null) {
-            // Extremely unlikely (spawn reported success but the bot can't be found) - refund rather
-            // than silently charge for nothing.
+            // 极不可能发生（生成报告成功但找不到假人）- 退款，
+            // 而不是白白扣费。
             economy.deposit(player, cost);
             sender.sendMessage(Lang.get("rent-spawn-failed"));
             return true;
@@ -162,8 +162,8 @@ public final class RentCommand implements FppCommand {
 
         long expiresAt = System.currentTimeMillis() + hours * 3_600_000L;
         RentalPurchases.setRentalExpiry(plugin, fp, expiresAt);
-        Config.debugRental("Bought rental bot '" + fp.getName() + "' for " + player.getName() + " (" + hours
-                + "h, cost=" + economy.format(cost) + ")");
+        Config.debugRental("为 " + player.getName() + " 购买了租赁假人 '" + fp.getName() + "'（" + hours
+                + " 小时，费用=" + economy.format(cost) + "）");
         sender.sendMessage(Lang.get(
                 "rent-bought",
                 "name",
@@ -262,7 +262,7 @@ public final class RentCommand implements FppCommand {
                 RentalPurchases.formatRemaining(remaining)));
     }
 
-    // ── give (dynamic / shop-plugin / admin entry point) ────────────────────────────────────────
+    // ── give（动态 / 商店插件 / 管理员入口） ────────────────────────────────────────
 
     private boolean give(CommandSender sender, String[] args) {
         if (!Perm.has(sender, Perm.RENT_GIVE)) {
@@ -314,8 +314,8 @@ public final class RentCommand implements FppCommand {
         long finalExpiry = Math.min(base + hours * 3_600_000L, cap);
         RentalPurchases.setRentalExpiry(plugin, fp, finalExpiry);
 
-        Config.debugRental("Granted " + hours + "h rental on '" + fp.getName() + "' to " + target.getName()
-                + " via /fpp rent give (sender=" + sender.getName() + ")");
+        Config.debugRental("通过 /fpp rent give 向 " + target.getName() + " 授予了 '" + fp.getName() + "' 的 " + hours
+                + " 小时租赁（发送者=" + sender.getName() + "）");
         sender.sendMessage(Lang.get(
                 "rent-given",
                 "name",
@@ -339,7 +339,7 @@ public final class RentCommand implements FppCommand {
         return true;
     }
 
-    // ── clear (admin: make a rented bot permanent again) ────────────────────────────────────────
+    // ── clear（管理员：把租赁假人恢复为永久） ────────────────────────────────────────
 
     private boolean clear(CommandSender sender, String[] args) {
         if (!Perm.has(sender, Perm.RENT_GIVE)) {
@@ -360,7 +360,7 @@ public final class RentCommand implements FppCommand {
         return true;
     }
 
-    // ── shared helpers ───────────────────────────────────────────────────────────────────────
+    // ── 共享辅助方法 ───────────────────────────────────────────────────────────────────────
 
     @org.jetbrains.annotations.Nullable
     private Integer parseHours(CommandSender sender, String raw) {
@@ -387,7 +387,7 @@ public final class RentCommand implements FppCommand {
         return set;
     }
 
-    /** The one bot in {@code owner}'s list that wasn't in {@code before} - i.e. the one just spawned. */
+    /** {@code owner} 列表中不在 {@code before} 里的那个假人 - 即刚刚生成的那个。 */
     @org.jetbrains.annotations.Nullable
     private FakePlayer findNewBot(Player owner, Set<UUID> before) {
         for (FakePlayer fp : manager.getBotsOwnedBy(owner.getUniqueId())) {

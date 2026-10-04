@@ -59,35 +59,25 @@ import net.minecraft.world.level.block.state.BlockState;
  */
 public final class FindCommand implements FppCommand {
 
-    /**
-     * Default search radius if --radius is not specified.
-     */
+    /** 未指定 --radius 时的默认搜索半径。 */
     private static final int DEFAULT_RADIUS = 32;
 
-    /**
-     * Hard cap on search radius to prevent freezing the server.
-     */
+    /** 搜索半径的硬性上限，防止卡死服务器。 */
     private static final int MAX_RADIUS = 128;
 
-    /**
-     * Ticks to wait after a block is broken before trying to mine the next one.
-     */
+    /** 挖掉一个方块后、尝试挖下一个之前等待的 tick 数。 */
     private static final int POST_MINE_PAUSE_TICKS = 10;
 
-    /**
-     * How long a find-job navigation attempt can run with no arrival/cancel/failure before we give up
-     * on that block ourselves and move to the next one (anti-stuck: the shared pathfinder will keep
-     * recalculating against a genuinely unreachable block forever otherwise).
-     */
+    /** 寻找任务的导航尝试在没有到达/取消/失败的情况下最多持续多久，超过后我们自己
+     * 放弃该方块并转向下一个（防卡死：否则共享寻路器会对着真正不可达的方块
+     * 无限重算）。 */
     private static final long NAV_WATCHDOG_TICKS = 45L * 20L;
 
-    /**
-     * Ticks of zero mining-progress before a block is abandoned as stuck (wrong/no tool, block
-     * regenerating, etc.) instead of being ground on forever.
-     */
+    /** 挖矿进度为零持续多少 tick 后把方块视为卡住并放弃（工具不对/缺失、
+     * 方块再生等），而不是永远磨下去。 */
     private static final int MINE_STALL_TICKS = 100;
 
-    /** Auto-deposit trip triggers once free main-inventory slots drop to/below this. */
+    /** 主背包空格降到/低于此值时触发自动存放行程。 */
     private static final int LOW_INVENTORY_FREE_SLOTS = 2;
 
     private final FakePlayerPlugin plugin;
@@ -125,9 +115,9 @@ public final class FindCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Path to and mine nearby blocks of a chosen type, auto-equipping the right tool and"
-                + " auto-depositing at registered storage when full. Repeats until --count blocks are"
-                + " mined or no more are found.";
+        return "寻路到附近指定类型的方块并挖掘，自动装备合适的工具，"
+                + "背包满时自动存放到已注册的存储。重复进行，直到挖完 --count 个"
+                + "方块或再也找不到为止。";
     }
 
     @Override
@@ -147,7 +137,7 @@ public final class FindCommand implements FppCommand {
             return true;
         }
 
-        // /fpp find --stop  (stop all bots)
+        // /fpp find --stop（停止所有假人）
         if (isStop(args[0]) && args.length == 1) {
             stopAll();
             sender.sendMessage(Lang.get("find-stopped-all"));
@@ -179,7 +169,7 @@ public final class FindCommand implements FppCommand {
             return true;
         }
 
-        // Parse block material
+        // 解析方块材料
         String blockArg = args[1].toUpperCase(Locale.ROOT);
         Material material;
         try {
@@ -194,7 +184,7 @@ public final class FindCommand implements FppCommand {
         }
 
         int radius = DEFAULT_RADIUS;
-        int count = -1; // -1 = unlimited
+        int count = -1; // -1 = 无限制
         boolean preferVisible = false;
 
         for (int i = 2; i < args.length; i++) {
@@ -226,12 +216,12 @@ public final class FindCommand implements FppCommand {
                 }
                 case "--prefer-visible", "--prefervisible" -> preferVisible = true;
                 default -> {
-                    // ignore unknown flags gracefully
+                    // 优雅地忽略未知参数
                 }
             }
         }
 
-        // Stop any existing find job for this bot before starting a new one.
+        // 在开始新任务前，先停止该假人已有的寻找任务。
         cleanupBot(fp.getUuid());
 
         UUID starterUuid = sender instanceof Player p ? p.getUniqueId() : null;
@@ -250,7 +240,7 @@ public final class FindCommand implements FppCommand {
                 "count",
                 countDisplay));
 
-        // Begin first search cycle
+        // 开始第一轮搜索
         findAndMineNext(fp, job);
         return true;
     }
@@ -313,8 +303,8 @@ public final class FindCommand implements FppCommand {
             }
         }
 
-        // Stop any existing find job for this bot before starting a new one. Left/right-click are
-        // independent task systems now and are left running, same as the primary /fpp find entry point.
+        // 在开始新任务前，先停止该假人已有的寻找任务。左/右键现在是
+        // 独立的任务系统，会保持运行，与主 /fpp find 入口一致。
         cleanupBot(fp.getUuid());
         UUID starterUuid = sender instanceof Player p ? p.getUniqueId() : null;
         FindJob job = new FindJob(material, radius, count, preferVisible, starterUuid, sender instanceof Player);
@@ -340,13 +330,13 @@ public final class FindCommand implements FppCommand {
         if (args.length == 2) {
             String prefix = args[1].toUpperCase(Locale.ROOT);
             if (isStop(args[0])) return List.of();
-            // Suggest --stop or block names
+            // 提示 --stop 或方块名称
             List<String> out = new ArrayList<>();
             if ("--STOP".startsWith(prefix)) out.add("--stop");
             for (Material m : Material.values()) {
                 if (!m.isAir() && m.isBlock() && m.name().startsWith(prefix)) {
                     out.add(m.name().toLowerCase(Locale.ROOT));
-                    if (out.size() >= 50) break; // cap for UX
+                    if (out.size() >= 50) break; // 用户体验上限
                 }
             }
             return out;
@@ -385,10 +375,10 @@ public final class FindCommand implements FppCommand {
             return;
         }
 
-        // Inventory-aware: detour to the bot's nearest registered storage when running low on space,
-        // then resume the search from wherever the bot ends up. Skipped once right after a deposit
-        // trip finishes so an unreachable/full storage can't cause a tight retry loop; falls back to
-        // the existing passive drop-collection behavior if no storage is registered.
+        // 背包感知：空间不足时绕道去假人最近的已注册存储，然后从假人
+        // 最终所在的位置继续搜索。存放行程刚结束后会跳过一次检查，避免
+        // 不可达/已满的存储造成紧凑重试循环；未注册存储时，
+        // 回退到现有的被动拾取掉落物行为。
         if (!job.skipInventoryCheckOnce && isInventoryLow(bot)) {
             job.skipInventoryCheckOnce = true;
             if (tryStartDepositTrip(fp, job)) return;
@@ -420,7 +410,7 @@ public final class FindCommand implements FppCommand {
         }
 
         if (found == null) {
-            // No more blocks found
+            // 再也找不到更多方块
             cleanupBot(fp.getUuid());
             notifySender(
                     job,
@@ -442,14 +432,14 @@ public final class FindCommand implements FppCommand {
             return;
         }
 
-        job.mined.add(found.key()); // mark before nav so it won't be re-targeted during travel
+        job.mined.add(found.key()); // 导航前先标记，途中不会被再次锁定
 
-        // Find a safe stand position adjacent to the target block
+        // 寻找目标方块旁的安全站立位置
         Location standLoc =
                 BotNavUtil.findStandLocation(bot.getWorld(), null, target.getX(), target.getY(), target.getZ());
 
         if (standLoc == null) {
-            // Can't stand next to it - skip and try next
+            // 无法站在旁边 - 跳过并尝试下一个
             releaseReservation(found.key(), fp.getUuid());
             findAndMineNext(fp, job);
             return;
@@ -464,7 +454,7 @@ public final class FindCommand implements FppCommand {
         } else {
             UUID uuid = fp.getUuid();
             startNavWatchdog(fp, target, () -> {
-                // Stuck too long chasing this block - give up on it and try the next one.
+                // 追这个方块卡太久 - 放弃它并尝试下一个。
                 if (pathfinding.isNavigating(uuid, PathfindingService.Owner.FIND)) {
                     pathfinding.cancel(uuid);
                 }
@@ -484,12 +474,12 @@ public final class FindCommand implements FppCommand {
                                 lockAndMineTarget(fp, job, target, faceLoc);
                             },
                             () -> {
-                                // Navigation cancelled externally - stop job
+                                // 导航被外部取消 - 停止任务
                                 cancelNavWatchdog(uuid);
                                 cleanupBot(uuid);
                             },
                             () -> {
-                                // Path failed - skip this block and try next
+                                // 寻路失败 - 跳过此方块并尝试下一个
                                 cancelNavWatchdog(uuid);
                                 releaseReservation(found.key(), uuid);
                                 findAndMineNext(fp, job);

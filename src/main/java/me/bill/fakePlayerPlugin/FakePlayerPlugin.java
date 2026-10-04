@@ -182,7 +182,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
         ConfigMigrator.migrateIfNeeded(this);
 
         Config.init(this);
-        Config.debugStartup("config.yml loaded.");
+        Config.debugStartup("config.yml 加载完成.");
 
         profiler = new BuiltinFppProfiler(Config.performanceSelfProfilerMethodLevel());
         if (Config.performanceSelfProfilerEnabled()) profiler.start();
@@ -193,9 +193,9 @@ public final class FakePlayerPlugin extends JavaPlugin {
         BadwordFilter.reload(this);
         if (Config.isBadwordFilterEnabled() && BadwordFilter.getBadwordCount() == 0) {
             FppLogger.warn("═══════════════════════════════════════════════════════════════════");
-            FppLogger.warn("  ⚠  BADWORD FILTER IS ENABLED BUT NO SOURCES ARE ACTIVE  ⚠");
-            FppLogger.warn("  Enable 'badword-filter.use-global-list' or add words to");
-            FppLogger.warn("  'badword-filter.words' / 'bad-words.yml', then run /fpp reload");
+            FppLogger.warn("  ⚠  脏话过滤器已开启，但未加载任何词库来源  ⚠");
+            FppLogger.warn("  请开启 'badword-filter.use-global-list'，或将词语添加到");
+            FppLogger.warn("  'badword-filter.words' / 'bad-words.yml'，随后执行 /fpp reload");
             FppLogger.warn("═══════════════════════════════════════════════════════════════════");
         }
 
@@ -207,19 +207,19 @@ public final class FakePlayerPlugin extends JavaPlugin {
             versionUnsupported = true;
             String pv = getPluginMeta().getVersion();
             FppLogger.warn("═══════════════════════════════════════════════════════════════════");
-            FppLogger.warn("  ⚠  FakePlayerPlugin - UNSUPPORTED MINECRAFT VERSION  ⚠");
+            FppLogger.warn("  ⚠  FakePlayerPlugin - 检测到不受支持的 Minecraft 版本  ⚠");
             FppLogger.warn("═══════════════════════════════════════════════════════════════════");
-            FppLogger.warn("  Plugin    : FakePlayerPlugin v" + pv);
-            FppLogger.warn("  Server MC : " + detectedMcVersion + "  (NOT supported)");
-            FppLogger.warn("  Supported : up to MC 1.21.11, and 26.1.x–26.3.x");
-            FppLogger.warn("  Action    : All /fpp commands have been DISABLED.");
-            FppLogger.warn("  Support   : If you think this is a bug, contact us:");
+            FppLogger.warn("  插件      : FakePlayerPlugin v" + pv);
+            FppLogger.warn("  服务端 MC : " + detectedMcVersion + "  （不受支持）");
+            FppLogger.warn("  兼容版本  : 最高支持 MC 1.21.11，以及 26.1.x–26.3.x");
+            FppLogger.warn("  已执行    : 所有 /fpp 命令已停用。");
+            FppLogger.warn("  技术支持  : 如果你认为这是 Bug，请联系我们：");
             FppLogger.warn("              Discord → https://discord.gg/Q9cd9frzRt");
             FppLogger.warn("═══════════════════════════════════════════════════════════════════");
         }
 
         BotNameConfig.init(this);
-        Config.debugStartup("Bot name pool: " + BotNameConfig.getNames().size() + " names.");
+        Config.debugStartup("机器人名称池：" + BotNameConfig.getNames().size() + " 个名称。");
 
         ensureDataDirectories();
 
@@ -228,16 +228,16 @@ public final class FakePlayerPlugin extends JavaPlugin {
             databaseManager = new DatabaseManager();
             dbOk = databaseManager.init(this);
             if (!dbOk) {
-                FppLogger.warn("Database could not be initialised - session tracking disabled.");
+                FppLogger.warn("数据库初始化失败——会话追踪已停用。");
                 databaseManager = null;
             } else {
 
                 String mode = Config.databaseMode();
                 String serverId = Config.serverId();
-                Config.debugDatabase("Database mode: " + mode + " | server-id=" + serverId);
+                Config.debugDatabase("数据库模式：" + mode + " | server-id=" + serverId);
             }
         } else {
-            Config.debugDatabase("Database disabled in config - skipping database initialisation.");
+            Config.debugDatabase("配置中已禁用数据库——跳过数据库初始化。");
             databaseManager = null;
         }
 
@@ -259,13 +259,13 @@ public final class FakePlayerPlugin extends JavaPlugin {
                 } catch (Exception ignored) {
                 }
             }
-            Config.debugNetwork("Remote bot cache pre-populated from DB: " + remoteBotCache.count() + " bot(s).");
+            Config.debugNetwork("远程假人缓存已从数据库预热：" + remoteBotCache.count() + " 个假人。");
         }
 
         if (Config.isNetworkMode() && databaseManager != null) {
             configSyncManager = new ConfigSyncManager(this, databaseManager);
             configSyncManager.init();
-            Config.debugConfigSync("Config sync manager initialized (mode=" + Config.configSyncMode() + ").");
+            Config.debugConfigSync("配置同步管理器已启动（模式=" + Config.configSyncMode() + "）。");
         } else {
             configSyncManager = null;
         }
@@ -348,7 +348,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
         settingGui = new SettingGui(this);
         commandManager.register(new SettingCommand(settingGui, botSettingGui, fakePlayerManager));
         Config.debugStartup(
-                "Commands registered: " + commandManager.getCommands().size() + " total.");
+                "已注册命令总数：" + commandManager.getCommands().size() + " 个。");
 
         stopCommand = new StopCommand(fakePlayerManager);
         stopCommand.setMoveCommand(moveCommand);
@@ -395,8 +395,8 @@ public final class FakePlayerPlugin extends JavaPlugin {
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, VelocityChannel.CHANNEL, velocityChannel);
         getServer().getMessenger().registerIncomingPluginChannel(this, VelocityChannel.PROXY_CHANNEL, velocityChannel);
-        Config.debugNetwork("Plugin messaging channels registered: " + VelocityChannel.CHANNEL + " + "
-                + VelocityChannel.PROXY_CHANNEL + " + BungeeCord.");
+        Config.debugNetwork("插件消息通道已注册：" + VelocityChannel.CHANNEL + " + "
+                + VelocityChannel.PROXY_CHANNEL + " + BungeeCord。");
 
         FppScheduler.runSyncRepeating(
                 this,
@@ -410,21 +410,21 @@ public final class FakePlayerPlugin extends JavaPlugin {
 
         int configIssues = ConfigValidator.validate();
         if (configIssues > 0) {
-            FppLogger.warn("Config validation found " + configIssues + " issue(s) - see above.");
+            FppLogger.warn("配置校验发现 " + configIssues + " 个问题——详见上方日志。");
         }
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             try {
                 new FppPlaceholderExpansion(this, fakePlayerManager).register();
-                Config.debugStartup("PlaceholderAPI detected - placeholders registered.");
+                Config.debugStartup("检测到 PlaceholderAPI——占位符已注册。");
             } catch (Exception e) {
-                FppLogger.warn("PlaceholderAPI: failed to register expansion - " + e.getMessage());
+                FppLogger.warn("PlaceholderAPI：扩展注册失败——" + e.getMessage());
             }
         }
 
         worldEditAvailable = Bukkit.getPluginManager().getPlugin("WorldEdit") != null;
         if (worldEditAvailable) {
-            Config.debugStartup("WorldEdit detected - --wesel flag enabled for /fpp mine and /fpp place.");
+            Config.debugStartup("检测到 WorldEdit——已为 /fpp mine 和 /fpp place 启用 --wesel 参数。");
         }
 
         UpdateChecker.check(this);
@@ -438,10 +438,10 @@ public final class FakePlayerPlugin extends JavaPlugin {
                 fppMetrics.init(this);
             } catch (Throwable t) {
                 fppMetrics = null;
-                FppLogger.warn("Metrics disabled because FastStats is unavailable: " + t.getMessage());
+                FppLogger.warn("统计功能已禁用，因为 FastStats 不可用：" + t.getMessage());
             }
         } else {
-            Config.debugStartup("Metrics disabled in config.yml - skipping FastStats init.");
+            Config.debugStartup("配置中已禁用统计功能——跳过 FastStats 初始化。");
         }
 
         performanceMonitor = new PerformanceMonitor(this, fakePlayerManager);
@@ -451,8 +451,8 @@ public final class FakePlayerPlugin extends JavaPlugin {
             performanceMonitor.setReportExporter(new PerformanceReportExporter(this, performanceMonitor, profiler));
         }
 
-        String dbLabel = databaseManager == null ? "none" : Config.mysqlEnabled() ? "MySQL" : "SQLite (local)";
-        String dbState = !Config.databaseEnabled() ? "disabled" : (dbOk ? dbLabel : dbLabel + " (failed)");
+        String dbLabel = databaseManager == null ? "无" : Config.mysqlEnabled() ? "MySQL" : "SQLite（本地）";
+        String dbState = !Config.databaseEnabled() ? "已禁用" : (dbOk ? dbLabel : dbLabel + "（失败）");
         int dbSchemaVersion = databaseManager != null ? DatabaseManager.getCurrentSchemaVersion() : 0;
 
         boolean effectiveChunkLoading = Config.chunkLoadingEnabled() && Config.chunkLoadingRadius() != 0;
@@ -460,7 +460,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
 
         long startupMs = System.currentTimeMillis() - enabledAt;
         int cfgVer = Config.configVersion();
-        String configVersion = "v" + cfgVer + (cfgVer >= ConfigMigrator.CURRENT_VERSION ? " ✔" : " (migrated)");
+        String configVersion = "v" + cfgVer + (cfgVer >= ConfigMigrator.CURRENT_VERSION ? " ✔" : "（已迁移）");
         int backupCount = BackupManager.listBackups(this).size();
 
         FppLogger.printStartupBanner(
@@ -485,12 +485,12 @@ public final class FakePlayerPlugin extends JavaPlugin {
             FppScheduler.runSyncLater(this, () -> velocityChannel.broadcastResyncRequest(), 10L);
         }
 
-        Config.debugStartup("onEnable complete.");
+        Config.debugStartup("onEnable 执行完毕。");
     }
 
     @Override
     public void onDisable() {
-        Config.debugStartup("onDisable called.");
+        Config.debugStartup("onDisable 已触发。");
         me.bill.fakePlayerPlugin.util.BotLoginLogFilter.uninstall();
 
         int botsRemoved = fakePlayerManager != null ? fakePlayerManager.getCount() : 0;
@@ -505,7 +505,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
 
         if (botPersistence != null && fakePlayerManager != null) {
             if (Config.persistOnRestart()) {
-                Config.debugStartup("Saving " + fakePlayerManager.getCount() + " bot(s) for persistence...");
+                Config.debugStartup("正在保存 " + fakePlayerManager.getCount() + " 个假人，以便重启后恢复……");
                 botPersistence.saveForShutdown(fakePlayerManager.getActivePlayers());
             }
         }
@@ -556,7 +556,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
     }
 
     /**
-     * Returns the public API entry point for other plugins. Available after {@code onEnable} completes.
+     * 返回供其他插件使用的公共 API 入口。在 {@code onEnable} 完成后可用。
      */
     @SuppressWarnings("unused")
     public FppApi getFppApi() {
@@ -564,7 +564,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
     }
 
     /**
-     * Internal accessor for subsystems that need the concrete impl (e.g. fireTickHandlers).
+     * 供需要具体实现类的内部子系统使用的访问器（例如 fireTickHandlers）。
      */
     public FppApiImpl getFppApiImpl() {
         return fppApi;
@@ -714,7 +714,7 @@ public final class FakePlayerPlugin extends JavaPlugin {
             File d = new File(root, dir);
             if (!d.exists()) {
                 boolean ok = d.mkdirs();
-                Config.debugStartup("Created directory: " + d.getPath() + (ok ? " ✔" : " (already exists or failed)"));
+                Config.debugStartup("目录已创建：" + d.getPath() + (ok ? " ✔" : "（已存在或创建失败）"));
             }
         }
     }

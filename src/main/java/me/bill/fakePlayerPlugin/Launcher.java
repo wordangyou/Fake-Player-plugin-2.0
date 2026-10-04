@@ -13,7 +13,7 @@ public final class Launcher {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Could not open browser: " + e.getMessage());
+            System.err.println("无法打开浏览器: " + e.getMessage());
         }
         System.exit(0);
     }

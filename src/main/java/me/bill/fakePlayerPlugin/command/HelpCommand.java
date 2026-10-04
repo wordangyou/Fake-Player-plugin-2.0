@@ -51,7 +51,7 @@ public class HelpCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Shows the command help menu.";
+        return "显示命令帮助菜单。";
     }
 
     @Override
@@ -104,14 +104,14 @@ public class HelpCommand implements FppCommand {
 
         Component prev;
         if (page > 1) {
-            prev = Component.text("« ᴘʀᴇᴠ")
+            prev = Component.text("« 上一页")
                     .color(ACCENT)
                     .decoration(TextDecoration.BOLD, true)
                     .clickEvent(ClickEvent.runCommand("/fpp help " + (page - 1)))
                     .hoverEvent(HoverEvent.showText(
-                            Component.text("Go to page " + (page - 1)).color(TextColor.fromHexString("#9691AB"))));
+                            Component.text("前往第 " + (page - 1) + " 页").color(TextColor.fromHexString("#9691AB"))));
         } else {
-            prev = Component.text("« ᴘʀᴇᴠ")
+            prev = Component.text("« 上一页")
                     .color(TextColor.fromHexString("#5F5B73"))
                     .decoration(TextDecoration.BOLD, true);
         }
@@ -121,14 +121,14 @@ public class HelpCommand implements FppCommand {
 
         Component next;
         if (page < totalPages) {
-            next = Component.text("ɴᴇxᴛ »")
+            next = Component.text("下一页 »")
                     .color(ACCENT)
                     .decoration(TextDecoration.BOLD, true)
                     .clickEvent(ClickEvent.runCommand("/fpp help " + (page + 1)))
                     .hoverEvent(HoverEvent.showText(
-                            Component.text("Go to page " + (page + 1)).color(TextColor.fromHexString("#9691AB"))));
+                            Component.text("前往第 " + (page + 1) + " 页").color(TextColor.fromHexString("#9691AB"))));
         } else {
-            next = Component.text("ɴᴇxᴛ »")
+            next = Component.text("下一页 »")
                     .color(TextColor.fromHexString("#5F5B73"))
                     .decoration(TextDecoration.BOLD, true);
         }

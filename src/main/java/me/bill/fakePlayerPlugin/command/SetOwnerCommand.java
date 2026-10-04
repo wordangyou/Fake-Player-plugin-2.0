@@ -38,7 +38,7 @@ public final class SetOwnerCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Set the owner of a bot.";
+        return "设置假人的拥有者。";
     }
 
     @Override

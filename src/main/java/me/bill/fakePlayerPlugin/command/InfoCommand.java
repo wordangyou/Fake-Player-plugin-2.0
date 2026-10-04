@@ -57,7 +57,7 @@ public class InfoCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Query bot session history from the database.";
+        return "从数据库查询假人会话历史。";
     }
 
     @Override
@@ -105,7 +105,7 @@ public class InfoCommand implements FppCommand {
 
         if ((sub.equals("bot") || sub.equals("spawner")) && args.length < 2) {
             sender.sendMessage(Component.empty()
-                    .append(Component.text("Usage: ").color(LABEL))
+                    .append(Component.text("用法：").color(LABEL))
                     .append(Component.text("/fpp info " + sub + " <name>").color(ACCENT)));
             return true;
         }
@@ -140,7 +140,7 @@ public class InfoCommand implements FppCommand {
                 .filter(fp -> BotAccess.canAdminister(player, fp))
                 .toList();
 
-        sender.sendMessage(header("ʏᴏᴜʀ ʙᴏᴛꜱ"));
+        sender.sendMessage(header("你的假人"));
         if (owned.isEmpty()) {
             sender.sendMessage(Lang.get("list-none"));
             sender.sendMessage(divider());
@@ -175,22 +175,22 @@ public class InfoCommand implements FppCommand {
             return;
         }
 
-        sender.sendMessage(header("ʙᴏᴛ - " + fp.getDisplayName()));
-        row(sender, "ᴡᴏʀʟᴅ", getWorld(fp));
-        row(sender, "ʟᴏᴄᴀᴛɪᴏɴ", manager.formatLocationForDisplay(fp));
-        row(sender, "ᴜᴘᴛɪᴍᴇ", formatUptime(fp.getSpawnTime()));
-        row(sender, "ꜱᴘᴀᴡɴᴇᴅ ʙʏ", fp.getSpawnedBy());
+        sender.sendMessage(header("假人 - " + fp.getDisplayName()));
+        row(sender, "世界", getWorld(fp));
+        row(sender, "位置", manager.formatLocationForDisplay(fp));
+        row(sender, "在线时长", formatUptime(fp.getSpawnTime()));
+        row(sender, "生成者", fp.getSpawnedBy());
         sender.sendMessage(divider());
     }
 
     private void showAdminLiveBots(CommandSender sender) {
         Collection<FakePlayer> active = manager.getActivePlayers();
 
-        sender.sendMessage(header("ᴀᴄᴛɪᴠᴇ ʙᴏᴛꜱ (" + active.size() + ")"));
+        sender.sendMessage(header("活跃假人（" + active.size() + "）"));
 
         if (active.isEmpty()) {
             sender.sendMessage(Component.empty()
-                    .append(Component.text("  No bots are currently active.").color(MUTED)));
+                    .append(Component.text("  当前没有活跃的假人。").color(MUTED)));
         } else {
             for (FakePlayer fp : active) {
                 sender.sendMessage(Component.empty()
@@ -201,7 +201,7 @@ public class InfoCommand implements FppCommand {
                         .append(Component.text("  📍 ").color(MUTED))
                         .append(Component.text(manager.formatLocationForDisplay(fp))
                                 .color(VALUE))
-                        .append(Component.text("  by ").color(MUTED))
+                        .append(Component.text("  由 ").color(MUTED))
                         .append(Component.text(fp.getSpawnedBy()).color(LABEL)));
             }
         }
@@ -209,13 +209,13 @@ public class InfoCommand implements FppCommand {
         if (db != null) {
             DatabaseManager.DbStats stats = db.getStats();
             sender.sendMessage(divider());
-            sender.sendMessage(header("ᴅᴀᴛᴀʙᴀꜱᴇ ꜱᴛᴀᴛꜱ (" + stats.backend() + ")"));
-            row(sender, "ᴍᴏᴅᴇ", Config.databaseMode());
-            row(sender, "ꜱᴇʀᴠᴇʀ ɪᴅ", Config.serverId());
-            row(sender, "ᴛᴏᴛᴀʟ ꜱᴇꜱꜱɪᴏɴꜱ", String.valueOf(stats.totalSessions()));
-            row(sender, "ᴜɴɪQᴜᴇ ʙᴏᴛꜱ", String.valueOf(stats.uniqueBots()));
-            row(sender, "ᴜɴɪQᴜᴇ ꜱᴘᴀᴡɴᴇʀꜱ", String.valueOf(stats.uniqueSpawners()));
-            row(sender, "ᴛᴏᴛᴀʟ ᴜᴘᴛɪᴍᴇ", stats.formattedUptime());
+            sender.sendMessage(header("数据库统计（" + stats.backend() + "）"));
+            row(sender, "模式", Config.databaseMode());
+            row(sender, "服务器 ID", Config.serverId());
+            row(sender, "总会话数", String.valueOf(stats.totalSessions()));
+            row(sender, "独立假人数", String.valueOf(stats.uniqueBots()));
+            row(sender, "独立生成者数", String.valueOf(stats.uniqueSpawners()));
+            row(sender, "总在线时长", stats.formattedUptime());
 
             Map<String, Integer> top = db.getTopSpawners(3);
             if (!top.isEmpty()) {
@@ -224,25 +224,25 @@ public class InfoCommand implements FppCommand {
                     if (sb.length() > 0) sb.append(", ");
                     sb.append(p).append(" (").append(c).append(")");
                 });
-                row(sender, "ᴛᴏᴘ ꜱᴘᴀᴡɴᴇʀꜱ", sb.toString());
+                row(sender, "生成最多者", sb.toString());
             }
 
             sender.sendMessage(Component.empty()
-                    .append(Component.text("  Use /fpp info <name> or /fpp info spawner" + " <name> for history.")
+                    .append(Component.text("  使用 /fpp info <name> 或 /fpp info spawner" + " <name> 查看历史。")
                             .color(MUTED)));
         }
         sender.sendMessage(divider());
     }
 
     private void showAdminBotInfo(CommandSender sender, FakePlayer fp) {
-        sender.sendMessage(header("ʙᴏᴛ - " + fp.getDisplayName()));
-        row(sender, "ɴᴀᴍᴇ", fp.getDisplayName());
-        row(sender, "ɪɴᴛᴇʀɴᴀʟ", fp.getName());
-        row(sender, "ᴜᴜɪᴅ", fp.getUuid().toString());
-        row(sender, "ᴡᴏʀʟᴅ", getWorld(fp));
-        row(sender, "ʟᴏᴄᴀᴛɪᴏɴ", formatLoc(fp));
-        row(sender, "ᴜᴘᴛɪᴍᴇ", formatUptime(fp.getSpawnTime()));
-        row(sender, "ꜱᴘᴀᴡɴᴇᴅ ʙʏ", fp.getSpawnedBy());
+        sender.sendMessage(header("假人 - " + fp.getDisplayName()));
+        row(sender, "名称", fp.getDisplayName());
+        row(sender, "内部名", fp.getName());
+        row(sender, "UUID", fp.getUuid().toString());
+        row(sender, "世界", getWorld(fp));
+        row(sender, "位置", formatLoc(fp));
+        row(sender, "在线时长", formatUptime(fp.getSpawnTime()));
+        row(sender, "生成者", fp.getSpawnedBy());
         sender.sendMessage(divider());
     }
 
@@ -266,7 +266,7 @@ public class InfoCommand implements FppCommand {
         }
         if (records.isEmpty()) return;
 
-        sender.sendMessage(header("ꜱᴇꜱꜱɪᴏɴ ʜɪꜱᴛᴏʀʏ - " + botName + " (last " + records.size() + ")"));
+        sender.sendMessage(header("会话历史 - " + botName + "（最近 " + records.size() + " 条）"));
         for (BotRecord r : records) {
             sender.sendMessage(sessionRow(r));
         }
@@ -280,7 +280,7 @@ public class InfoCommand implements FppCommand {
             sender.sendMessage(Lang.get("info-no-records", "name", playerName));
             return;
         }
-        sender.sendMessage(header("ꜱᴘᴀᴡɴᴇʀ ʜɪꜱᴛᴏʀʏ - " + playerName + " (last " + records.size() + ")"));
+        sender.sendMessage(header("生成者历史 - " + playerName + "（最近 " + records.size() + " 条）"));
         for (BotRecord r : records) {
             sender.sendMessage(sessionRow(r));
         }
@@ -303,7 +303,7 @@ public class InfoCommand implements FppCommand {
 
     private Component sessionRow(BotRecord r) {
         TextColor statusColor = r.isActive() ? OK : ERR;
-        String status = r.isActive() ? "ᴀᴄᴛɪᴠᴇ" : (r.getRemoveReason() != null ? r.getRemoveReason() : "ʀᴇᴍᴏᴠᴇᴅ");
+        String status = r.isActive() ? "活跃" : (r.getRemoveReason() != null ? r.getRemoveReason() : "已移除");
         String spawned = FMT.format(r.getSpawnedAt());
         String loc = r.getWorldName() + " " + fmt(r.getSpawnX()) + "," + fmt(r.getSpawnY()) + "," + fmt(r.getSpawnZ());
 
@@ -326,15 +326,15 @@ public class InfoCommand implements FppCommand {
             return body.getLocation().getWorld().getName();
         var sl = fp.getSpawnLocation();
         if (sl != null && sl.getWorld() != null) return sl.getWorld().getName();
-        return "unknown";
+        return "未知";
     }
 
     private static String formatUptime(Instant t) {
         if (t == null) return "?";
         long s = Duration.between(t, Instant.now()).getSeconds();
-        if (s < 60) return s + "s";
-        if (s < 3600) return (s / 60) + "m " + (s % 60) + "s";
-        return (s / 3600) + "h " + ((s % 3600) / 60) + "m";
+        if (s < 60) return s + "秒";
+        if (s < 3600) return (s / 60) + "分 " + (s % 60) + "秒";
+        return (s / 3600) + "小时 " + ((s % 3600) / 60) + "分";
     }
 
     private static String formatLoc(FakePlayer fp) {
@@ -358,7 +358,7 @@ public class InfoCommand implements FppCommand {
                     + sl.getBlockY()
                     + ","
                     + sl.getBlockZ();
-        return "unknown";
+        return "未知";
     }
 
     @Override

@@ -116,7 +116,7 @@ public class InventoryCommand implements FppCommand, Listener {
 
     @Override
     public String getDescription() {
-        return "Open a bot's full inventory";
+        return "打开假人的完整背包";
     }
 
     @Override

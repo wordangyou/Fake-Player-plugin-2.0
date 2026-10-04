@@ -38,7 +38,7 @@ public class TphCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Teleports your bot(s) to you.";
+        return "将你的假人传送到你身边。";
     }
 
     @Override
@@ -61,7 +61,7 @@ public class TphCommand implements FppCommand {
         if (!manager.physicalBodiesEnabled()) {
             sender.sendMessage(Component.text("[ꜰᴘᴘ] ")
                     .color(ACCENT)
-                    .append(Component.text("No body to tp to or from.").color(MUTED)));
+                    .append(Component.text("没有可传送的实体。").color(MUTED)));
             return true;
         }
         if (candidates.isEmpty()) {
@@ -121,9 +121,9 @@ public class TphCommand implements FppCommand {
         if (ok) {
             sender.sendMessage(Component.empty()
                     .append(Component.text("[ꜰᴘᴘ] ").color(ACCENT))
-                    .append(Component.text("Teleported ").color(MUTED))
+                    .append(Component.text("已将 ").color(MUTED))
                     .append(Component.text(target.getDisplayName()).color(ACCENT))
-                    .append(Component.text(" to you.").color(MUTED)));
+                    .append(Component.text(" 传送到你身边。").color(MUTED)));
         } else {
             sender.sendMessage(Lang.get("tph-failed", "name", target.getDisplayName()));
         }
@@ -151,7 +151,7 @@ public class TphCommand implements FppCommand {
 
     private void listBots(CommandSender sender, List<FakePlayer> bots) {
         sender.sendMessage(Component.empty()
-                .append(Component.text("  Your bots: ").color(MUTED))
+                .append(Component.text("  你的假人： ").color(MUTED))
                 .append(Component.text(String.join(
                                 ", ",
                                 bots.stream().map(FakePlayer::getDisplayName).toList()))

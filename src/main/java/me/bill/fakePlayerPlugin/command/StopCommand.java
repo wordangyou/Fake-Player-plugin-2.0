@@ -16,13 +16,13 @@ import me.bill.fakePlayerPlugin.permission.Perm;
 /**
  * /fpp stop [&lt;bot&gt;|--all]
  * <p>
- * Immediately cancels every active core task for one bot or all bots.
+ * 立即取消一个假人或所有假人的全部活跃核心任务。
  */
 public final class StopCommand implements FppCommand {
 
     private final FakePlayerManager manager;
 
-    // All references are nullable - injected after construction.
+    // 所有引用均可为空 - 在构造之后注入。
     @Nullable
     private MoveCommand moveCommand;
 
@@ -38,13 +38,13 @@ public final class StopCommand implements FppCommand {
     @Nullable
     private FindCommand findCommand;
 
-    // ── Constructor ──────────────────────────────────────────────────────────
+    // ── 构造函数 ──────────────────────────────────────────────────────────────
 
     public StopCommand(@NotNull FakePlayerManager manager) {
         this.manager = manager;
     }
 
-    // ── Dependency injection ─────────────────────────────────────────────────
+    // ── 依赖注入 ─────────────────────────────────────────────────────────────
 
     public void setMoveCommand(@Nullable MoveCommand cmd) {
         this.moveCommand = cmd;
@@ -66,7 +66,7 @@ public final class StopCommand implements FppCommand {
         this.findCommand = cmd;
     }
 
-    // ── FppCommand metadata ──────────────────────────────────────────────────
+    // ── FppCommand 元数据 ─────────────────────────────────────────────────────
 
     @Override
     public String getName() {
@@ -90,14 +90,14 @@ public final class StopCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Stop all active tasks for one bot or all bots.";
+        return "停止一个假人或所有假人的全部活跃任务。";
     }
 
-    // ── Command execution ─────────────────────────────────────────────────────
+    // ── 命令执行 ─────────────────────────────────────────────────────────────
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        // Default: stop all if no argument is supplied.
+        // 默认：不提供参数时停止全部。
         if (args.length == 0 || args[0].equalsIgnoreCase("--all")) {
             int stopped = stopAllBots();
             if (stopped == 0) {
@@ -123,12 +123,12 @@ public final class StopCommand implements FppCommand {
         return true;
     }
 
-    // ── Stop helpers ─────────────────────────────────────────────────────────
+    // ── 停止辅助方法 ─────────────────────────────────────────────────────────
 
     /**
-     * Stops all running tasks for a single bot.
+     * 停止单个假人的所有正在运行的任务。
      *
-     * @return true if at least one task was cancelled.
+     * @return 如果至少取消了一个任务则为 true。
      */
     private boolean stopBot(@NotNull UUID uuid) {
         boolean did = false;
@@ -158,9 +158,9 @@ public final class StopCommand implements FppCommand {
     }
 
     /**
-     * Stops all running tasks for every active bot.
+     * 停止所有活跃假人的全部正在运行的任务。
      *
-     * @return total number of bots that had at least one task stopped.
+     * @return 至少停止了一个任务的假人总数。
      */
     private int stopAllBots() {
         int count = 0;
@@ -170,7 +170,7 @@ public final class StopCommand implements FppCommand {
         return count;
     }
 
-    // ── Tab-completion ────────────────────────────────────────────────────────
+    // ── Tab 补全 ──────────────────────────────────────────────────────────────
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {

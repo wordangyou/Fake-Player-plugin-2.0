@@ -18,27 +18,25 @@ import org.bukkit.plugin.Plugin;
 import me.bill.fakePlayerPlugin.util.FppLogger;
 
 /**
- * Encrypts/decrypts the per-bot passwords {@link BotAuthManager} stores in the database, so
- * {@code fpp_bot_auth.password_enc} is never a plaintext column even though it has to be
- * reversible (unlike a login password hash, this one has to be typed again on every future join -
- * see {@link BotAuthManager}'s own class doc).
+ * 加密/解密 {@link BotAuthManager} 存储在数据库中的每个假人密码，使
+ * {@code fpp_bot_auth.password_enc} 永远不是明文列，尽管它必须可逆（与登录密码的哈希
+ * 不同，这个密码在未来的每次加入时都要再次输入 - 见 {@link BotAuthManager} 自身的类文档）。
  *
- * <p>AES-256/GCM with a random 12-byte IV per call, key held only in memory plus one file on
- * disk: {@code <dataFolder>/auth.key}, generated once with {@link SecureRandom} on first use and
- * never written anywhere else (not config.yml, not logs). Anyone who can read that file plus the
- * database can recover every stored password, exactly like any other symmetric-key-at-rest
- * scheme - back up/restrict {@code auth.key} the same way you would the database itself.
+ * <p>使用 AES-256/GCM，每次调用随机生成 12 字节 IV，密钥仅保存在内存和磁盘上的一个文件
+ * 中：{@code <dataFolder>/auth.key}，首次使用时用 {@link SecureRandom} 生成一次，
+ * 此后绝不写入其他任何地方（不进 config.yml，不进日志）。任何能读取该文件加数据库的人
+ * 都能恢复所有已存储的密码，与任何其他对称密钥静态加密方案一样 - 请像对待数据库本身
+ * 一样备份/限制 {@code auth.key}。
  *
- * <p>Losing or rotating {@code auth.key} makes every previously-stored password permanently
- * undecryptable (by design - there's no recovery path around the encryption). {@link
- * BotAuthManager} treats a decrypt failure as "forgot this bot's password", logging a pointer to
- * {@code /fpp auth reset <bot>} rather than silently retrying with garbage.
+ * <p>丢失或轮换 {@code auth.key} 会使之前存储的所有密码永久无法解密（设计如此 -
+ * 加密没有恢复路径）。{@link BotAuthManager} 将解密失败视为“忘记该假人的密码”，
+ * 记录一条指向 {@code /fpp auth reset <bot>} 的提示，而不是用垃圾数据静默重试。
  */
 final class AuthCipher {
 
     private static final String KEY_FILE_NAME = "auth.key";
     private static final int KEY_BYTES = 32; // AES-256
-    private static final int IV_BYTES = 12; // GCM-recommended nonce size
+    private static final int IV_BYTES = 12; // GCM 推荐的 nonce 长度
     private static final int TAG_BITS = 128;
     private static final String TRANSFORMATION = "AES/GCM/NoPadding";
 
@@ -58,15 +56,15 @@ final class AuthCipher {
                 byte[] decoded = Base64.getDecoder()
                         .decode(Files.readString(keyFile.toPath()).trim());
                 if (decoded.length == KEY_BYTES) return decoded;
-                FppLogger.warn("Auth: " + KEY_FILE_NAME + " is malformed - generating a fresh key. Any "
-                        + "passwords already stored will fail to decrypt; run /fpp auth reset <bot> for "
-                        + "any bot that then gets stuck, so it registers a new one on its next join.");
+                FppLogger.warn("Auth: " + KEY_FILE_NAME + " 格式损坏 - 正在生成新密钥。任何"
+                        + "已存储的密码都将无法解密；对之后卡住的任何假人请执行 /fpp auth reset <bot>，"
+                        + "以便它在下次加入时注册新密码。");
             }
             byte[] fresh = new byte[KEY_BYTES];
             random.nextBytes(fresh);
             Files.writeString(keyFile.toPath(), Base64.getEncoder().encodeToString(fresh));
-            // Best-effort file lockdown - a no-op (not a failure) on filesystems/OSes that don't
-            // support POSIX-style owner-only permissions (e.g. plain Windows/FAT).
+            // 尽力而为的文件锁定 - 在不支持 POSIX 风格“仅所有者”权限的文件系统/操作系统上
+            // 是无操作（不算失败）（例如普通 Windows/FAT）。
             try {
                 keyFile.setReadable(false, false);
                 keyFile.setReadable(true, true);
@@ -77,11 +75,11 @@ final class AuthCipher {
             return fresh;
         } catch (IOException e) {
             throw new IllegalStateException(
-                    "Auth: couldn't read or create " + KEY_FILE_NAME + " in the plugin data folder", e);
+                    "Auth: 无法在插件数据文件夹中读取或创建 " + KEY_FILE_NAME, e);
         }
     }
 
-    /** Base64(iv || ciphertext+tag) - a fresh random IV every call, safe to reuse the same key indefinitely. */
+    /** Base64(iv || 密文+tag) - 每次调用都使用新的随机 IV，同一密钥可无限期安全复用。 */
     String encrypt(String plaintext) throws GeneralSecurityException {
         byte[] iv = new byte[IV_BYTES];
         random.nextBytes(iv);
@@ -96,7 +94,7 @@ final class AuthCipher {
 
     String decrypt(String stored) throws GeneralSecurityException {
         byte[] combined = Base64.getDecoder().decode(stored);
-        if (combined.length <= IV_BYTES) throw new GeneralSecurityException("stored value too short");
+        if (combined.length <= IV_BYTES) throw new GeneralSecurityException("存储的值过短");
         byte[] iv = Arrays.copyOfRange(combined, 0, IV_BYTES);
         byte[] ciphertext = Arrays.copyOfRange(combined, IV_BYTES, combined.length);
         Cipher cipher = Cipher.getInstance(TRANSFORMATION);

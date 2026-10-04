@@ -537,7 +537,7 @@ public class DatabaseManager {
                 isMysql = true;
                 return true;
             }
-            FppLogger.warn("MySQL connection failed - falling back to SQLite.");
+            FppLogger.warn("MySQL 连接失败 - 回退到 SQLite。");
         }
         return trySqlite();
     }
@@ -561,17 +561,17 @@ public class DatabaseManager {
                     + (connTimeout * 2);
             connection = DriverManager.getConnection(url, Config.mysqlUsername(), Config.mysqlPassword());
             Config.debug("MySQL pool-size advisory: " + Config.mysqlPoolSize());
-            FppLogger.info("Database connected via MySQL ("
+            FppLogger.info("已通过 MySQL 连接数据库 ("
                     + Config.mysqlHost()
                     + ":"
                     + Config.mysqlPort()
                     + "/"
                     + Config.mysqlDatabase()
-                    + "). Connection object: " + connection);
+                    + ")。连接对象: " + connection);
             Config.debugDbConn("MySQL connection established - valid=" + isConnectionValid());
             return true;
         } catch (Exception e) {
-            FppLogger.warn("MySQL init error: " + e.getMessage());
+            FppLogger.warn("MySQL 初始化错误: " + e.getMessage());
             return false;
         }
     }
@@ -593,11 +593,11 @@ public class DatabaseManager {
                 st.execute("PRAGMA temp_store=MEMORY");
             }
             isMysql = false;
-            FppLogger.info("Database connected via SQLite (" + dbFile.getPath() + ").");
+            FppLogger.info("已通过 SQLite 连接数据库 (" + dbFile.getPath() + ").");
             Config.debugDbConn("SQLite connection established - valid=" + isConnectionValid());
             return true;
         } catch (Exception e) {
-            FppLogger.error("SQLite init error: " + e.getMessage());
+            FppLogger.error("SQLite 初始化错误: " + e.getMessage());
             return false;
         }
     }
@@ -634,11 +634,11 @@ public class DatabaseManager {
     private void migrate() {
         int current = getSchemaVersion();
 
-        if (current < 1) {
+       if (current < 1) {
             FppLogger.warn("DB schema_version="
                     + current
-                    + " is invalid (expected >= 1). Treating as v1 to avoid a migration"
-                    + " crash. All schema steps will be applied.");
+                    + " 无效（应为 >= 1）。将按 v1 处理以避免迁移"
+                    + "崩溃。所有架构步骤都将被应用。");
             current = 1;
         }
 
@@ -651,13 +651,13 @@ public class DatabaseManager {
             BackupManager.createDatabaseBackup(plugin, "pre-db-migration-v" + current + "-to-v" + SCHEMA_VERSION);
         }
 
-        FppLogger.info("Applying DB schema migration v"
+        FppLogger.info("正在应用 DB 架构迁移 v"
                 + current
                 + " → v"
                 + SCHEMA_VERSION
                 + " ("
                 + (SCHEMA_VERSION - current)
-                + " step(s))…");
+                + " 步)…");
 
         for (int v = current; v < SCHEMA_VERSION; v++) {
             String[] migration = v - 1 < MIGRATIONS.length ? MIGRATIONS[v - 1] : new String[0];
@@ -665,14 +665,14 @@ public class DatabaseManager {
                 if (!sql.isEmpty()) execSilent(sql);
             }
             setSchemaVersion(v + 1);
-            FppLogger.info("  DB schema: v" + v + " → v" + (v + 1));
+            FppLogger.info(" DB 架构: v" + v + " → v" + (v + 1));
         }
 
         keepExtensionOwnedDatabaseState();
         restoreSkinPersistenceColumns();
         restoreExtensionPersistenceColumns();
 
-        FppLogger.info("DB schema migration complete (now at v" + SCHEMA_VERSION + ").");
+        FppLogger.info("DB 架构迁移完成（当前 v" + SCHEMA_VERSION + ").");
     }
 
     private void repairSchema() {
@@ -728,7 +728,7 @@ public class DatabaseManager {
     }
 
     private void keepExtensionOwnedDatabaseState() {
-        FppLogger.info("  DB schema: preserving extension-owned columns for optional extension reinstalls.");
+        FppLogger.info(" DB 架构: 保留扩展自有列，供可选扩展重装时使用。");
     }
 
     private void restoreSkinPersistenceColumns() {
@@ -736,7 +736,7 @@ public class DatabaseManager {
         execSilent("ALTER TABLE fpp_active_bots ADD COLUMN skin_signature TEXT DEFAULT NULL");
         execSilent("ALTER TABLE fpp_despawn_snapshots ADD COLUMN skin_texture   TEXT DEFAULT NULL");
         execSilent("ALTER TABLE fpp_despawn_snapshots ADD COLUMN skin_signature TEXT DEFAULT NULL");
-        FppLogger.info("  DB schema: restored persisted skin texture columns.");
+        FppLogger.info(" DB 架构: 已恢复持久化的皮肤纹理列。");
     }
 
     private void restoreExtensionPersistenceColumns() {
@@ -748,7 +748,7 @@ public class DatabaseManager {
         execSilent("ALTER TABLE fpp_active_bots ADD COLUMN ping INT DEFAULT -1");
         execSilent("ALTER TABLE fpp_active_bots ADD COLUMN ping_user_set BOOLEAN DEFAULT 0");
         execSilent(CREATE_EXTENSION_DATA);
-        FppLogger.info("  DB schema: restored extension persistence columns.");
+        FppLogger.info(" DB 架构: 已恢复扩展持久化列。");
     }
 
     private void dropColumn(String table, String column) {
@@ -809,7 +809,7 @@ public class DatabaseManager {
         writeExecutor.shutdown();
         try {
             if (!writeExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
-                FppLogger.warn("Database writer did not finish within 5 seconds; closing anyway.");
+                FppLogger.warn("数据库写入器未在 5 秒内完成；仍将关闭。");
             }
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
@@ -818,12 +818,12 @@ public class DatabaseManager {
             if (connection != null && !isClosed) {
                 Config.debugDbConn("Closing active database connection");
                 connection.close();
-                FppLogger.info("Database connection closed.");
+                FppLogger.info("数据库连接已关闭。");
             } else {
                 Config.debugDbConn("Database connection already closed or null");
             }
         } catch (SQLException e) {
-            FppLogger.error("Error closing DB: " + e.getMessage());
+            FppLogger.error("关闭数据库时出错: " + e.getMessage());
         }
     }
 
@@ -1719,11 +1719,9 @@ public class DatabaseManager {
         try (Statement st = connection.createStatement()) {
             int rows = st.executeUpdate(sql);
             if (rows > 0) {
-                FppLogger.info("Bot identity registry: backfilled "
+                FppLogger.info("假人身份注册表: 已从会话历史回填 "
                         + rows
-                        + " identit"
-                        + (rows == 1 ? "y" : "ies")
-                        + " from session history.");
+                        + " 条身份记录。");
             }
         } catch (SQLException e) {
 

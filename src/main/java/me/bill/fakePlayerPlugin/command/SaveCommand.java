@@ -26,7 +26,7 @@ public final class SaveCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Save all active bot data immediately.";
+        return "立即保存所有活跃假人数据。";
     }
 
     @Override

@@ -5,39 +5,35 @@ import java.lang.reflect.Method;
 import me.bill.fakePlayerPlugin.util.FppLogger;
 
 /**
- * Hooks bots into nLogin (nickuc.com's closed-source auth plugin) through its genuine public API
- * ({@code com.nickuc.login.api.nLoginAPI}), if it's installed - a fully optional soft-dependency,
- * completely inert if nLogin isn't present. Resolved entirely through reflection (see
- * {@link #resolveMethods()}) rather than a compile-time dependency: nLogin is a paid plugin with no
- * public Maven artifact, so its API package is never actually on this project's build classpath -
- * a hard {@code import} would make the whole plugin fail to compile for anyone without a private
- * copy of {@code nLogin.jar}.
+ * 通过 nLogin（nickuc.com 的闭源认证插件）真正的公共 API
+ * （{@code com.nickuc.login.api.nLoginAPI}）把假人接入其中（若已安装）- 完全可选的软依赖，
+ * nLogin 不存在时完全惰性。全部通过反射解析（见 {@link #resolveMethods()}），而不是编译期
+ * 依赖：nLogin 是付费插件、没有公开的 Maven 构件，因此它的 API 包从不出现在本项目的构建
+ * classpath 上 - 硬性 {@code import} 会让任何没有私有 {@code nLogin.jar} 副本的人无法编译
+ * 整个插件。
  *
- * <p><b>Why this exists at all, when every other tested login plugin (OpeNLogin, AuthMe-shaped
- * ones) works through {@code BotAuthManager}'s normal command-simulation path instead:</b> nLogin's
- * own live "is this connection authenticated" state lives on a per-connection session object it
- * only ever creates while its bundled PacketEvents processes a client's <i>real</i> login/
- * configuration packets. A bot never goes through that - {@code NmsPlayerSpawner} places an
- * already-fully-constructed entity directly into the world, not a simulated network handshake -
- * so simulating a chat command (indistinguishable from a real player's, for every other plugin
- * tested) still hits {@code IllegalStateException: Player session not set} every single time,
- * confirmed live against a real nLogin install. Even nLogin's own admin commands ({@code /nlogin
- * register}, {@code /nlogin forcelogin}) hit the same wall - {@code register} alone can create the
- * database row without a session, but doesn't flip the live connection to authenticated, and
- * {@code forcelogin} throws the identical exception.
+ * <p><b>既然其他所有测试过的登录插件（OpeNLogin、AuthMe 系的）都能通过
+ * {@code BotAuthManager} 的常规命令模拟路径工作，这里为什么还需要它：</b> nLogin 自身的
+ * 实时“此连接是否已认证”状态保存在一个按连接创建的会话对象上，而该对象只有在其捆绑的
+ * PacketEvents 处理客户端的<i>真实</i>登录/配置数据包时才会创建。假人从不经过那里 -
+ * {@code NmsPlayerSpawner} 把一个已经完整构建的实体直接放进世界，而不是模拟的网络
+ * 握手 - 所以模拟聊天命令（对其他每个测试过的插件都与真实玩家无异）每次都会命中
+ * {@code IllegalStateException: Player session not set}，已对真实的 nLogin 安装实机确认。
+ * 连 nLogin 自己的管理命令（{@code /nlogin register}、{@code /nlogin forcelogin}）也撞上
+ * 同样的墙 - {@code register} 单独可以在没有会话的情况下创建数据库行，但不会把实时连接
+ * 切换为已认证，而 {@code forcelogin} 抛出完全相同的异常。
  *
- * <p>{@code nLoginAPI#forceLogin} is different: it's nLogin's own sanctioned, documented way to
- * mark a player authenticated programmatically - built for exactly this shape of integration
- * (proxy session sync, premium auto-login, etc.), not layered on top of the same session
- * requirement everything else here runs into. Confirmed live: register via
- * {@code nLoginAPI#performRegister} then {@code nLoginAPI#forceLogin} actually lifts a bot's damage
- * cancellation, unlike the admin commands.
+ * <p>{@code nLoginAPI#forceLogin} 则不同：它是 nLogin 官方认可并有文档记载的、
+ * 以编程方式将玩家标记为已认证的方式 - 正是为这种集成形态而构建（代理会话同步、
+ * 正版自动登录等），而不是叠加在这里其他一切都会遇到的同一会话要求之上。
+ * 实机确认：先通过 {@code nLoginAPI#performRegister} 注册再
+ * {@code nLoginAPI#forceLogin}，确实能解除假人的伤害取消，这一点与那些管理命令不同。
  */
 public final class NLoginIntegration {
 
     private static final String API_CLASS = "com.nickuc.login.api.nLoginAPI";
 
-    /** Non-null once the API class/methods were successfully resolved; reflection lookups are cheap to cache forever. */
+    /** API 类/方法成功解析后非空；反射查找缓存起来永久使用代价很低。 */
     private static volatile Handles handles;
 
     private final Object api;
@@ -57,10 +53,9 @@ public final class NLoginIntegration {
             Method forceLogin) {}
 
     /**
-     * Resolves the API's method handles via reflection the first time nLogin's class is actually
-     * loadable, then caches them forever. Deliberately re-attempted on every call until it first
-     * succeeds - not memoized as a permanent failure - so nLogin enabling after this plugin (load
-     * order) or being installed during a {@code /reload} still gets picked up without a restart.
+     * 在 nLogin 的类首次真正可加载时通过反射解析 API 的方法句柄，然后永久缓存。
+     * 在首次成功之前，每次调用都会刻意重试 - 不会把失败记为永久失败 - 这样在本插件之后
+     * 才启用（加载顺序）或在 {@code /reload} 期间安装的 nLogin 也能被识别，无需重启。
      */
     private static Handles resolveMethods() {
         Handles cached = handles;
@@ -77,22 +72,21 @@ public final class NLoginIntegration {
             handles = resolved;
             return resolved;
         } catch (Throwable t) {
-            // nLogin isn't installed, or its API shape differs from what we expect - stays fully inert.
+            // nLogin 未安装，或其 API 形态与我们预期不符 - 保持完全惰性。
             return null;
         }
     }
 
     /**
-     * Looks up nLogin's API via its own static holder. Returns {@code null} (and does nothing
-     * else) if nLogin isn't installed or its API isn't ready yet - safe to call unconditionally,
-     * matching this codebase's other soft-dependency integrations. The availability check itself is
-     * never cached - only the reflective method handles are - so calling this fresh every time
-     * sidesteps any plugin-load-order timing issue entirely (nLogin enabling after this plugin, a
-     * {@code /reload}, etc.) rather than needing a deferred-check dance.
+     * 通过 nLogin 自己的静态持有者查找其 API。若 nLogin 未安装或其 API 尚未就绪，
+     * 返回 {@code null}（不做其他事）- 可无条件调用，与本代码库中其他软依赖集成一致。
+     * 可用性检查本身从不缓存 - 只缓存反射方法句柄 - 所以每次重新调用可以完全绕开
+     * 插件加载顺序的时机问题（nLogin 在本插件之后启用、{@code /reload} 等），
+     * 而无需延迟检查之类的把戏。
      *
-     * <p>Wrapped in {@code catch (Throwable}, not {@code catch (Exception}: reflective invocation
-     * wraps target-side throwables in {@link java.lang.reflect.InvocationTargetException}, and a
-     * missing/incompatible nLogin build could still throw something unchecked underneath that.
+     * <p>用 {@code catch (Throwable} 而不是 {@code catch (Exception} 包裹：反射调用会把
+     * 目标侧的 throwable 包装进 {@link java.lang.reflect.InvocationTargetException}，
+     * 而缺失/不兼容的 nLogin 构建仍可能在其下抛出未检查异常。
      */
     public static NLoginIntegration tryInstall() {
         Handles h = resolveMethods();
@@ -106,7 +100,7 @@ public final class NLoginIntegration {
         }
     }
 
-    /** Never throws. */
+    /** 从不抛出异常。 */
     public boolean isRegistered(String name) {
         try {
             return (Boolean) handlesForApi.isRegistered().invoke(api, name);
@@ -115,7 +109,7 @@ public final class NLoginIntegration {
         }
     }
 
-    /** Never throws. */
+    /** 从不抛出异常。 */
     public boolean isAuthenticated(String name) {
         try {
             return (Boolean) handlesForApi.isAuthenticated().invoke(api, name);
@@ -124,22 +118,22 @@ public final class NLoginIntegration {
         }
     }
 
-    /** Creates the account via nLogin's own API - does NOT by itself flip the live session to authenticated, see class doc; always follow with {@link #forceLogin}. Never throws. */
+    /** 通过 nLogin 自己的 API 创建账号 - 本身不会把实时会话切换为已认证，见类文档；务必接着调用 {@link #forceLogin}。从不抛出异常。 */
     public boolean performRegister(String name, String password) {
         try {
             return (Boolean) handlesForApi.performRegister().invoke(api, name, password);
         } catch (Throwable t) {
-            FppLogger.warn("nLogin API: performRegister threw for '" + name + "': " + t.getMessage());
+            FppLogger.warn("nLogin API: performRegister 对 '" + name + "' 抛出异常：" + t.getMessage());
             return false;
         }
     }
 
-    /** nLogin's own sanctioned way to mark a connection authenticated without a real login handshake - see class doc. Never throws. */
+    /** nLogin 官方认可的、无需真实登录握手即可将连接标记为已认证的方式 - 见类文档。从不抛出异常。 */
     public boolean forceLogin(String name) {
         try {
             return (Boolean) handlesForApi.forceLogin().invoke(api, name);
         } catch (Throwable t) {
-            FppLogger.warn("nLogin API: forceLogin threw for '" + name + "': " + t.getMessage());
+            FppLogger.warn("nLogin API: forceLogin 对 '" + name + "' 抛出异常：" + t.getMessage());
             return false;
         }
     }

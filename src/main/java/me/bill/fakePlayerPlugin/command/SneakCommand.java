@@ -34,7 +34,7 @@ public final class SneakCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Set or toggle a bot's sneaking state.";
+        return "设置或切换假人的潜行状态。";
     }
 
     @Override

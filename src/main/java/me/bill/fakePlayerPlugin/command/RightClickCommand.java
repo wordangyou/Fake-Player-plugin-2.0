@@ -99,7 +99,7 @@ public final class RightClickCommand extends AbstractClickCommand {
 
     @Override
     public String getDescription() {
-        return "Bot right-clicks like a real player (interacts with what it aims at, uses items). Default: --once";
+        return "假人像真实玩家一样右键点击（与准星所指目标交互、使用物品）。默认：--once";
     }
 
     @Override

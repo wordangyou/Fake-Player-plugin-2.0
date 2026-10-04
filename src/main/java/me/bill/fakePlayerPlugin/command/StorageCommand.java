@@ -60,7 +60,7 @@ public final class StorageCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Set or manage storage targets for a bot (chest, barrel, hopper, shulker, etc.).";
+        return "设置或管理假人的存储目标（箱子、木桶、漏斗、潜影盒等）。";
     }
 
     @Override

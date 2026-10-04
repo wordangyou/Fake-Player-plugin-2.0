@@ -113,7 +113,7 @@ public final class GuiKit {
                 .append(Component.text(isNext ? "▶" : "◄").color(color).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text((isNext ? "ɴᴇxᴛ ᴘᴀɢᴇ" : "ᴘʀᴇᴠ ᴘᴀɢᴇ") + " (" + targetPage + ")")
+                .append(Component.text((isNext ? "下一页" : "上一页") + " (" + targetPage + ")")
                         .color(DARK_GRAY))));
         item.setItemMeta(meta);
         return item;
@@ -126,30 +126,30 @@ public final class GuiKit {
         ItemMeta meta = item.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("🔍 ꜱᴇᴀʀᴄʜ")
+                .append(Component.text("🔍 搜索")
                         .color(active ? ON_GREEN : ACCENT)
                         .decoration(TextDecoration.BOLD, true)));
         List<Component> lore = new java.util.ArrayList<>();
         if (active) {
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ꜰɪʟᴛᴇʀ: ").color(DARK_GRAY))
+                    .append(Component.text("筛选: ").color(DARK_GRAY))
                     .append(Component.text(currentFilter).color(VALUE_YELLOW)));
             lore.add(Component.empty());
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("◈ ").color(ACCENT))
-                    .append(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ᴄʜᴀɴɢᴇ").color(DARK_GRAY)));
+                    .append(Component.text("点击修改").color(DARK_GRAY)));
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("✕ ").color(OFF_RED))
-                    .append(Component.text("ꜱʜɪꜰᴛ+ᴄʟɪᴄᴋ ᴛᴏ ᴄʟᴇᴀʀ").color(DARK_GRAY)));
+                    .append(Component.text("Shift+点击 清除").color(DARK_GRAY)));
             meta.addEnchant(org.bukkit.enchantments.Enchantment.UNBREAKING, 1, true);
             meta.addItemFlags(org.bukkit.inventory.ItemFlag.HIDE_ENCHANTS);
         } else {
             lore.add(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ꜱᴇᴀʀᴄʜ ʙʏ ɴᴀᴍᴇ").color(DARK_GRAY)));
+                    .append(Component.text("点击按名字搜索").color(DARK_GRAY)));
         }
         meta.lore(lore);
         item.setItemMeta(meta);

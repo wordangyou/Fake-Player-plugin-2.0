@@ -49,7 +49,7 @@ public class ReloadCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Reloads the plugin configuration (optionally target a subsystem).";
+        return "重载插件配置（可选指定子系统）。";
     }
 
     @Override
@@ -69,7 +69,7 @@ public class ReloadCommand implements FppCommand {
         long start = System.currentTimeMillis();
         String version = plugin.getPluginMeta().getVersion();
 
-        String label = target.equals("all") ? "full reload" : "reload:" + target;
+        String label = target.equals("all") ? "完整重载" : "重载:" + target;
         sender.sendMessage(Component.text("┌ FakePlayerPlugin v" + version + " - " + label + "…")
                 .color(ACCENT));
 
@@ -80,9 +80,9 @@ public class ReloadCommand implements FppCommand {
             default -> {
                 sender.sendMessage(Component.text("│  ")
                         .color(ACCENT)
-                        .append(Component.text("✗ Unknown target '").color(RED))
+                        .append(Component.text("✗ 未知目标 '").color(RED))
                         .append(Component.text(target).color(YELLOW))
-                        .append(Component.text("'.  Valid: " + String.join(", ", TARGETS))
+                        .append(Component.text("'。有效值：" + String.join(", ", TARGETS))
                                 .color(RED)));
             }
         }
@@ -90,9 +90,9 @@ public class ReloadCommand implements FppCommand {
         long ms = System.currentTimeMillis() - start;
         sender.sendMessage(Component.text("└ ")
                 .color(ACCENT)
-                .append(Component.text("✓ Done").color(GREEN))
-                .append(Component.text("  in " + ms + "ms").color(GRAY)));
-        FppLogger.success("Plugin reloaded [" + label + "] by " + sender.getName() + " in " + ms + "ms.");
+                .append(Component.text("✓ 完成").color(GREEN))
+                .append(Component.text("  耗时 " + ms + "ms").color(GRAY)));
+        FppLogger.success("插件已重载 [" + label + "]，执行者 " + sender.getName() + "，耗时 " + ms + "ms。");
         return true;
     }
 
@@ -113,16 +113,16 @@ public class ReloadCommand implements FppCommand {
         if (plugin.getSkinManager() != null) plugin.getSkinManager().reload();
 
         if (Config.isBadwordFilterEnabled() && BadwordFilter.getBadwordCount() == 0) {
-            sender.sendMessage(Component.text("│  ⚠ Badword filter is ON but no sources are active - enable"
-                            + " 'badword-filter.use-global-list' or add words to"
-                            + " config.yml / bad-words.yml!")
+            sender.sendMessage(Component.text("│  ⚠ 脏话过滤器已开启，但没有生效的词库来源 - 请开启"
+                            + " 'badword-filter.use-global-list'，或将词语添加到"
+                            + " config.yml / bad-words.yml！")
                     .color(YELLOW));
         }
 
         FakePlayerManager fpm = plugin.getFakePlayerManager();
         if (fpm != null) fpm.refreshCleanNamePool();
 
-        sendStep(sender, "Config, lang, names (" + BotNameConfig.getNames().size() + "), badword filter");
+        sendStep(sender, "配置、语言、名称 (" + BotNameConfig.getNames().size() + ")、脏话过滤器");
 
         if (Config.configSyncMode().equalsIgnoreCase("AUTO_PUSH") && plugin.getConfigSyncManager() != null) {
             var csm = plugin.getConfigSyncManager();
@@ -130,14 +130,14 @@ public class ReloadCommand implements FppCommand {
                 int pushed = csm.pushAll(sender.getName());
                 FppScheduler.runSync(
                         plugin,
-                        () -> sendStep(sender, "AUTO_PUSH: " + pushed + " config file(s) pushed" + " to network"));
+                        () -> sendStep(sender, "AUTO_PUSH: 已推送 " + pushed + " 个配置文件" + " 到网络"));
             });
         }
     }
 
     private void reloadLang(CommandSender sender) {
         Lang.reload();
-        sendStep(sender, "Language file reloaded");
+        sendStep(sender, "语言文件已重载");
     }
 
     private void reloadAll(CommandSender sender) {
@@ -149,16 +149,16 @@ public class ReloadCommand implements FppCommand {
         if (plugin.getSkinManager() != null) plugin.getSkinManager().reload();
 
         if (Config.isBadwordFilterEnabled() && BadwordFilter.getBadwordCount() == 0) {
-            sender.sendMessage(Component.text("│  ⚠ Badword filter is ON but no sources are active - enable"
-                            + " 'badword-filter.use-global-list' or add words to"
-                            + " config.yml / bad-words.yml!")
+            sender.sendMessage(Component.text("│  ⚠ 脏话过滤器已开启，但没有生效的词库来源 - 请开启"
+                            + " 'badword-filter.use-global-list'，或将词语添加到"
+                            + " config.yml / bad-words.yml！")
                     .color(YELLOW));
         }
 
         FakePlayerManager fpm = plugin.getFakePlayerManager();
         if (fpm != null) fpm.refreshCleanNamePool();
 
-        sendStep(sender, "Config, lang, names (" + BotNameConfig.getNames().size() + "), badword filter");
+        sendStep(sender, "配置、语言、名称 (" + BotNameConfig.getNames().size() + ")、脏话过滤器");
 
         if (Config.configSyncMode().equalsIgnoreCase("AUTO_PUSH") && plugin.getConfigSyncManager() != null) {
             var csm = plugin.getConfigSyncManager();
@@ -166,7 +166,7 @@ public class ReloadCommand implements FppCommand {
                 int pushed = csm.pushAll(sender.getName());
                 FppScheduler.runSync(
                         plugin,
-                        () -> sendStep(sender, "AUTO_PUSH: " + pushed + " config file(s) pushed" + " to network"));
+                        () -> sendStep(sender, "AUTO_PUSH: 已推送 " + pushed + " 个配置文件" + " 到网络"));
             });
         }
 
@@ -177,33 +177,33 @@ public class ReloadCommand implements FppCommand {
                 sendStep(
                         sender,
                         active
-                                + " active bot(s) state updated"
-                                + "  (damageable="
+                                + " 个活跃假人的状态已更新"
+                                + "  （可受伤="
                                 + Config.bodyDamageable()
-                                + ", pushable="
+                                + "，可推动="
                                 + Config.bodyPushable()
-                                + ")");
+                                + "）");
         }
 
-        sendStep(sender, "LuckPerms - auto-updates via UserDataRecalculateEvent");
+        sendStep(sender, "LuckPerms - 通过 UserDataRecalculateEvent 自动更新");
 
         boolean taskPersistActive = Config.persistOnRestart() && plugin.getDatabaseManager() != null;
         String taskPersistDetail = taskPersistActive
-                ? "db + yaml  (schema v" + DatabaseManager.getCurrentSchemaVersion() + ")"
-                : Config.persistOnRestart() ? "yaml only  (DB disabled)" : "disabled";
-        sendStep(sender, "Task persistence - " + taskPersistDetail);
+                ? "数据库 + yaml  （模式 v" + DatabaseManager.getCurrentSchemaVersion() + "）"
+                : Config.persistOnRestart() ? "仅 yaml  （数据库已禁用）" : "已禁用";
+        sendStep(sender, "任务持久化 - " + taskPersistDetail);
 
         int issues = ConfigValidator.validate();
         if (issues > 0) {
-            sender.sendMessage(Component.text("│  ⚠ " + issues + " config issue(s) detected - check console")
+            sender.sendMessage(Component.text("│  ⚠ 检测到 " + issues + " 个配置问题 - 请查看控制台")
                     .color(YELLOW));
         } else {
-            sendStep(sender, "Config validation passed  (0 issues)");
+            sendStep(sender, "配置校验通过  （0 个问题）");
         }
 
         UpdateChecker.invalidateCache();
         UpdateChecker.check(plugin);
-        sendStep(sender, "Update check triggered  (async)");
+        sendStep(sender, "已触发更新检查  （异步）");
     }
 
     private void sendStep(CommandSender sender, String message) {

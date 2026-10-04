@@ -111,7 +111,7 @@ public final class Config {
             debugCfg.options().copyDefaults(true);
             Config.debugStartup("debug.yml loaded.");
         } catch (Exception e) {
-            FppLogger.warn("Failed to load debug.yml: " + e.getMessage());
+            FppLogger.warn("加载 debug.yml 失败： " + e.getMessage());
             debugCfg = null;
         }
     }
@@ -126,7 +126,7 @@ public final class Config {
 
     public static boolean isDebug() {
         if (cfg != null && cfg.getBoolean("debug", false)) return true;
-        return debugCfg != null && debugCfg.getBoolean("enabled", false);
+        return debugCfg != null && debugCfg.getBoolean("已启用", false);
     }
 
     public static boolean debugDbConn() {
@@ -262,7 +262,7 @@ public final class Config {
             java.io.File debugFile = new java.io.File(plugin.getDataFolder(), "debug.yml");
             debugCfg.save(debugFile);
         } catch (Exception e) {
-            FppLogger.warn("Failed to save debug.yml: " + e.getMessage());
+            FppLogger.warn("保存 debug.yml 失败： " + e.getMessage());
         }
     }
 
@@ -675,7 +675,7 @@ public final class Config {
     }
 
     public static String configSyncMode() {
-        String raw = cfg.getString("config-sync.mode", "DISABLED");
+        String raw = cfg.getString("config-sync.mode", "已禁用");
         return raw.trim().toUpperCase();
     }
 

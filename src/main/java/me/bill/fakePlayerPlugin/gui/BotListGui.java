@@ -65,10 +65,10 @@ public final class BotListGui implements Listener {
     private int refreshTaskId = -1;
 
     public enum SortMode {
-        NAME("ɴᴀᴍᴇ"),
-        UPTIME("ᴜᴘᴛɪᴍᴇ"),
-        OWNER("ᴏᴡɴᴇʀ"),
-        STATUS("ꜱᴛᴀᴛᴜꜱ");
+        NAME("名字"),
+        UPTIME("运行时长"),
+        OWNER("拥有者"),
+        STATUS("状态");
 
         final String label;
 
@@ -148,7 +148,7 @@ public final class BotListGui implements Listener {
                 .append(Component.text("[").color(GuiKit.DARK_GRAY))
                 .append(Component.text("ꜰᴘᴘ").color(GuiKit.ACCENT))
                 .append(Component.text("] ").color(GuiKit.DARK_GRAY))
-                .append(Component.text(admin ? "ᴀʟʟ ʙᴏᴛꜱ" : "ʏᴏᴜʀ ʙᴏᴛꜱ").color(GuiKit.DARK_GRAY));
+                .append(Component.text(admin ? "所有假人" : "你的假人").color(GuiKit.DARK_GRAY));
 
         Inventory inv = Bukkit.createInventory(new GuiKit.SimpleHolder(uuid, "list"), SIZE, title);
 
@@ -207,8 +207,8 @@ public final class BotListGui implements Listener {
             GuiKit.playUiClick(player, 1.0f);
             player.sendActionBar(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
-                    .append(Component.text("◈ ᴠɪᴇᴡ ").color(GuiKit.DARK_GRAY))
-                    .append(Component.text("ꜱᴏʀᴛᴇᴅ ʙʏ " + next.label).color(GuiKit.ON_GREEN)));
+                    .append(Component.text("◈ 视图 ").color(GuiKit.DARK_GRAY))
+                    .append(Component.text("排序: " + next.label).color(GuiKit.ON_GREEN)));
             build(player);
         } else if (slot == SLOT_SEARCH) {
             if (event.isShiftClick() && filters.get(uuid) != null) {
@@ -222,10 +222,10 @@ public final class BotListGui implements Listener {
             player.sendMessage(Component.empty()
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text("✦ ").color(GuiKit.ACCENT))
-                    .append(Component.text("ᴛʏᴘᴇ ᴀ ɴᴀᴍᴇ/ᴏᴡɴᴇʀ ꜰɪʟᴛᴇʀ ɪɴ ᴄʜᴀᴛ, ᴏʀ '")
+                    .append(Component.text("在聊天中输入名字/拥有者进行筛选，或输入 '")
                             .color(GuiKit.GRAY))
                     .append(Component.text("cancel").color(GuiKit.YELLOW))
-                    .append(Component.text("'.").color(GuiKit.GRAY)));
+                    .append(Component.text("' 取消。").color(GuiKit.GRAY)));
             GuiKit.beginCapture(
                     plugin,
                     player,
@@ -357,24 +357,24 @@ public final class BotListGui implements Listener {
 
     private List<Component> botLore(FakePlayer fp) {
         List<Component> lore = new ArrayList<>();
-        lore.add(line("ᴏᴡɴᴇʀ", fp.getSpawnedBy() != null ? fp.getSpawnedBy() : "?"));
-        lore.add(line("ʟᴏᴄᴀᴛɪᴏɴ", location(fp)));
-        lore.add(line("ᴜᴘᴛɪᴍᴇ", uptime(fp.getSpawnTime())));
-        lore.add(line("ᴀᴄᴛɪᴠɪᴛʏ", BotActivity.currentLabel(fp)));
+        lore.add(line("拥有者", fp.getSpawnedBy() != null ? fp.getSpawnedBy() : "?"));
+        lore.add(line("位置", location(fp)));
+        lore.add(line("运行时长", uptime(fp.getSpawnTime())));
+        lore.add(line("活动", BotActivity.currentLabel(fp)));
         String rarity = rareSkinLabel(fp);
         if (rarity != null) {
-            lore.add(Component.text("ꜱᴋɪɴ: ", GuiKit.GRAY)
+            lore.add(Component.text("皮肤: ", GuiKit.GRAY)
                     .decoration(TextDecoration.ITALIC, false)
                     .append(Component.text(rarity, GuiKit.VALUE_YELLOW)));
         }
-        lore.add(Component.text("ꜱᴛᴀᴛᴜꜱ: ", GuiKit.GRAY)
+        lore.add(Component.text("状态: ", GuiKit.GRAY)
                 .decoration(TextDecoration.ITALIC, false)
                 .append(
                         fp.isFrozen()
-                                ? Component.text("❄ ꜰʀᴏᴢᴇɴ", GuiKit.FROZEN)
-                                : Component.text("● ᴀᴄᴛɪᴠᴇ", GuiKit.ON_GREEN)));
+                                ? Component.text("❄ 已冻结", GuiKit.FROZEN)
+                                : Component.text("● 活跃", GuiKit.ON_GREEN)));
         lore.add(Component.empty());
-        lore.add(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ᴍᴀɴᴀɢᴇ", GuiKit.DARK_GRAY).decoration(TextDecoration.ITALIC, false));
+        lore.add(Component.text("点击管理", GuiKit.DARK_GRAY).decoration(TextDecoration.ITALIC, false));
         return lore;
     }
 
@@ -385,7 +385,7 @@ public final class BotListGui implements Listener {
         String source = skin.getSource();
         if (!source.startsWith("pool:")) return null;
         String tail = source.substring(source.lastIndexOf(':') + 1);
-        return tail.startsWith("1-in-") ? "✨ ʀᴀʀᴇ " + tail.replace("1-in-", "1/") : null;
+        return tail.startsWith("1-in-") ? "✨ 稀有 " + tail.replace("1-in-", "1/") : null;
     }
 
     private static Component line(String label, String value) {
@@ -397,12 +397,12 @@ public final class BotListGui implements Listener {
     private ItemStack infoItem(boolean admin, int count, int page, int totalPages) {
         ItemStack it = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta meta = it.getItemMeta();
-        meta.displayName(Component.text(admin ? "ᴀʟʟ ʙᴏᴛꜱ" : "ʏᴏᴜʀ ʙᴏᴛꜱ", GuiKit.ACCENT)
+        meta.displayName(Component.text(admin ? "所有假人" : "你的假人", GuiKit.ACCENT)
                 .decoration(TextDecoration.ITALIC, false));
         List<Component> lore = new ArrayList<>();
-        lore.add(line("ᴛᴏᴛᴀʟ", String.valueOf(count)));
-        lore.add(line("ᴘᴀɢᴇ", (page + 1) + "/" + totalPages));
-        lore.add(Component.text(admin ? "ꜱᴇᴇɪɴɢ ᴇᴠᴇʀʏ ʙᴏᴛ ᴏɴ ᴛʜᴇ ꜱᴇʀᴠᴇʀ" : "ꜱᴇᴇɪɴɢ ᴏɴʟʏ ʙᴏᴛꜱ ʏᴏᴜ ᴏᴡɴ", GuiKit.DARK_GRAY)
+        lore.add(line("总数", String.valueOf(count)));
+        lore.add(line("页码", (page + 1) + "/" + totalPages));
+        lore.add(Component.text(admin ? "显示服务器上的所有假人" : "仅显示你拥有的假人", GuiKit.DARK_GRAY)
                 .decoration(TextDecoration.ITALIC, false));
         meta.lore(lore);
         it.setItemMeta(meta);
@@ -414,15 +414,15 @@ public final class BotListGui implements Listener {
         ItemMeta meta = it.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("⇅ ꜱᴏʀᴛ").color(GuiKit.ACCENT).decoration(TextDecoration.BOLD, true)));
+                .append(Component.text("⇅ 排序").color(GuiKit.ACCENT).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴄᴜʀʀᴇɴᴛ: ").color(GuiKit.DARK_GRAY))
+                        .append(Component.text("当前: ").color(GuiKit.DARK_GRAY))
                         .append(Component.text(mode.label).color(GuiKit.VALUE_YELLOW)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ᴄʏᴄʟᴇ").color(GuiKit.DARK_GRAY))));
+                        .append(Component.text("点击切换").color(GuiKit.DARK_GRAY))));
         it.setItemMeta(meta);
         return it;
     }
@@ -430,7 +430,7 @@ public final class BotListGui implements Listener {
     private ItemStack closeItem() {
         ItemStack it = new ItemStack(Material.BARRIER);
         ItemMeta meta = it.getItemMeta();
-        meta.displayName(Component.text("ᴄʟᴏꜱᴇ", GuiKit.OFF_RED).decoration(TextDecoration.ITALIC, false));
+        meta.displayName(Component.text("关闭", GuiKit.OFF_RED).decoration(TextDecoration.ITALIC, false));
         it.setItemMeta(meta);
         return it;
     }
@@ -440,17 +440,17 @@ public final class BotListGui implements Listener {
         ItemMeta meta = it.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("＋ ꜱᴘᴀᴡɴ ʙᴏᴛ").color(GuiKit.ON_GREEN).decoration(TextDecoration.BOLD, true)));
+                .append(Component.text("＋ 生成假人").color(GuiKit.ON_GREEN).decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ꜱᴘᴀᴡɴꜱ ᴏɴᴇ ᴀᴜᴛᴏ-ɴᴀᴍᴇᴅ ʙᴏᴛ").color(GuiKit.GRAY)),
+                        .append(Component.text("在你的位置生成").color(GuiKit.GRAY)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴀᴛ ʏᴏᴜʀ ʟᴏᴄᴀᴛɪᴏɴ.").color(GuiKit.GRAY)),
+                        .append(Component.text("一个自动命名的假人。").color(GuiKit.GRAY)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴄʟɪᴄᴋ ᴛᴏ ꜱᴘᴀᴡɴ").color(GuiKit.DARK_GRAY))));
+                        .append(Component.text("点击生成").color(GuiKit.DARK_GRAY))));
         it.setItemMeta(meta);
         return it;
     }
@@ -460,17 +460,17 @@ public final class BotListGui implements Listener {
         ItemMeta meta = it.getItemMeta();
         meta.displayName(Component.empty()
                 .decoration(TextDecoration.ITALIC, false)
-                .append(Component.text("⚙ ɢʟᴏʙᴀʟ ꜱᴇᴛᴛɪɴɢꜱ")
+                .append(Component.text("⚙ 全局设置")
                         .color(GuiKit.ACCENT)
                         .decoration(TextDecoration.BOLD, true)));
         meta.lore(List.of(
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("ᴏᴘᴇɴꜱ ᴛʜᴇ ᴘʟᴜɢɪɴ-ᴡɪᴅᴇ ꜱᴇᴛᴛɪɴɢꜱ ɢᴜɪ")
+                        .append(Component.text("打开插件的全局设置界面")
                                 .color(GuiKit.GRAY)),
                 Component.empty()
                         .decoration(TextDecoration.ITALIC, false)
-                        .append(Component.text("(ɢᴇɴᴇʀᴀʟ · ʙᴏᴅʏ · ᴅᴇʙᴜɢ).").color(GuiKit.GRAY))));
+                        .append(Component.text("（通用 · 身体 · 调试）。").color(GuiKit.GRAY))));
         it.setItemMeta(meta);
         return it;
     }
@@ -479,7 +479,7 @@ public final class BotListGui implements Listener {
         Location loc = fp.getPhysicsEntity() != null && fp.getPhysicsEntity().isValid()
                 ? fp.getPhysicsEntity().getLocation()
                 : fp.getSpawnLocation();
-        if (loc == null) return "unknown";
+        if (loc == null) return "未知";
         return (loc.getWorld() != null ? loc.getWorld().getName() : "?") + " " + loc.getBlockX() + "," + loc.getBlockY()
                 + "," + loc.getBlockZ();
     }

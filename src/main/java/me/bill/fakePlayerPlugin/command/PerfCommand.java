@@ -54,7 +54,7 @@ public final class PerfCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Show server performance diagnostics and trigger benchmark or Spark profiler.";
+        return "显示服务器性能诊断，并触发基准测试或 Spark 性能分析。";
     }
 
     @Override
@@ -122,8 +122,8 @@ public final class PerfCommand implements FppCommand {
         broadcastToStaff(startedMsg, sender);
         Bukkit.getConsoleSender().sendMessage(startedMsg);
         Bukkit.getConsoleSender()
-                .sendMessage("[FPP-Perf] Benchmark started. Spawn bots, run commands, etc. Report will auto-export in "
-                        + BENCHMARK_MINUTES + " minutes. Use /fpp perf report stop to end early.");
+                .sendMessage("[FPP-Perf] 基准测试已开始。请生成假人、执行命令等。报告将在 "
+                        + BENCHMARK_MINUTES + " 分钟后自动导出。使用 /fpp perf report stop 提前结束。");
 
         // Reminder every 2 minutes.
         int reminderTask = FppScheduler.runSyncRepeatingWithId(
@@ -171,7 +171,7 @@ public final class PerfCommand implements FppCommand {
         List<ReportSnapshot.SectionEntry> tree = builtin.snapshotTree(minutes);
         PerformanceReportExporter exporter =
                 new PerformanceReportExporter(plugin, plugin.getPerformanceMonitor(), builtin);
-        File file = exporter.exportBenchmark(minutes, "Manual benchmark", tree);
+        File file = exporter.exportBenchmark(minutes, "手动基准测试", tree);
 
         Component done = Lang.get("perf-benchmark-done", "file", file.getPath());
         sender.sendMessage(done);

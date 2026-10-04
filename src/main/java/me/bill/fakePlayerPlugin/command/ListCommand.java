@@ -55,7 +55,7 @@ public class ListCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Lists all currently active bots.";
+        return "列出当前所有活跃的假人。";
     }
 
     @Override
@@ -65,13 +65,13 @@ public class ListCommand implements FppCommand {
 
     @Override
     public boolean execute(CommandSender sender, String[] args) {
-        // Players get the GUI: normal users see only their own bots, admins/OPs see every bot.
+        // 玩家打开 GUI：普通用户只看到自己的假人，管理员/OP 看到全部假人。
         if (sender instanceof Player player) {
             plugin.getBotListGui().open(player);
             return true;
         }
 
-        // Console / command blocks keep the text list (all bots).
+        // 控制台 / 命令方块保留文本列表（全部假人）。
         List<FakePlayer> localBots = new ArrayList<>(manager.getActivePlayers());
         Collection<RemoteBotEntry> remoteBots =
                 Config.isNetworkMode() ? plugin.getRemoteBotCache().getAll() : List.of();
@@ -92,9 +92,9 @@ public class ListCommand implements FppCommand {
         page = Math.max(1, Math.min(page, totalPages));
 
         String headerCount = Config.isNetworkMode()
-                ? localBots.size() + " local, " + remoteBots.size() + " remote"
+                ? "本地 " + localBots.size() + " 个，远程 " + remoteBots.size() + " 个"
                 : String.valueOf(localBots.size());
-        sender.sendMessage(TextUtil.colorize("<dark_gray><st>━━━━━━━━</st> <#A78BFA>ᴀᴄᴛɪᴠᴇ ʙᴏᴛꜱ</#A78BFA> "
+        sender.sendMessage(TextUtil.colorize("<dark_gray><st>━━━━━━━━</st> <#A78BFA>活跃假人</#A78BFA> "
                 + "<dark_gray>(<white>"
                 + headerCount
                 + "<dark_gray>) <st>━━━━━━━━</st>"));
@@ -124,21 +124,21 @@ public class ListCommand implements FppCommand {
 
         if (totalPages > 1) {
             Component prev = page > 1
-                    ? Component.text("  ◄ ᴘʀᴇᴠ")
+                    ? Component.text("  ◄ 上一页")
                             .color(ACCENT)
                             .clickEvent(ClickEvent.runCommand("/fpp list " + (page - 1)))
-                            .hoverEvent(HoverEvent.showText(Component.text("Page " + (page - 1))))
+                            .hoverEvent(HoverEvent.showText(Component.text("第 " + (page - 1) + " 页")))
                     : Component.text("  ◄").color(MUTED);
 
             Component pageNum =
                     Component.text("  " + page + "/" + totalPages + "  ").color(LABEL);
 
             Component next = page < totalPages
-                    ? Component.text("ɴᴇxᴛ ▶")
+                    ? Component.text("下一页 ▶")
                             .color(ACCENT)
                             .clickEvent(ClickEvent.runCommand("/fpp list " + (page + 1)))
-                            .hoverEvent(HoverEvent.showText(Component.text("Page " + (page + 1))))
-                    : Component.text("ɴᴇxᴛ ▶").color(MUTED);
+                            .hoverEvent(HoverEvent.showText(Component.text("第 " + (page + 1) + " 页")))
+                    : Component.text("下一页 ▶").color(MUTED);
 
             sender.sendMessage(prev.append(pageNum).append(next));
         }
@@ -168,7 +168,7 @@ public class ListCommand implements FppCommand {
                 .append(Component.text("    "))
                 .append(Component.text("📍 ").color(LABEL))
                 .append(Component.text(locStr).color(VALUE))
-                .append(Component.text("  by ").color(MUTED))
+                .append(Component.text("  由 ").color(MUTED))
                 .append(Component.text(spawner).color(LABEL));
 
         sender.sendMessage(line1);
@@ -186,7 +186,7 @@ public class ListCommand implements FppCommand {
         Component line2 = Component.empty()
                 .append(Component.text("    "))
                 .append(Component.text("📍 ").color(LABEL))
-                .append(Component.text("(remote server)").color(MUTED));
+                .append(Component.text("（远程服务器）").color(MUTED));
 
         sender.sendMessage(line1);
         sender.sendMessage(line2);
@@ -195,10 +195,10 @@ public class ListCommand implements FppCommand {
     private static String formatUptime(Instant spawnTime) {
         if (spawnTime == null) return "?";
         long secs = Duration.between(spawnTime, Instant.now()).getSeconds();
-        if (secs < 60) return secs + "s";
-        if (secs < 3600) return (secs / 60) + "m " + (secs % 60) + "s";
+        if (secs < 60) return secs + "秒";
+        if (secs < 3600) return (secs / 60) + "分 " + (secs % 60) + "秒";
         long h = secs / 3600, m = (secs % 3600) / 60;
-        return h + "h " + m + "m";
+        return h + "小时 " + m + "分";
     }
 
     private static String formatLocation(FakePlayer fp) {
@@ -222,9 +222,9 @@ public class ListCommand implements FppCommand {
                     + loc.getBlockY()
                     + ","
                     + loc.getBlockZ()
-                    + " (spawn)";
+                    + "（出生点）";
         }
-        return "unknown";
+        return "未知";
     }
 
     @Override

@@ -42,7 +42,7 @@ public class XpCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Collect XP from a bot";
+        return "从假人身上收取经验";
     }
 
     @Override

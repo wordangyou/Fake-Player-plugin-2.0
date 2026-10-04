@@ -25,9 +25,9 @@ import me.bill.fakePlayerPlugin.permission.Perm;
 import me.bill.fakePlayerPlugin.util.BotAccess;
 
 /**
- * Pathfinding-only bot movement: walk to another bot/player (following live if they move) or to
- * fixed coordinates. Directional raw-input movement was removed - {@code --to}/{@code --coords}
- * cover every real use case and are simpler to reason about.
+ * 纯寻路的假人移动：走到另一个假人/玩家身边（对方移动时实时跟随）
+ * 或走到固定坐标。方向性原始输入移动已被移除 - {@code --to}/{@code --coords}
+ * 已涵盖所有实际用法，且更易理解。
  */
 public final class MoveCommand implements FppCommand {
 
@@ -51,7 +51,7 @@ public final class MoveCommand implements FppCommand {
 
     @Override
     public String getDescription() {
-        return "Pathfind a bot to another bot/player (follows live) or to fixed coordinates.";
+        return "让假人寻路到另一个假人/玩家身边（实时跟随）或到固定坐标。";
     }
 
     @Override
@@ -142,9 +142,9 @@ public final class MoveCommand implements FppCommand {
             return true;
         }
 
-        // Resolve the destination once, up front - not per bot in the loop, otherwise a "--to"
-        // target that happens to be one of the "all" bots would abort the whole batch on its own
-        // turn (self-target) instead of just being skipped.
+        // 一次性预先解析目的地 - 而不是在循环中为每个假人解析，否则 "--to"
+        // 的目标恰好是 "all" 中的某个假人时，会在轮到它自己（自我指向）
+        // 时中止整批任务，而不是仅被跳过。
         UUID excludeUuid = null;
         PathfindTarget dest;
         if (flag.equals("--to")) {
@@ -201,7 +201,7 @@ public final class MoveCommand implements FppCommand {
         return target.equalsIgnoreCase("--all");
     }
 
-    /** Resolves a {@code --to} target by name: an active bot first, then a real online player. */
+    /** 按名字解析 {@code --to} 目标：优先活跃假人，其次是真实在线玩家。 */
     @Nullable
     private PathfindTarget parseToTarget(CommandSender sender, FakePlayer fp, String[] args) {
         if (args.length < 3) {
@@ -218,8 +218,8 @@ public final class MoveCommand implements FppCommand {
     }
 
     /**
-     * @return {@code null} if the sender was already messaged with a failure. {@code excludeUuid} is
-     *     non-null only when the target is itself an active bot (used for self-target checks).
+     * @return 如果发送者已被通知失败则返回 {@code null}。{@code excludeUuid} 仅在
+     *     目标本身是活跃假人时非空（用于自我指向检查）。
      */
     @Nullable
     private ResolvedTarget resolveToTarget(CommandSender sender, String targetName) {
@@ -289,8 +289,8 @@ public final class MoveCommand implements FppCommand {
     }
 
     /**
-     * @param sender if non-null, notified on arrival/failure (the controller invokes these callbacks
-     *     on the main/region thread already, so no extra scheduling is needed here).
+     * @param sender 若非空，则在到达/失败时收到通知（控制器已在这些回调
+     *     的主线程/区域线程上调用，因此此处无需额外调度）。
      */
     private void startPathfindMove(
             FakePlayer fp, Supplier<Location> destination, String destinationLabel, CommandSender sender) {
@@ -328,9 +328,9 @@ public final class MoveCommand implements FppCommand {
 
     private void stopMovement(FakePlayer fp) {
         UUID uuid = fp.getUuid();
-        // Only release the nav slot if /fpp move itself currently owns it - another concurrently
-        // running task (mining, using, finding, PVE) may hold it instead, and stopping *this* bot's
-        // move command must never cancel someone else's navigation.
+        // 只有当导航槽位当前由 /fpp move 自己持有时才释放 - 它可能被另一个并发
+        // 任务（挖矿、使用、寻找、PVE）持有，停止 *这个* 假人的
+        // move 命令绝不能取消别人的导航。
         if (pathfinding.isNavigating(uuid, PathfindingService.Owner.MOVE)) {
             pathfinding.cancel(uuid);
         }
